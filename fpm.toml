@@ -1,0 +1,18 @@
+name = "M_escape"
+version = "0.1.0"
+license = "Public Domain"
+author = "John S. Urban"
+maintainer = "urbanjost@comcast.net"
+copyright = "2020 John S. Urban"
+
+
+# demo programs
+test = [
+   { name="demo1", source-dir="test/demo1", main="default.f90" },
+   { name="demo2", source-dir="test/demo2", main="plain.f90" },
+   { name="demo3", source-dir="test/demo3", main="raw.f90" },
+   { name="demo4", source-dir="test/demo4", main="vt102.f90" },
+   { name="demo5", source-dir="test/demo5", main="custom.f90" },
+   { name="demo6", source-dir="test/demo6", main="dump.f90" },
+   { name="demo9", source-dir="test/demo9", main="mixed.f90" }
+]

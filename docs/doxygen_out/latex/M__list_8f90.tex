@@ -1,0 +1,96 @@
+\hypertarget{M__list_8f90}{}\section{/home/urbanjs/venus/\+V600/github/\+M\+\_\+escape/src/\+M\+\_\+list.f90 File Reference}
+\label{M__list_8f90}\index{/home/urbanjs/venus/\+V600/github/\+M\+\_\+escape/src/\+M\+\_\+list.\+f90@{/home/urbanjs/venus/\+V600/github/\+M\+\_\+escape/src/\+M\+\_\+list.\+f90}}
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interfacem__list_1_1locate}{m\+\_\+list\+::locate}}
+\item 
+interface \mbox{\hyperlink{interfacem__list_1_1insert}{m\+\_\+list\+::insert}}
+\item 
+interface \mbox{\hyperlink{interfacem__list_1_1replace}{m\+\_\+list\+::replace}}
+\item 
+interface \mbox{\hyperlink{interfacem__list_1_1remove}{m\+\_\+list\+::remove}}
+\item 
+type \mbox{\hyperlink{structm__list_1_1dictionary}{m\+\_\+list\+::dictionary}}
+\end{DoxyCompactItemize}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \mbox{\hyperlink{namespacem__list}{m\+\_\+list}}
+\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
+
+M\+\_\+list(3f) -\/ \mbox{[}M\+\_\+list\mbox{]} maintain simple lists (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_aeb2a9d8e479c44cca127db7c65abb1f3}{m\+\_\+list\+::locate\+\_\+c}} (list, value, place, ier, errmsg)
+\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
+
+locate(3f) -\/ \mbox{[}M\+\_\+list\mbox{]} finds the index where a string is found or should be in a sorted array (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_a6b746f0ad79a6fbfbafcf0ee22e38891}{m\+\_\+list\+::locate\+\_\+d}} (list, value, place, ier, errmsg)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_a533a0e5b16558efb391913e881a57040}{m\+\_\+list\+::locate\+\_\+r}} (list, value, place, ier, errmsg)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_a5b1b93df5003d6dce72acba89e779638}{m\+\_\+list\+::locate\+\_\+i}} (list, value, place, ier, errmsg)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_a216c9ec18769ee63a769cc25bc273022}{m\+\_\+list\+::remove\+\_\+c}} (list, place)
+\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
+
+remove(3f) -\/ \mbox{[}M\+\_\+list\mbox{]} remove entry from an allocatable array at specified position (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_a6c5f971866302b40b5952ad919203461}{m\+\_\+list\+::remove\+\_\+d}} (list, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_af5940ed6b39d9e3429e2784767db9e56}{m\+\_\+list\+::remove\+\_\+r}} (list, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_a138b6450613db943177df6258f58e89b}{m\+\_\+list\+::remove\+\_\+l}} (list, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_acdc3299515ed0402f4213d76d3e4d4cf}{m\+\_\+list\+::remove\+\_\+i}} (list, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_adddd2b7443557b3727320c314170e001}{m\+\_\+list\+::replace\+\_\+c}} (list, value, place)
+\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
+
+replace(3f) -\/ \mbox{[}M\+\_\+list\mbox{]} replace entry in a string array at specified position (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_a9cac0a0b0d325d26267d37648f8eada6}{m\+\_\+list\+::replace\+\_\+d}} (list, value, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_ac2ef50718d66bfe2fc102a3d48a28cb2}{m\+\_\+list\+::replace\+\_\+r}} (list, value, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_a0de977b7f38554ccd2e8b6e668f11648}{m\+\_\+list\+::replace\+\_\+l}} (list, value, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_a8c67651ca2c2c90d921f23146577491b}{m\+\_\+list\+::replace\+\_\+i}} (list, value, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_ac9b841bea6c2cfed1608b2809aaf07b4}{m\+\_\+list\+::insert\+\_\+c}} (list, value, place)
+\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
+
+insert(3f) -\/ \mbox{[}M\+\_\+list\mbox{]} insert entry into a string array at specified position (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_affd8a9996750ccf655cf677136d9fc4e}{m\+\_\+list\+::insert\+\_\+r}} (list, value, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_ae2356cb1ec5b313c3fcbad090d6eb440}{m\+\_\+list\+::insert\+\_\+d}} (list, value, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_a6108584670ced9dc4469e76ceb808730}{m\+\_\+list\+::insert\+\_\+l}} (list, value, place)
+\item 
+subroutine, private \mbox{\hyperlink{namespacem__list_a7d50f88bd8d25138af4e6d484aca2cbc}{m\+\_\+list\+::insert\+\_\+i}} (list, value, place)
+\item 
+subroutine \mbox{\hyperlink{namespacem__list_aa562d18ce6890a8a1a96d77ff1d39948}{m\+\_\+list\+::dict\+\_\+delete}} (self, key)
+\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
+
+dict\+\_\+delete(3f) -\/ \mbox{[}M\+\_\+list\mbox{]} delete entry by name from an allocatable sorted string array if it is present (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable \mbox{\hyperlink{namespacem__list_a7b9bb0b8fa4b0eeef45d7fcdc21f8bf3}{m\+\_\+list\+::dict\+\_\+get}} (self, key)
+\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
+
+dict\+\_\+get(3f) -\/ \mbox{[}M\+\_\+list\mbox{]} get value of key-\/value pair in a dictionary given key (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\item 
+subroutine \mbox{\hyperlink{namespacem__list_aca66691fd75ea79859a1b4505d2125bb}{m\+\_\+list\+::dict\+\_\+add}} (self, key, value)
+\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
+
+dict\+\_\+add(3f) -\/ \mbox{[}M\+\_\+list\mbox{]} add or replace a key-\/value pair in a dictionary (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__list_a5b8d48a0fc3218e8ed1d263a73748a27}{m\+\_\+list\+::ident\+\_\+1}} =\char`\"{}@(\#)M\+\_\+list\+::locate(3f)\+: Generic subroutine locates where element is or should be in sorted allocatable array\char`\"{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__list_a25c880ddb1248291f9b143e99fd80870}{m\+\_\+list\+::ident\+\_\+2}} =\char`\"{}@(\#)M\+\_\+list\+::insert(3f)\+: Generic subroutine inserts element into allocatable array at specified position\char`\"{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__list_a47ce2be826f94ee09c3b15b367504866}{m\+\_\+list\+::ident\+\_\+3}} =\char`\"{}@(\#)M\+\_\+list\+::replace(3f)\+: Generic subroutine replaces element from allocatable array at specified position\char`\"{}
+\item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__list_a9ff7bfbdf866c8a3a9fc831c228ce065}{m\+\_\+list\+::ident\+\_\+4}} =\char`\"{}@(\#)M\+\_\+list\+::remove(3f)\+: Generic subroutine deletes element from allocatable array at specified position\char`\"{}
+\item 
+logical, save \mbox{\hyperlink{namespacem__list_aaa3ea916cd8c669ebbc8ec9096c5bbca}{m\+\_\+list\+::debug}} =.false.
+\end{DoxyCompactItemize}
