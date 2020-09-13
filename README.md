@@ -106,7 +106,7 @@ or emulator of such:
 * [**Wikipedia**](https://en.wikipedia.org/wiki/ANSI_escape_code) a description of the basic ANSI escape sequences.
 * [**FACE**](https://github.com/szaghi/FACE) A Fortran library for generating ANSI escape sequences
 * [**foul**](http://foul.sourceforge.net/) A library for controlling the attributes of output text using Fortran
--------
+
 ## FEEDBACK
 
 Please provide feedback on the
@@ -114,4 +114,5 @@ Please provide feedback on the
 [__issues__](https://github.com/urbanjost/M_escape/issues) section
 and please star the repository if you use the module (or let me know
 why not and let others know what you did use!).
+
 -------
