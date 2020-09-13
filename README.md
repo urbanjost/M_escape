@@ -94,6 +94,12 @@ or emulator of such:
    end program demo_M_escape
 ```
 
+## SEE ALSO
+   +[Fortran Wiki example](http://fortranwiki.org/fortran/show/ansi_colors) for an example that covers the basics
+   +[Rosetta Code examples[(https://rosettacode.org/wiki/Terminal_control/Coloured_text) for how other languages do color
+   +[Wikipedia](https://en.wikipedia.org/wiki/ANSI_escape_code) a description of the basic ANSI escape sequences.
+   +[FACE](https://github.com/szaghi/FACE) A Fortran library for generating ANSI escape sequences
+   +[foul](http://foul.sourceforge.net/) A library for controlling the attributes of output text using Fortran
 -------
 ## FEEDBACK
 
