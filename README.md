@@ -89,18 +89,19 @@ or emulator of such:
 
 ```fortran
    program demo_M_escape
-   use M_escape, only : esc 
+   use M_escape, only : esc
       write(*,'(a)') esc('<r><W>ERROR:</W>This should appear as red text</y>')
       write(*,'(a)') esc('<y><B>WARNING:</B></y> This should appear as default text')
    end program demo_M_escape
 ```
 
 ## SEE ALSO
-   +[Fortran Wiki example](http://fortranwiki.org/fortran/show/ansi_colors) for an example that covers the basics
-   +[Rosetta Code examples[(https://rosettacode.org/wiki/Terminal_control/Coloured_text) for how other languages do color
-   +[Wikipedia](https://en.wikipedia.org/wiki/ANSI_escape_code) a description of the basic ANSI escape sequences.
-   +[FACE](https://github.com/szaghi/FACE) A Fortran library for generating ANSI escape sequences
-   +[foul](http://foul.sourceforge.net/) A library for controlling the attributes of output text using Fortran
+
+* [**Fortran Wiki example**](http://fortranwiki.org/fortran/show/ansi_colors) for an example that covers the basics
+* [**Rosetta Code examples**](https://rosettacode.org/wiki/Terminal_control/Coloured_text) for how other languages do color
+* [**Wikipedia**](https://en.wikipedia.org/wiki/ANSI_escape_code) a description of the basic ANSI escape sequences.
+* [**FACE**](https://github.com/szaghi/FACE) A Fortran library for generating ANSI escape sequences
+* [**foul**](http://foul.sourceforge.net/) A library for controlling the attributes of output text using Fortran
 -------
 ## FEEDBACK
 
