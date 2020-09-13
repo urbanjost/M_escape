@@ -139,9 +139,10 @@ contains
 !!
 !!##SYNOPSIS
 !!
-!!     function esc(string) result (expanded)
+!!     function esc(string,clear_at_end) result (expanded)
 !!
 !!       character(len=*),intent(in) :: string
+!!       logical,intent(in),optional :: clear_at_end
 !!       character(len=:),allocatable :: expanded
 !!
 !!##DESCRIPTION
@@ -158,9 +159,14 @@ contains
 !!                "<attribute_name>string</attribute_name> ...".
 !!            where the current attributes are color names, color=name,
 !!            color=#rgb, bold, italic, ...
+!!    clear_at_end   By default, a sequence to clear all text attributes is sent at
+!!                   the end of the returned text if an escape character appears in
+!!                   the output string. This can be turned off by setting this value
+!!                   to false.
 !!##KEYWORDS
 !!    current keywords
 !!
+!!     colors:
 !!       r,         red,       R,  RED
 !!       g,         green,     G,  GREEN
 !!       b,         blue,      B,  BLUE
@@ -169,14 +175,19 @@ contains
 !!       y,         yellow,    Y,  YELLOW
 !!       e,         ebony,     E,  EBONY
 !!       w,         white,     W,  WHITE
+!!     attributes:
 !!       it,        italic
 !!       bo,        bold
 !!       un,        underline
+!!      other:
 !!       clear
 !!       esc,       escape
+!!       default
 !!
 !!    By default, if the color mnemonics (ie. the keywords) are uppercase
 !!    they change the background color. If lowercase, the foreground color.
+!!
+!!    The "default" keyword is typically used explicitly when clear_at_end=.false.
 !!
 !!    Add, delete, and replace what strings are produced using UPDATE(3f).
 !!
@@ -248,14 +259,21 @@ contains
 !!    end subroutine printstuff
 !!
 !!    end program demo_esc
-function esc(string) result (expanded)
+function esc(string,clear_at_end) result (expanded)
 character(len=*),intent(in)  :: string
+logical,intent(in),optional  :: clear_at_end
+logical                      :: clear_at_end_local
 character(len=:),allocatable :: padded
 character(len=:),allocatable :: expanded
 character(len=:),allocatable :: name
 integer                      :: i
 integer                      :: ii
 integer                      :: maxlen
+if(present(clear_at_end))then
+   clear_at_end_local=clear_at_end
+else
+   clear_at_end_local=.false.
+endif
 if(.not.allocated(mode))then  ! set substitution mode
    mode='vt102' !'raw', 'xterm', 'dummy'|'plain'
    call vt102()
@@ -302,7 +320,11 @@ do
    end select
    if(i >= maxlen+1)exit
 enddo
-expanded=expanded//CODE_CLEAR                                   ! Clear all styles
+if( (index(expanded,escape).ne.0).and.(.not.clear_at_end_local))then
+   if((mode.ne.'raw').and.(mode.ne.'plain'))then
+      expanded=expanded//CODE_CLEAR                                   ! Clear all styles
+   endif
+endif
 end function esc
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
@@ -343,6 +365,7 @@ subroutine vt102()
    call update('escape',ESCAPE)
 
    call update('clear',CLEAR_DISPLAY)
+   call update('default',CODE_CLEAR)
 
    ! foreground colors
    call update('r',CODE_START//RED//CODE_END)

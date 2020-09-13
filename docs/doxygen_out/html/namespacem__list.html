@@ -151,14 +151,6 @@ dict_add(3f) - [M_list] add or replace a key-value pair in a dictionary (LICENSE
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a5b8d48a0fc3218e8ed1d263a73748a27"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__list.html#a5b8d48a0fc3218e8ed1d263a73748a27">ident_1</a> =&quot;@(#)M_list::locate(3f): Generic subroutine locates where element is or should be in sorted allocatable array&quot;</td></tr>
-<tr class="separator:a5b8d48a0fc3218e8ed1d263a73748a27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25c880ddb1248291f9b143e99fd80870"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__list.html#a25c880ddb1248291f9b143e99fd80870">ident_2</a> =&quot;@(#)M_list::insert(3f): Generic subroutine inserts element into allocatable array at specified position&quot;</td></tr>
-<tr class="separator:a25c880ddb1248291f9b143e99fd80870"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47ce2be826f94ee09c3b15b367504866"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__list.html#a47ce2be826f94ee09c3b15b367504866">ident_3</a> =&quot;@(#)M_list::replace(3f): Generic subroutine replaces element from allocatable array at specified position&quot;</td></tr>
-<tr class="separator:a47ce2be826f94ee09c3b15b367504866"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ff7bfbdf866c8a3a9fc831c228ce065"><td class="memItemLeft" align="right" valign="top">character(len= *), parameter&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__list.html#a9ff7bfbdf866c8a3a9fc831c228ce065">ident_4</a> =&quot;@(#)M_list::remove(3f): Generic subroutine deletes element from allocatable array at specified position&quot;</td></tr>
-<tr class="separator:a9ff7bfbdf866c8a3a9fc831c228ce065"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa3ea916cd8c669ebbc8ec9096c5bbca"><td class="memItemLeft" align="right" valign="top">logical, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__list.html#aaa3ea916cd8c669ebbc8ec9096c5bbca">debug</a> =.false.</td></tr>
 <tr class="separator:aaa3ea916cd8c669ebbc8ec9096c5bbca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -1538,94 +1530,6 @@ PLACE         is the subscript that the entry should be placed at
       <table class="memname">
         <tr>
           <td class="memname">logical, save m_list::debug =.false.</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5b8d48a0fc3218e8ed1d263a73748a27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b8d48a0fc3218e8ed1d263a73748a27">&#9670;&nbsp;</a></span>ident_1</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">character(len=*), parameter m_list::ident_1 =&quot;@(#)M_list::locate(3f): Generic subroutine locates where element is or should be in sorted allocatable array&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a25c880ddb1248291f9b143e99fd80870"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25c880ddb1248291f9b143e99fd80870">&#9670;&nbsp;</a></span>ident_2</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">character(len=*), parameter m_list::ident_2 =&quot;@(#)M_list::insert(3f): Generic subroutine inserts element into allocatable array at specified position&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a47ce2be826f94ee09c3b15b367504866"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47ce2be826f94ee09c3b15b367504866">&#9670;&nbsp;</a></span>ident_3</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">character(len=*), parameter m_list::ident_3 =&quot;@(#)M_list::replace(3f): Generic subroutine replaces element from allocatable array at specified position&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9ff7bfbdf866c8a3a9fc831c228ce065"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ff7bfbdf866c8a3a9fc831c228ce065">&#9670;&nbsp;</a></span>ident_4</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">character(len=*), parameter m_list::ident_4 =&quot;@(#)M_list::remove(3f): Generic subroutine deletes element from allocatable array at specified position&quot;</td>
         </tr>
       </table>
   </td>

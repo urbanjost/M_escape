@@ -106,6 +106,8 @@ or emulator of such:
 * [**Wikipedia**](https://en.wikipedia.org/wiki/ANSI_escape_code) a description of the basic ANSI escape sequences.
 * [**FACE**](https://github.com/szaghi/FACE) A Fortran library for generating ANSI escape sequences
 * [**foul**](http://foul.sourceforge.net/) A library for controlling the attributes of output text using Fortran
+* [**Fortran Standard Library project**](https://github.com/fortran-lang/stdlib/issues/229) discussion about
+  adding ANSI control sequences to the Fortran Standard Library project.
 
 ## FEEDBACK
 
