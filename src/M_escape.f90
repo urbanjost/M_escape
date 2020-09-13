@@ -1,3 +1,91 @@
+
+!>
+!!##NAME
+!!    M_escape(3f) - [M_escape] substitute escape sequences for XML-like syntax (prototype) in strings
+!!
+!!##SYNOPSIS
+!!
+!!     use M_list, only : esc, esc_mode, update
+!!
+!!##DESCRIPTION
+!!    This is a prototype exploring using XML-like syntax to add attributes
+!!    to terminal output such as color.
+!!
+!!    ANSI escape sequences are not universally supported by all terminal
+!!    emulators; and normally should be suppressed when not going to a tty
+!!    device. This routine provides the basic structure to support such
+!!    behaviors. or to perhaps in the future generate a CSS style sheet
+!!    and HTML instead of text to the terminal, ...
+!!
+!!    The original concept was to allow formatting by using an existing
+!!    XML library to allow the user to write HTML and to format it on a
+!!    terminal like w3m, lynx, and link do. And in some ways this is an
+!!    opposite approach in that it is directly formatting the text by using
+!!    a similar syntax to directly generate text attributes; but it is a
+!!    much simpler approach programmatically for this prototype.
+!!
+!!    Typically, you should use M_system::system_istty(3f) to set the default
+!!    to "plain" instead of "vt102" when the output file is not a terminal.
+!!
+!!
+!!##MAJOR FEATURES
+!!    o Add ANSI terminal escape sequences with an XML-like syntax with ESC(3f).
+!!    o suppress the escape sequence output with ESC_MODE(3f).
+!!    o add, delete, and replace what strings are produced using UPDATE(3f).
+!!
+!!##LIMITATIONS
+!!      o colors are not nestable, keywords are case-sensitive,
+!!      o not all terminals obey the sequences. On Windows, it is best if
+!!        you use Windows 10+ and/or the Linux mode; although it has worked
+!!        with all CygWin and MinGW and Putty windows and mintty.
+!!
+!!
+!!##FUTURE
+!!     Full support for alternate output formats like HTML and popular markdown
+!!     syntax. For example
+!!
+!!       ANSI  HTML        Markdown
+!!             <h1></h1>   #
+!!             <h2></h2>   ##
+!!             <b></b>     ** and **
+!!             <i></i>     __ and __
+!!
+!!    Apparently have to make a stack of colors to allow nesting colors
+!!
+!!    How common are extensions like xterm-256 has to set RGB values for
+!!    colors and so on?
+!!
+!!    Should a call to system_istty(3f) be built in to turn off escape sequences
+!!    when a terminal is not present?
+!!
+!!    Attributes are currently ended at the end of each call to esc(3f). Perhaps
+!!    allow multi-line formatting?
+!!
+!!##EXAMPLE
+!!
+!!   Sample program
+!!
+!!    program demo_M_escape
+!!    use M_escape, only : esc, esc_mode
+!!    implicit none
+!!    character(len=1024) :: line
+!!    real :: value
+!!       write(*,'(a)') esc('<r><W>ERROR:</W>This should appear as red text</y>')
+!!       write(*,'(a)') esc('<y><B>WARNING:</B></y> This should appear as default text')
+!!
+!!       value=3.4567
+!!       if( (value>0.0) .and. (value<100.0))then
+!!          write(line,fmt='("<w><G>GREAT</G></w>:The new value <Y><b>",f8.4,"</b></Y> is in range")')value
+!!       else
+!!          write(line,fmt='("<R><e>ERROR</e></R>:The new value <Y><b>",g0,"</b></Y> is out of range")')value
+!!       endif
+!!
+!!       write(*,'(a)')esc(trim(line))
+!!       ! write as plain text
+!!       call esc_mode(manner='plain')
+!!       write(*,'(a)')esc(trim(line))
+!!
+!!    end program demo_M_escape
 module M_escape
 use M_list, only : insert, locate, replace, remove
 use, intrinsic :: iso_fortran_env, only : stderr=>ERROR_UNIT,stdin=>INPUT_UNIT    ! access computing environment
@@ -57,36 +145,12 @@ contains
 !!       character(len=:),allocatable :: expanded
 !!
 !!##DESCRIPTION
-!!    This is a prototype exploring using XML-like syntax to add attributes
-!!    to terminal output such as color.
-!!    ANSI escape sequences
+!!    Use XML-like syntax to add attributes to terminal output such as color.
+!!
 !!    ANSI escape sequences are not universally supported by all terminal
 !!    emulators; and normally should be suppressed when not going to a tty
 !!    device. This routine provides the basic structure to support such
-!!    behaviors. or to perhaps generate a CSS style sheet and HTML instead
-!!    of text, ...
-!!
-!!    The original concept was to allow formatting by using an existing
-!!    XML library to allow the user to write HTML and to format it on
-!!    a terminal like w3m, lynx, and link do and in some ways this is an
-!!    opposite approach in that it is directly formatting the text by using
-!!    a similar syntax to directly generate text attributes; but it is a
-!!    much simpler approach programmatically.
-!!
-!!    Typically, you would use M_system::system_istty to set the default
-!!    to "plain" instead of "vt102" when the output file is not a terminal.
-!!
-!!
-!!       ANSI  HTML        Markdown
-!!             <h1></h1>   #
-!!             <h2></h2>   ##
-!!             <b></b>     ** and **
-!!             <i></i>     __ and __
-!!
-!!    Apparently have to make a stack of colors to allow nesting colors
-!!
-!!    How common are extensions like xterm-256 has to set RGB values for
-!!    colors and so on?
+!!    behaviors.
 !!
 !!##OPTIONS
 !!    string  input string  of form
@@ -97,21 +161,25 @@ contains
 !!##KEYWORDS
 !!    current keywords
 !!
-!!       r,red
-!!       g,green
-!!       b,blue
-!!       m,magenta
-!!       c,cyan
-!!       y,yellow
-!!       e,ebony
-!!       w,white
-!!       it,italic
-!!       bo,bold
-!!       un,underline
+!!       r,         red,       R,  RED
+!!       g,         green,     G,  GREEN
+!!       b,         blue,      B,  BLUE
+!!       m,         magenta,   M,  MAGENTA
+!!       c,         cyan,      C,  CYAN
+!!       y,         yellow,    Y,  YELLOW
+!!       e,         ebony,     E,  EBONY
+!!       w,         white,     W,  WHITE
+!!       it,        italic
+!!       bo,        bold
+!!       un,        underline
 !!       clear
-!!       esc,esc
+!!       esc,       escape
 !!
-!!    you can add, delete, and replace what strings are produced using UPDATE(3f).
+!!    By default, if the color mnemonics (ie. the keywords) are uppercase
+!!    they change the background color. If lowercase, the foreground color.
+!!
+!!    Add, delete, and replace what strings are produced using UPDATE(3f).
+!!
 !!##LIMITATIONS
 !!      o colors are not nestable, keywords are case-sensitive,
 !!      o not all terminals obey the sequences. On Windows, it is best if
@@ -129,7 +197,7 @@ contains
 !!
 !!   Sample program
 !!
-!!    program demo_M_escape
+!!    program demo_esc
 !!    use M_escape, only : esc, esc_mode, update
 !!       write(*,'(a)') esc('<clear>TEST DEFAULTS:')
 !!       call printstuff()
@@ -179,7 +247,7 @@ contains
 !!       write(*,'(a)') esc('<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
 !!    end subroutine printstuff
 !!
-!!    end program demo_M_escape
+!!    end program demo_esc
 function esc(string) result (expanded)
 character(len=*),intent(in)  :: string
 character(len=:),allocatable :: padded
@@ -373,17 +441,72 @@ end subroutine vt102
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
 !===================================================================================================================================
+!>
+!!##NAME
+!!    esc_mode(3f) - [M_escape] select processing mode for output from esc(3f)
+!!##SYNOPSIS
+!!
+!!    subroutine esc_mode(manner)
+!!
+!!       character(len=*),intent(in) :: manner
+!!##DESCRIPTION
+!!       Turn off the generation of strings associated with the XML keywords in the
+!!       string generated by the esc(3f) function, or display the text in raw mode
+!!       as it was passed to esc(3f) or return to ANSI escape control sequence generation.
+!!
+!!##OPTIONS
+!!    MANNER  The current manners or modes supported via the ESC_MODE(3f) procedure are
+!!
+!!        plain          suppress the output associated with keywords
+!!        ansi(default)  commonly supported escape sequences
+!!        raw            echo the input to ESC(3f) as its output
+!!        reload         restore original keyword meanings deleted or replaced by calls
+!!                       to update(3f).
+!!
+!!##EXAMPLE
+!!
+!!   Sample program
+!!
+!!    program demo_esc_mode
+!!    use M_escape, only : esc, esc_mode
+!!    implicit none
+!!    character(len=1024) :: line
+!!    real :: value
+!!
+!!       value=3.4567
+!!       if( (value>0.0) .and. (value<100.0))then
+!!          write(line,fmt='("<w><G>GREAT</G></w>:The new value <Y><b>",f8.4,"</b></Y> is in range")')value
+!!       else
+!!          write(line,fmt='("<R><e>ERROR</e></R>:The new value <Y><b>",g0,"</b></Y> is out of range")')value
+!!       endif
+!!
+!!       write(*,'(a)')esc(trim(line))
+!!
+!!       ! write as plain text
+!!       call esc_mode(manner='plain')
+!!       write(*,'(a)')esc(trim(line))
+!!       ! write as-is
+!!       call esc_mode(manner='raw')
+!!       write(*,'(a)')esc(trim(line))
+!!       ! return to default mode
+!!       call esc_mode(manner='ansi')
+!!       write(*,'(a)')esc(trim(line))
+!!
+!!    end program demo_esc_mode
+
 subroutine esc_mode(manner)
 character(len=*),intent(in) :: manner
    select case(manner)
-   case('vt102')
+   case('vt102','ANSI','ansi')
+      mode='vt102'
+   case('reload')
       call vt102()
-      mode=manner
+      mode='vt102'
    case('xterm')
       mode=manner
    case('raw')
       mode=manner
-   case('dummy','plain','ANSI','ansi')
+   case('dummy','plain','text')
       mode='plain'
    case default
    end select
@@ -402,6 +525,56 @@ end subroutine wipe_dictionary
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
 !===================================================================================================================================
+!>
+!!##NAME
+!!    update(3f) - [M_escape] update internal dictionary given keyword and value
+!!    (LICENSE:PD)
+!!##SYNOPSIS
+!!
+!!   subroutine update(key,val)
+!!
+!!    character(len=*),intent(in)           :: key
+!!    character(len=*),intent(in),optional  :: val
+!!##DESCRIPTION
+!!    Update internal dictionary in M_escape(3fm) module.
+!!##OPTIONS
+!!    key  name of keyword to add, replace, or delete from dictionary
+!!    val  if present add or replace value associated with keyword. If not
+!!         present remove keyword entry from dictionary.
+!!##RETURNS
+!!##EXAMPLE
+!!
+!!   Sample program
+!!
+!!           program demo_update
+!!           use M_escape, only : esc, update
+!!              write(*,'(a)') esc('<clear>TEST CUSTOMIZED:')
+!!              ! add custom keywords
+!!              call update('blink',char(27)//'[5m')
+!!              call update('/blink',char(27)//'[38m')
+!!
+!!              write(*,'(a)') esc('<blink>Items for Friday<blink/>')
+!!
+!!              write(*,'(a)',advance='no') esc('<r>RED</r>,')
+!!              write(*,'(a)',advance='no') esc('<b>BLUE</b>,')
+!!              write(*,'(a)',advance='yes') esc('<g>GREEN</g>')
+!!
+!!              ! delete
+!!              call update('r')
+!!              call update('/r')
+!!              ! replace
+!!              call update('b','<<<<')
+!!              call update('/b','>>>>')
+!!              write(*,'(a)',advance='no') esc('<r>RED</r>,')
+!!              write(*,'(a)',advance='no') esc('<b>BLUE</b>,')
+!!              write(*,'(a)',advance='yes') esc('<g>GREEN</g>')
+!!
+!!        end program demo_update
+!!
+!!##AUTHOR
+!!    John S. Urban, 2019
+!!##LICENSE
+!!    Public Domain
 subroutine update(key,valin)
 character(len=*),intent(in)           :: key
 character(len=*),intent(in),optional  :: valin
@@ -518,6 +691,10 @@ integer          :: i
       endif
    endif
 end subroutine print_dictionary
+!===================================================================================================================================
+!()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
+!===================================================================================================================================
+!flasher () { while true; do printf \\e[?5h; sleep 0.1; printf \\e[?5l; read -s -n1 -t1 && break; done; }
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
 !===================================================================================================================================

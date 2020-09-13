@@ -4,21 +4,20 @@
 
 ## NAME
 
-### M_escape - use in-band signaling to control the text attributes, formatting, color, 
-    and other output options on ANSI video text terminals
+### M_escape - use in-band signaling to control the text attributes, formatting, color, and other output options on ANSI video text terminals
 
-    ** This is a WIP __(Work In Progress)__ **
+** This is a WIP __(Work In Progress)__ **
 
-    __This is an uncompleted project but basically functional__. If anyone is
-    interested in seeing this further developed or wishes to contribute
-    to doing so please let me know; as it will remain a low priority otherwise
-    that I will "get around to" "one of these days"!
+__This is an uncompleted project but basically functional__. If anyone is
+interested in seeing this further developed or wishes to contribute
+to doing so please let me know; as it will remain a low priority otherwise
+that I will "get around to" "one of these days"!
 
 ## DESCRIPTION
 
    M_escape(3f) is a Fortran module that writes common ANSI escape
    sequences to control terminal attributes like text color. It is
-   designed to allow the sequences to be surpressed and for the user
+   designed to allow the sequences to be suppressed and for the user
    program to completely customize it -- user can add, delete and replace
    the sequences associated with a keyword without changing the code.
 
@@ -63,8 +62,8 @@
 The included demo programs provide templates for the most common usage:
 
 - [demo1](test/demo1/default.f90) simple demo setting color
-- [demo2](test/demo2/plain.f90)   simple demo setting color but with escape sequences surpressed
-- [demo3](test/demo3/raw.f90)     simple demo seting color but in raw echo mode showing input as-is
+- [demo2](test/demo2/plain.f90)   simple demo setting color but with escape sequences suppressed
+- [demo3](test/demo3/raw.f90)     simple demo setting color but in raw echo mode showing input as-is
 - [demo4](test/demo4/vt102.f90)   explicit call to set default mode
 - [demo5](test/demo5/custom.f90)  how to add, delete, and replace attribute strings
 - [demo6](test/demo6/dump.f90)    dump the dictionary. Intended for debugging but might be generally useful.
@@ -88,11 +87,11 @@ This short program will display red and yellow text on an ANSI-compatible color 
 or emulator of such:
 
 ```fortran
-          program demo_M_escape
-          use M_escape, only : esc 
-             write(*,'(a)') esc('<r>ERROR:</r> This should appear as red text')
-             write(*,'(a)') esc('<y>WARNING:</y> This should appear as yellow text')
-       end program demo_M_escape
+   program demo_M_escape
+   use M_escape, only : esc 
+      write(*,'(a)') esc('<r><W>ERROR:</W>This should appear as red text</y>')
+      write(*,'(a)') esc('<y><B>WARNING:</B></y> This should appear as default text')
+   end program demo_M_escape
 ```
 
 -------

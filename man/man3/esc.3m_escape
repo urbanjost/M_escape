@@ -25,42 +25,12 @@ function \fBesc\fP(\fIstring\fP) result (\fIexpanded\fP)
 .fam T
 .fi
 .SH DESCRIPTION
-This is a prototype exploring using XML-like syntax to add attributes
-to terminal output such as color.
-ANSI escape sequences
+Use XML-like syntax to add attributes to terminal output such as color.
+.PP
 ANSI escape sequences are not universally supported by all terminal
 emulators; and normally should be suppressed when not going to a tty
 device. This routine provides the basic structure to support such
-behaviors. or to perhaps generate a CSS style sheet and HTML instead
-of text, \.\.\.
-.PP
-The original concept was to allow formatting by using an existing
-XML library to allow the user to write HTML and to format it on
-a terminal like w3m, lynx, and link do and in some ways this is an
-opposite approach in that it is directly formatting the text by using
-a similar syntax to directly generate text attributes; but it is a
-much simpler approach programmatically.
-.PP
-Typically, you would use M_system::system_istty to set the default
-to "plain" instead of "vt102" when the output file is not a terminal.
-.RE
-.PP
-
-.nf
-.fam C
-      ANSI  HTML        Markdown
-            <h1></h1>   #
-            <h2></h2>   ##
-            <b></b>     ** and **
-            <i></i>     __ and __
-
-.fam T
-.fi
-.RS
-Apparently have to make a stack of colors to allow nesting colors
-.PP
-How common are extensions like xterm-256 has to set RGB values for
-colors and so on?
+behaviors.
 .SH OPTIONS
 .TP
 .B \fIstring\fP
@@ -78,23 +48,26 @@ current keywords
 .PP
 .nf
 .fam C
-      r,red
-      g,green
-      b,blue
-      m,magenta
-      c,cyan
-      y,yellow
-      e,ebony
-      w,white
-      it,italic
-      bo,bold
-      un,underline
+      r,         red,       R,  RED
+      g,         green,     G,  GREEN
+      b,         blue,      B,  BLUE
+      m,         magenta,   M,  MAGENTA
+      c,         cyan,      C,  CYAN
+      y,         yellow,    Y,  YELLOW
+      e,         ebony,     E,  EBONY
+      w,         white,     W,  WHITE
+      it,        italic
+      bo,        bold
+      un,        underline
       clear
-      esc,esc
+      esc,       escape
 
 .fam T
 .fi
-you can add, delete, and replace what strings are produced using \fBUPDATE\fP(3f).
+By default, if the color mnemonics (ie. the keywords) are uppercase
+they change the background color. If lowercase, the foreground color.
+.PP
+Add, delete, and replace what strings are produced using \fBUPDATE\fP(3f).
 .SH LIMITATIONS
 .IP \(bu 3
 colors are not nestable, keywords are case-sensitive,
@@ -118,7 +91,7 @@ Sample program
 .PP
 .nf
 .fam C
-   program demo_M_escape
+   program demo_esc
    use M_escape, only : esc, esc_mode, update
       write(*,'(a)') esc('<clear>TEST DEFAULTS:')
       call printstuff()
@@ -173,4 +146,4 @@ Sample program
 end subroutine printstuff
 .RS
 .PP
-end program demo_M_escape
+end program demo_esc

@@ -1,4 +1,4 @@
-          program demo_M_escape
+          program demo_esc
           use M_escape, only : esc, esc_mode, update
              write(*,'(a)') esc('<clear>TEST DEFAULTS:')
              call printstuff()
@@ -48,4 +48,4 @@
              write(*,'(a)') esc('<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
        end subroutine printstuff
 
-              end program demo_M_escape
+              end program demo_esc

@@ -4,7 +4,17 @@ NULL=
 #$(NULL)
 PROGFILES = \
 ../app/main.f90 \
+../test/demos/M_escape/M_escape.f90 \
 ../test/demos/esc/esc.f90 \
+../test/demos/esc_mode/esc_mode.f90 \
+../test/demos/update/update.f90 \
+../test/demo1/default.f90 \
+../test/demo2/plain.f90 \
+../test/demo3/raw.f90 \
+../test/demo4/vt102.f90 \
+../test/demo5/custom.f90 \
+../test/demo6/dump.f90 \
+../test/demo9/mixed.f90 \
 $(NULL)
 PROG = ${PROGFILES:.f90=}
 SRCS =  M_escape.f90 M_list.f90
