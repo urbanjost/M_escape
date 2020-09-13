@@ -105,9 +105,9 @@ or emulator of such:
 -------
 ## FEEDBACK
 
-   Please provide feedback on the
-   [wiki](https://github.com/urbanjost/M_escape/wiki) or in the
-   [__issues__](https://github.com/urbanjost/M_escape/issues) section
-   and please star the repository if you use the module (or let me know
-   why not and let others know what you did use!).
+Please provide feedback on the
+[wiki](https://github.com/urbanjost/M_escape/wiki) or in the
+[__issues__](https://github.com/urbanjost/M_escape/issues) section
+and please star the repository if you use the module (or let me know
+why not and let others know what you did use!).
 -------
