@@ -70,9 +70,10 @@ The included demo programs provide templates for the most common usage:
 - [demo9](test/demo9/mixed.f90)   multiple modes and mixed attributes
 
 ### manpages
-- [M_escape](https://urbanjost.github.io/M_escape/M_escape.3M_escape.html)  -- An overview of the M_escape module
-- [set_args](https://urbanjost.github.io/M_escape/set_args.esc.html)  -- the main function
-- [get_args](https://urbanjost.github.io/M_escape/get_args.update.html)  -- customizing
+- [M_escape](https://urbanjost.github.io/M_escape/M_escape.3m_escape.html)  -- An overview of the M_escape module
+- [esc](https://urbanjost.github.io/M_escape/esc.3m_escape.html)  -- the main function
+- [esc_mode](https://urbanjost.github.io/M_escape/esc_mode.3m_escape.html)  -- setting processed or plain output mode
+- [update](https://urbanjost.github.io/M_escape/update.3m_escape.html)  -- customizing
 
 ### All manpages amalgamated
 - [BOOK_M_escape](https://urbanjost.github.io/M_escape/BOOK_M_escape.html) -- All manpages consolidated using JavaScript
