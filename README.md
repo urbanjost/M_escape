@@ -53,7 +53,7 @@ that I will "get around to" "one of these days"!
 
 **This is how the interface works --**
 
-* call the ESC(3f) function with strings that include syntax like "<attribute> My regular text </attribute>"
+* call the ESC(3f) function with strings that include syntax like "\<attribute\> My regular text \</attribute\>"
   and the "attribute" and "/attribute" strings will be replaced with ANSI escape sequences or user-defined
   strings associated with those keywords.
 
@@ -89,11 +89,15 @@ or emulator of such:
 
 ```fortran
    program demo_M_escape
-   use M_escape, only : esc
-      write(*,'(a)') esc('<r><W>ERROR:</W>This should appear as red text</y>')
-      write(*,'(a)') esc('<y><B>WARNING:</B></y> This should appear as default text')
+   use M_escape, only : esc, esc_mode
+      do i=1,2
+         write(*,'(a)') esc('<r><W>ERROR:</W>This should appear as red text</y>')
+         write(*,'(a)') esc('<y><B>WARNING:</B></y> This should appear as default text')
+         call esc_mode(manner='plain')
+      enddo
    end program demo_M_escape
 ```
+![sample](docs/images/sample.gif)
 
 ## SEE ALSO
 
