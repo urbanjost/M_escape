@@ -23,6 +23,15 @@ that I will "get around to" "one of these days"!
 
    Attributes are specified by writing lines with XML-like structure.
 
+   The advantage of the approach of replacing in-band escape sequences
+   with formatting directives contained on each line is that it is easy
+   to turn off when running batch, but more importantly your program can
+   be run in "raw" mode and write a file with the directives in it that
+   can then be read back in by a simple filter program that strips it
+   back to plain text or displays it to a screen in color or converts it
+   to HTML or Adobe PDF. By making each line self-contained by default
+   this can still be done with any selected group of lines from the file.
+
 ## DOWNLOAD
    ```bash
        git clone https://github.com/urbanjost/M_escape.git
@@ -108,6 +117,10 @@ or emulator of such:
 * [**foul**](http://foul.sourceforge.net/) A library for controlling the attributes of output text using Fortran
 * [**Fortran Standard Library project**](https://github.com/fortran-lang/stdlib/issues/229) discussion about
   adding ANSI control sequences to the Fortran Standard Library project.
+
+## OTHER LANGUAGES
+
+*  [python](https://python-prompt-toolkit.readthedocs.io/en/master/pages/printing_text.html#html) prompt-toolkit
 
 ## FEEDBACK
 

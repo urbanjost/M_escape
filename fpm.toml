@@ -4,6 +4,7 @@ license = "Public Domain"
 author = "John S. Urban"
 maintainer = "urbanjost@comcast.net"
 copyright = "2020 John S. Urban"
+description= "ANSI control escape sequences using an XML-like syntax for attributes like color on video displays and emulators"
 
 
 # demo programs
