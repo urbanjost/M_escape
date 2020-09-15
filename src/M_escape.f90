@@ -619,7 +619,6 @@ end subroutine wipe_dictionary
 !!    key  name of keyword to add, replace, or delete from dictionary
 !!    val  if present add or replace value associated with keyword. If not
 !!         present remove keyword entry from dictionary.
-!!##RETURNS
 !!##EXAMPLE
 !!
 !!   Sample program
@@ -650,7 +649,7 @@ end subroutine wipe_dictionary
 !!        end program demo_update
 !!
 !!##AUTHOR
-!!    John S. Urban, 2019
+!!    John S. Urban, 2020
 !!##LICENSE
 !!    Public Domain
 subroutine update(key,valin)
@@ -748,7 +747,7 @@ end function get
 !!         usage               F        [F]
 !!
 !!##AUTHOR
-!!      John S. Urban, 2019
+!!      John S. Urban, 2020
 !!##LICENSE
 !!      Public Domain
 !===================================================================================================================================
@@ -872,6 +871,51 @@ integer                       :: imax                   ! length of longest toke
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
 !===================================================================================================================================
+!>
+!!##NAME
+!!    attr(3f) - [M_escape] colorize text using a simple function-based approach
+!!    (LICENSE:PD)
+!!##SYNOPSIS
+!!
+!!   function attr(attribute) result (out)
+!!
+!!    character(len=*),intent(in)  :: attribute
+!!    character(len=:),allocatable :: out
+!!##DESCRIPTION
+!!    attr(3f) uses the same keywords as esc(3f) to send ANSI escape sequences
+!!    to the display screen, except instead of using a pseudo-XML string to select
+!!    the codes it uses a simple colon-delimited list of the keywords.
+!!##OPTIONS
+!!    attribute  colon-delimited list of attribute keywords as defined in the
+!!               esc(3f) procedure.
+!!##RETURNS
+!!    out        the output is the strings (by default ANSI video
+!!               display escape sequences, see update(3f) ) assigned by the keywords.
+!!##EXAMPLE
+!!
+!!   Sample program
+!!
+!!    program functional
+!!    use M_escape, only : attr, esc_mode
+!!    implicit none
+!!         call printme('color')
+!!         call printme('plain')
+!!         call printme('raw')
+!!    contains
+!!    subroutine printme(mymode)
+!!    character(len=*),intent(in) :: mymode
+!!       call esc_mode(mymode)
+!!       write(*,'(a)')mymode
+!!       write(*,'(*(g0))',advance='no')attr('red:BLUE:bold'),'Hello!', &
+!!        & attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset')
+!!       write(*,'(*(g0))',advance='yes')' Back to a normal write statement.'
+!!    end subroutine printme
+!!    end program functional
+!!
+!!##AUTHOR
+!!    John S. Urban, 2020
+!!##LICENSE
+!!    Public Domain
 function attr(attribute) result(out)
 ! colon-delimited string of attributes
 character(len=*),intent(in)  :: attribute

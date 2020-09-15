@@ -45,7 +45,7 @@ a.existingWikiWord[title]{ //border: 1px dashed #BBB; }
 <div id="Container">
 <div id="Content">
 <CENTER>
-<H1><HR><I>Manual Reference Pages &nbsp;-&nbsp;</I><NOBR>update (3m_escape)</NOBR><HR></H1>
+<H1><HR><I>Manual Reference Pages &nbsp;-&nbsp;</I><NOBR>attr (3m_escape)</NOBR><HR></H1>
 </CENTER>
 <A name=0>
 
@@ -53,7 +53,7 @@ a.existingWikiWord[title]{ //border: 1px dashed #BBB; }
 
 </A>
 <BLOCKQUOTE>
-<B>update(3f) </B>- [M_escape] update internal dictionary given keyword and value
+<B>attr(3f) </B>- [M_escape] colorize text using a simple function-based approach
 <B>(LICENSE:PD)
 </B></BLOCKQUOTE>
 <A name=contents></A><H3>CONTENTS</H3></A>
@@ -61,21 +61,22 @@ a.existingWikiWord[title]{ //border: 1px dashed #BBB; }
 <A HREF=#1>Synopsis</A><BR>
 <A HREF=#2>Description</A><BR>
 <A HREF=#3>Options</A><BR>
-<A HREF=#4>Example</A><BR>
-<A HREF=#5>Author</A><BR>
-<A HREF=#6>License</A><BR>
+<A HREF=#4>Returns</A><BR>
+<A HREF=#5>Example</A><BR>
+<A HREF=#6>Author</A><BR>
+<A HREF=#7>License</A><BR>
 </BLOCKQUOTE>
-<A name=7>
+<A name=8>
 
      <H3>SYNOPSIS</H3>
 
 </A>
 <BLOCKQUOTE>
 <PRE>
-subroutine <B>update</B>(key,val)
+function <B>attr</B>(<I>attribute</I>) result (<I>out</I>)
 <P>
-   character(len=*),intent(in)           :: key
-   character(len=*),intent(in),optional  :: val
+   character(len=*),intent(in)  :: attribute
+   character(len=:),allocatable :: out
 </PRE>
 </BLOCKQUOTE>
 <A name=2>
@@ -84,7 +85,9 @@ subroutine <B>update</B>(key,val)
 
 </A>
 <BLOCKQUOTE>
-Update internal dictionary in <B>M_escape</B>(3fm) module.
+<B>attr</B>(3f) uses the same keywords as <B>esc</B>(3f) to send ANSI escape sequences
+to the display screen, except instead of using a pseudo-XML string to select
+the codes it uses a simple colon-delimited list of the keywords.
 </BLOCKQUOTE>
 <A name=3>
 
@@ -93,17 +96,26 @@ Update internal dictionary in <B>M_escape</B>(3fm) module.
 </A>
 <BLOCKQUOTE>
 <TABLE cellpadding=3>
-<TR valign=top><TD width=6% nowrap>
-<B>key</B> </TD><TD valign=bottom>
-name of keyword to add, replace, or delete from dictionary
-</TD></TR>
-<TR valign=top><TD width=6% nowrap>
-<B>val</B> </TD><TD valign=bottom>
-if present add or replace value associated with keyword. If not
-present remove keyword entry from dictionary.
+<TR valign=top><TD colspan=2>
+<B></B><I>attribute</I> </TD></TR><TR valign=top><TD width=6%>&nbsp;</TD><TD>
+colon-delimited list of <I>attribute</I> keywords as defined in the
+<B>esc</B>(3f) procedure.
 </TD></TR>
 <TR></TR></TABLE></BLOCKQUOTE>
 <A name=4>
+
+     <H3>RETURNS</H3>
+
+</A>
+<BLOCKQUOTE>
+<TABLE cellpadding=3>
+<TR valign=top><TD width=6% nowrap>
+<B></B><I>out</I> </TD><TD valign=bottom>
+the output is the strings (by default ANSI video
+display escape sequences, see <B>update</B>(3f) ) assigned by the keywords.
+</TD></TR>
+<TR></TR></TABLE></BLOCKQUOTE>
+<A name=5>
 
      <H3>EXAMPLE</H3>
 
@@ -112,35 +124,26 @@ present remove keyword entry from dictionary.
 Sample program
 <P>
 <PRE>
-          program demo_update
-          use M_escape, only : esc, update
-             write(*,&#146;(a)&#146;) esc(&#146;&lt;clear&gt;TEST CUSTOMIZED:&#146;)
-             ! add custom keywords
-             call update(&#146;blink&#146;,char(27)//&#146;[5m&#146;)
-             call update(&#146;/blink&#146;,char(27)//&#146;[38m&#146;)
-<P>
-             write(*,&#146;(a)&#146;) esc(&#146;&lt;blink&gt;Items for Friday&lt;blink/&gt;&#146;)
-<P>
-             write(*,&#146;(a)&#146;,advance=&#146;no&#146;) esc(&#146;&lt;r&gt;RED&lt;/r&gt;,&#146;)
-             write(*,&#146;(a)&#146;,advance=&#146;no&#146;) esc(&#146;&lt;b&gt;BLUE&lt;/b&gt;,&#146;)
-             write(*,&#146;(a)&#146;,advance=&#146;yes&#146;) esc(&#146;&lt;g&gt;GREEN&lt;/g&gt;&#146;)
-<P>
-             ! delete
-             call update(&#146;r&#146;)
-             call update(&#146;/r&#146;)
-             ! replace
-             call update(&#146;b&#146;,&#146;&lt;&lt;&lt;&lt;&#146;)
-             call update(&#146;/b&#146;,&#146;&gt;&gt;&gt;&gt;&#146;)
-             write(*,&#146;(a)&#146;,advance=&#146;no&#146;) esc(&#146;&lt;r&gt;RED&lt;/r&gt;,&#146;)
-             write(*,&#146;(a)&#146;,advance=&#146;no&#146;) esc(&#146;&lt;b&gt;BLUE&lt;/b&gt;,&#146;)
-             write(*,&#146;(a)&#146;,advance=&#146;yes&#146;) esc(&#146;&lt;g&gt;GREEN&lt;/g&gt;&#146;)
+   program functional
+   use M_escape, only : attr, esc_mode
+   implicit none
+        call printme(&#146;color&#146;)
+        call printme(&#146;plain&#146;)
+        call printme(&#146;raw&#146;)
+   contains
+   subroutine printme(mymode)
+   character(len=*),intent(in) :: mymode
+      call esc_mode(mymode)
+      write(*,&#146;(a)&#146;)mymode
+      write(*,&#146;(*(g0))&#146;,advance=&#146;no&#146;)attr(&#146;red:BLUE:bold&#146;),&#146;Hello!&#146;, &
+       & attr(&#146;/BLUE&#146;),&#146; Well, this is boring without a nice background color.&#146;,attr(&#146;reset&#146;)
+      write(*,&#146;(*(g0))&#146;,advance=&#146;yes&#146;)&#146; Back to a normal write statement.&#146;
+   end subroutine printme
+   end program functional
 <P>
 </PRE>
-<BLOCKQUOTE>
-end program demo_update
 </BLOCKQUOTE>
-</BLOCKQUOTE>
-<A name=5>
+<A name=6>
 
      <H3>AUTHOR</H3>
 
@@ -148,7 +151,7 @@ end program demo_update
 <BLOCKQUOTE>
 John S. Urban, 2020
 </BLOCKQUOTE>
-<A name=6>
+<A name=7>
 
      <H3>LICENSE</H3>
 
@@ -157,8 +160,8 @@ John S. Urban, 2020
 Public Domain
 </BLOCKQUOTE>
 <P><HR>
-<TABLE width=100%><TR> <TD width=33%><I></I></TD> <TD width=33% align=center>update (3m_escape)</TD> <TD align=right width=33%><I>September 14, 2020</I></TD> </TR></TABLE><FONT SIZE=-1>Generated by <A HREF="http://www.squarebox.co.uk/download/manServer.shtml">manServer 1.08</A> from 48ade3eb-84ad-401a-be98-55f435edbaae using man macros.</FONT>
-<br><br><center><img src="images/update.gif"></center>
+<TABLE width=100%><TR> <TD width=33%><I></I></TD> <TD width=33% align=center>attr (3m_escape)</TD> <TD align=right width=33%><I>September 14, 2020</I></TD> </TR></TABLE><FONT SIZE=-1>Generated by <A HREF="http://www.squarebox.co.uk/download/manServer.shtml">manServer 1.08</A> from 1c5436d4-82af-4e4b-9439-4f6e7cf25033 using man macros.</FONT>
+<br><br><center><img src="images/attr.gif"></center>
 </div>
 </div>
 </body>
