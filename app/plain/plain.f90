@@ -10,4 +10,5 @@ integer :: ios
       write(*,'(a)') esc(trim(line))
       if(ios.ne.0)exit
    enddo
+   write(*,'(a)',advance='no') esc('<reset>')
 end program demo_esc
