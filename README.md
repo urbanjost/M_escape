@@ -92,6 +92,7 @@ The included demo programs provide templates for the most common usage:
 - [esc](https://urbanjost.github.io/M_escape/esc.3m_escape.html)  -- the main function
 - [esc_mode](https://urbanjost.github.io/M_escape/esc_mode.3m_escape.html)  -- setting processed or plain output mode
 - [update](https://urbanjost.github.io/M_escape/update.3m_escape.html)  -- customizing
+- [attr](https://urbanjost.github.io/M_escape/attr.3m_escape.html)  -- alternate function that just takes keywords
 
 ### All manpages amalgamated
 - [BOOK_M_escape](https://urbanjost.github.io/M_escape/BOOK_M_escape.html) -- All manpages consolidated using JavaScript
