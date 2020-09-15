@@ -6,7 +6,6 @@ maintainer = "urbanjost@comcast.net"
 copyright = "2020 John S. Urban"
 description= "ANSI control escape sequences using an XML-like syntax for attributes like color on video displays and emulators"
 
-
 # demo programs
 test = [
    { name="demo1", source-dir="test/demo1", main="default.f90" },
@@ -15,11 +14,11 @@ test = [
    { name="demo4", source-dir="test/demo4", main="vt102.f90" },
    { name="demo5", source-dir="test/demo5", main="custom.f90" },
    { name="demo6", source-dir="test/demo6", main="dump.f90" },
-   { name="demo7", source-dir="test/demo7", main="attr.f90" },
+   { name="demo7", source-dir="test/demo7", main="functional.f90" },
+   { name="demo8", source-dir="test/demo8", main="direct.f90" },
    { name="demo9", source-dir="test/demo9", main="mixed.f90" }
 ]
 executable = [
-   { name="demo", source-dir="app/demo", main="main.f90" },
    { name="plain", source-dir="app/plain", main="plain.f90" },
    { name="light", source-dir="app/light", main="light.f90" },
 ]

@@ -14,6 +14,8 @@ PROGFILES = \
 ../test/demo4/vt102.f90 \
 ../test/demo5/custom.f90 \
 ../test/demo6/dump.f90 \
+../test/demo7/functional.f90 \
+../test/demo8/direct.f90 \
 ../test/demo9/mixed.f90 \
 ../app/plain/plain.f90 \
 ../app/light/light.f90 \
