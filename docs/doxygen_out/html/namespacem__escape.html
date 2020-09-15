@@ -103,11 +103,11 @@ print_dictionary(3f) - [ARGUMENTS:M_CLI2] print internal dictionary created by c
 <tr class="separator:a6add907828fd34e94b87f643a5cabc64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af23bd97702864e0f32258e6ec0d51506"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#af23bd97702864e0f32258e6ec0d51506">split</a> (input_line, array, delimiters)</td></tr>
 <tr class="separator:af23bd97702864e0f32258e6ec0d51506"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9ee8dee0ee167567e9c2f570f398987"><td class="memItemLeft" align="right" valign="top">character(len=:) function, allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#ab9ee8dee0ee167567e9c2f570f398987">attr</a> (attribute)</td></tr>
-<tr class="memdesc:ab9ee8dee0ee167567e9c2f570f398987"><td class="mdescLeft">&#160;</td><td class="mdescRight"><h2>NAME</h2>
+<tr class="memitem:a916b16ce9be553d669f54cb9575a91be"><td class="memItemLeft" align="right" valign="top">character(len=:) function, allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be">attr</a> (attribute, text)</td></tr>
+<tr class="memdesc:a916b16ce9be553d669f54cb9575a91be"><td class="mdescLeft">&#160;</td><td class="mdescRight"><h2>NAME</h2>
 attr(3f) - [M_escape] colorize text using a simple function-based approach (LICENSE:PD) </p><h2>SYNOPSIS</h2>
- <a href="#ab9ee8dee0ee167567e9c2f570f398987">More...</a><br /></td></tr>
-<tr class="separator:ab9ee8dee0ee167567e9c2f570f398987"><td class="memSeparator" colspan="2">&#160;</td></tr>
+ <a href="#a916b16ce9be553d669f54cb9575a91be">More...</a><br /></td></tr>
+<tr class="separator:a916b16ce9be553d669f54cb9575a91be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -315,12 +315,11 @@ Variables</h2></td></tr>
 <p>program direct use M_escape, only : &amp; ! FOREGROUND COLORS &amp; fg_red, fg_cyan, fg_magenta, fg_blue, &amp; &amp; fg_green, fg_yellow, fg_white, fg_ebony, &amp; &amp; fg_default, &amp; ! BACKGROUND COLORS &amp; bg_red, bg_cyan, bg_magenta, bg_blue, &amp; &amp; bg_green, bg_yellow, bg_white, bg_ebony, &amp; &amp; bg_default, &amp; ! ATTRIBUTES &amp; bold, italic, inverse, underline, &amp; &amp; unbold, unitalic, uninverse, ununderline, &amp; &amp; reset, &amp; ! DISPLAY &amp; clear implicit none write(*,'(*(g0))')fg_red,bg_green,bold,'Hello!',reset end program direct</p>
 <h2>ALTERNATE FUNCTIONAL INTERFACE</h2>
 <p>If you prefer a functional interface, use the attr(3f) function with the same keywords as with the esc(3f) function. Note that esc_mode(3f) will work with this function.</p>
-<p>program functional use M_escape, only : attr, esc_mode implicit none ! attr takes a colon-delimited list of attribute keywords write(*,'(*(g0))',advance='no')attr('red:BLUE:bold'),'Hello!', &amp; &amp; attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset') write(*,'(*(g0))',advance='yes')' Back to a normal write statement.'</p>
-<p>call printme('color') call printme('plain') call printme('raw') contains subroutine printme(mymode) character(len=*),intent(in) :: mymode call esc_mode(mymode) write(*,'(a)')mymode write(*,'(*(g0))',advance='no')attr('red'),attr('BLUE'),attr('bold'),'Hello!', &amp; &amp; attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset') write(*,'(*(g0))',advance='yes')' Back to a normal write statement.' end subroutine printme end program functional</p>
+<p>program functional use M_escape, only : attr, esc_mode implicit none call printme('color') call printme('plain') call printme('raw') contains subroutine printme(mymode) character(len=*),intent(in) :: mymode call esc_mode(mymode) write(*,'(a)')mymode write(*,'(*(g0))',advance='no') &amp; &amp; attr('red:BLUE:bold','Hello!'), &amp; &amp; 'and everything is back to defaults or ', &amp; &amp; attr('RED:blue:bold'),'Hello Again!', &amp; &amp; attr('/BLUE'),' Well, the text color is still on.',attr('reset') write(*,'(*(g0))',advance='yes')' Back to normal writes.' end subroutine printme end program functional</p>
 <h2>ALTERNATE OBJECT ORIENTED</h2>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
-<a id="ab9ee8dee0ee167567e9c2f570f398987"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9ee8dee0ee167567e9c2f570f398987">&#9670;&nbsp;</a></span>attr()</h2>
+<a id="a916b16ce9be553d669f54cb9575a91be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a916b16ce9be553d669f54cb9575a91be">&#9670;&nbsp;</a></span>attr()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -329,8 +328,18 @@ Variables</h2></td></tr>
           <td class="memname">character(len=:) function, allocatable, public m_escape::attr </td>
           <td>(</td>
           <td class="paramtype">character(len=*), intent(in)&#160;</td>
-          <td class="paramname"><em>attribute</em></td><td>)</td>
+          <td class="paramname"><em>attribute</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">character(len=*), intent(in), optional&#160;</td>
+          <td class="paramname"><em>text</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -341,25 +350,26 @@ attr(3f) - [M_escape] colorize text using a simple function-based approach (LICE
 <p>function attr(attribute) result (out)</p>
 <p>character(len=*),intent(in) :: attribute character(len=:),allocatable :: out </p><h2>DESCRIPTION</h2>
 <p>attr(3f) uses the same keywords as esc(3f) to send ANSI escape sequences to the display screen, except instead of using a pseudo-XML string to select the codes it uses a simple colon-delimited list of the keywords. </p><h2>OPTIONS</h2>
-<p>attribute colon-delimited list of attribute keywords as defined in the esc(3f) procedure. </p><h2>RETURNS</h2>
+<p>attribute colon-delimited list of attribute keywords as defined in the esc(3f) procedure. text if supplied it is printed and then an attribute reset is added </p><h2>RETURNS</h2>
 <p>out the output is the strings (by default ANSI video display escape sequences, see update(3f) ) assigned by the keywords. </p><h2>EXAMPLE</h2>
 <p>Sample program</p>
-<p>program functional use M_escape, only : attr, esc_mode implicit none call printme('color') call printme('plain') call printme('raw') contains subroutine printme(mymode) character(len=*),intent(in) :: mymode call esc_mode(mymode) write(*,'(a)')mymode write(*,'(*(g0))',advance='no')attr('red:BLUE:bold'),'Hello!', &amp; &amp; attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset') write(*,'(*(g0))',advance='yes')' Back to a normal write statement.' end subroutine printme end program functional</p>
+<p>program functional use M_escape, only : attr, esc_mode implicit none call printme('color') call printme('plain') call printme('raw') contains subroutine printme(mymode) character(len=*),intent(in) :: mymode call esc_mode(mymode) write(*,'(a)')mymode write(*,'(*(g0))',advance='no')attr('red:BLUE:bold','Hello!'), 'and everything is back to defaults or attr('RED:blue:bold'),'Hello Again!', &amp; &amp; attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset') write(*,'(*(g0))',advance='yes')' Back to a normal write statement.' end subroutine printme end program functional</p>
 <h2>AUTHOR</h2>
 <p>John S. Urban, 2020 </p><h2>LICENSE</h2>
 <p>Public Domain </p>
 
-<p class="reference">References <a class="el" href="namespacem__escape.html#af555c90c278ff964d8bce93ee0368a42">get()</a>, <a class="el" href="namespacem__escape.html#ab4e7fcb41457772a9bd4e4413d5355d6">mode</a>, <a class="el" href="namespacem__escape.html#af23bd97702864e0f32258e6ec0d51506">split()</a>, and <a class="el" href="namespacem__escape.html#ae9d40717b2e75e90e2505d5fed6435c5">vt102()</a>.</p>
+<p class="reference">References <a class="el" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb">esc()</a>, <a class="el" href="namespacem__escape.html#af555c90c278ff964d8bce93ee0368a42">get()</a>, <a class="el" href="namespacem__escape.html#ab4e7fcb41457772a9bd4e4413d5355d6">mode</a>, <a class="el" href="namespacem__escape.html#af23bd97702864e0f32258e6ec0d51506">split()</a>, and <a class="el" href="namespacem__escape.html#ae9d40717b2e75e90e2505d5fed6435c5">vt102()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="namespacem__escape_ab9ee8dee0ee167567e9c2f570f398987_cgraph.png" border="0" usemap="#namespacem__escape_ab9ee8dee0ee167567e9c2f570f398987_cgraph" alt=""/></div>
-<map name="namespacem__escape_ab9ee8dee0ee167567e9c2f570f398987_cgraph" id="namespacem__escape_ab9ee8dee0ee167567e9c2f570f398987_cgraph">
-<area shape="rect" id="node2" href="namespacem__escape.html#af555c90c278ff964d8bce93ee0368a42" title="m_escape::get" alt="" coords="180,5,297,32"/>
-<area shape="rect" id="node3" href="namespacem__escape.html#af23bd97702864e0f32258e6ec0d51506" title="m_escape::split" alt="" coords="177,56,301,83"/>
-<area shape="rect" id="node4" href="namespacem__escape.html#ae9d40717b2e75e90e2505d5fed6435c5" title="m_escape::vt102" alt="" coords="172,107,305,133"/>
-<area shape="rect" id="node5" href="namespacem__escape.html#a1bc574bc97157fe67d868d2bd180c91e" title="m_escape::wipe_dictionary" alt="" coords="353,81,552,108"/>
-<area shape="rect" id="node6" href="namespacem__escape.html#a5efd612f60d281003917329484a7960c" title="NAMEupdate(3f) &#45; [M_escape] update internal dictionary given keyword and value (LICENSE:PD) SYNOPSIS..." alt="" coords="382,132,523,159"/>
+<div class="center"><img src="namespacem__escape_a916b16ce9be553d669f54cb9575a91be_cgraph.png" border="0" usemap="#namespacem__escape_a916b16ce9be553d669f54cb9575a91be_cgraph" alt=""/></div>
+<map name="namespacem__escape_a916b16ce9be553d669f54cb9575a91be_cgraph" id="namespacem__escape_a916b16ce9be553d669f54cb9575a91be_cgraph">
+<area shape="rect" id="node2" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax (prototype) in strings ..." alt="" coords="175,56,293,83"/>
+<area shape="rect" id="node3" href="namespacem__escape.html#ae9d40717b2e75e90e2505d5fed6435c5" title="m_escape::vt102" alt="" coords="344,31,477,57"/>
+<area shape="rect" id="node6" href="namespacem__escape.html#af555c90c278ff964d8bce93ee0368a42" title="m_escape::get" alt="" coords="352,81,469,108"/>
+<area shape="rect" id="node7" href="namespacem__escape.html#af23bd97702864e0f32258e6ec0d51506" title="m_escape::split" alt="" coords="172,157,296,184"/>
+<area shape="rect" id="node4" href="namespacem__escape.html#a1bc574bc97157fe67d868d2bd180c91e" title="m_escape::wipe_dictionary" alt="" coords="525,5,724,32"/>
+<area shape="rect" id="node5" href="namespacem__escape.html#a5efd612f60d281003917329484a7960c" title="NAMEupdate(3f) &#45; [M_escape] update internal dictionary given keyword and value (LICENSE:PD) SYNOPSIS..." alt="" coords="554,56,695,83"/>
 </map>
 </div>
 
@@ -486,6 +496,14 @@ Here is the call graph for this function:</div>
 <area shape="rect" id="node5" href="namespacem__escape.html#a5efd612f60d281003917329484a7960c" title="NAMEupdate(3f) &#45; [M_escape] update internal dictionary given keyword and value (LICENSE:PD) SYNOPSIS..." alt="" coords="382,81,523,108"/>
 </map>
 </div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="namespacem__escape_a36f016baad6b23f86189e6f3ee6db0cb_icgraph.png" border="0" usemap="#namespacem__escape_a36f016baad6b23f86189e6f3ee6db0cb_icgraph" alt=""/></div>
+<map name="namespacem__escape_a36f016baad6b23f86189e6f3ee6db0cb_icgraph" id="namespacem__escape_a36f016baad6b23f86189e6f3ee6db0cb_icgraph">
+<area shape="rect" id="node2" href="namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="172,5,291,32"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -571,7 +589,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacem__escape_af555c90c278ff964d8bce93ee0368a42_icgraph.png" border="0" usemap="#namespacem__escape_af555c90c278ff964d8bce93ee0368a42_icgraph" alt=""/></div>
 <map name="namespacem__escape_af555c90c278ff964d8bce93ee0368a42_icgraph" id="namespacem__escape_af555c90c278ff964d8bce93ee0368a42_icgraph">
 <area shape="rect" id="node2" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax (prototype) in strings ..." alt="" coords="171,5,289,32"/>
-<area shape="rect" id="node3" href="namespacem__escape.html#ab9ee8dee0ee167567e9c2f570f398987" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="171,56,289,83"/>
+<area shape="rect" id="node3" href="namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="337,31,456,57"/>
 </map>
 </div>
 
@@ -676,7 +694,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacem__escape_af23bd97702864e0f32258e6ec0d51506_icgraph.png" border="0" usemap="#namespacem__escape_af23bd97702864e0f32258e6ec0d51506_icgraph" alt=""/></div>
 <map name="namespacem__escape_af23bd97702864e0f32258e6ec0d51506_icgraph" id="namespacem__escape_af23bd97702864e0f32258e6ec0d51506_icgraph">
-<area shape="rect" id="node2" href="namespacem__escape.html#ab9ee8dee0ee167567e9c2f570f398987" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="177,5,296,32"/>
+<area shape="rect" id="node2" href="namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="177,5,296,32"/>
 </map>
 </div>
 
@@ -751,8 +769,8 @@ Here is the caller graph for this function:</div>
 <map name="namespacem__escape_a5efd612f60d281003917329484a7960c_icgraph" id="namespacem__escape_a5efd612f60d281003917329484a7960c_icgraph">
 <area shape="rect" id="node2" href="namespacem__escape.html#ae9d40717b2e75e90e2505d5fed6435c5" title="m_escape::vt102" alt="" coords="195,56,328,83"/>
 <area shape="rect" id="node3" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax (prototype) in strings ..." alt="" coords="398,5,517,32"/>
-<area shape="rect" id="node4" href="namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b" title="NAMEesc_mode(3f) &#45; [M_escape] select processing mode for output from esc(3f) SYNOPSIS" alt="" coords="376,56,539,83"/>
-<area shape="rect" id="node5" href="namespacem__escape.html#ab9ee8dee0ee167567e9c2f570f398987" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="398,107,517,133"/>
+<area shape="rect" id="node4" href="namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="587,31,705,57"/>
+<area shape="rect" id="node5" href="namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b" title="NAMEesc_mode(3f) &#45; [M_escape] select processing mode for output from esc(3f) SYNOPSIS" alt="" coords="376,107,539,133"/>
 </map>
 </div>
 
@@ -797,8 +815,8 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5_icgraph.png" border="0" usemap="#namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5_icgraph" alt=""/></div>
 <map name="namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5_icgraph" id="namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5_icgraph">
 <area shape="rect" id="node2" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax (prototype) in strings ..." alt="" coords="209,5,327,32"/>
-<area shape="rect" id="node3" href="namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b" title="NAMEesc_mode(3f) &#45; [M_escape] select processing mode for output from esc(3f) SYNOPSIS" alt="" coords="187,56,349,83"/>
-<area shape="rect" id="node4" href="namespacem__escape.html#ab9ee8dee0ee167567e9c2f570f398987" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="209,107,327,133"/>
+<area shape="rect" id="node3" href="namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="397,31,516,57"/>
+<area shape="rect" id="node4" href="namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b" title="NAMEesc_mode(3f) &#45; [M_escape] select processing mode for output from esc(3f) SYNOPSIS" alt="" coords="187,107,349,133"/>
 </map>
 </div>
 
@@ -835,8 +853,8 @@ Here is the caller graph for this function:</div>
 <map name="namespacem__escape_a1bc574bc97157fe67d868d2bd180c91e_icgraph" id="namespacem__escape_a1bc574bc97157fe67d868d2bd180c91e_icgraph">
 <area shape="rect" id="node2" href="namespacem__escape.html#ae9d40717b2e75e90e2505d5fed6435c5" title="m_escape::vt102" alt="" coords="252,56,385,83"/>
 <area shape="rect" id="node3" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax (prototype) in strings ..." alt="" coords="455,5,574,32"/>
-<area shape="rect" id="node4" href="namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b" title="NAMEesc_mode(3f) &#45; [M_escape] select processing mode for output from esc(3f) SYNOPSIS" alt="" coords="433,56,596,83"/>
-<area shape="rect" id="node5" href="namespacem__escape.html#ab9ee8dee0ee167567e9c2f570f398987" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="455,107,574,133"/>
+<area shape="rect" id="node4" href="namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="644,31,763,57"/>
+<area shape="rect" id="node5" href="namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b" title="NAMEesc_mode(3f) &#45; [M_escape] select processing mode for output from esc(3f) SYNOPSIS" alt="" coords="433,107,596,133"/>
 </map>
 </div>
 

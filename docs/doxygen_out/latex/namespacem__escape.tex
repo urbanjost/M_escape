@@ -34,7 +34,7 @@ subroutine, public \mbox{\hyperlink{namespacem__escape_a6add907828fd34e94b87f643
 print\+\_\+dictionary(3f) -\/ \mbox{[}A\+R\+G\+U\+M\+E\+N\+TS\+:M\+\_\+\+C\+L\+I2\mbox{]} print internal dictionary created by calls to set\+\_\+args(3f) (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\item 
 subroutine \mbox{\hyperlink{namespacem__escape_af23bd97702864e0f32258e6ec0d51506}{split}} (input\+\_\+line, array, delimiters)
 \item 
-character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__escape_ab9ee8dee0ee167567e9c2f570f398987}{attr}} (attribute)
+character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__escape_a916b16ce9be553d669f54cb9575a91be}{attr}} (attribute, text)
 \begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
 
 attr(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -286,18 +286,16 @@ program direct use M\+\_\+escape, only \+: \& ! F\+O\+R\+E\+G\+R\+O\+U\+ND C\+O\
 
 If you prefer a functional interface, use the attr(3f) function with the same keywords as with the esc(3f) function. Note that esc\+\_\+mode(3f) will work with this function.
 
-program functional use M\+\_\+escape, only \+: attr, esc\+\_\+mode implicit none ! attr takes a colon-\/delimited list of attribute keywords write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}no\textquotesingle{})attr(\textquotesingle{}red\+:\+B\+L\+UE\+:bold\textquotesingle{}),\textquotesingle{}Hello!\textquotesingle{}, \& \& attr(\textquotesingle{}/\+B\+L\+UE\textquotesingle{}),\textquotesingle{} Well, this is boring without a nice background color.\textquotesingle{},attr(\textquotesingle{}reset\textquotesingle{}) write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}yes\textquotesingle{})\textquotesingle{} Back to a normal write statement.\textquotesingle{}
-
-call printme(\textquotesingle{}color\textquotesingle{}) call printme(\textquotesingle{}plain\textquotesingle{}) call printme(\textquotesingle{}raw\textquotesingle{}) contains subroutine printme(mymode) character(len=$\ast$),intent(in) \+:\+: mymode call esc\+\_\+mode(mymode) write($\ast$,\textquotesingle{}(a)\textquotesingle{})mymode write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}no\textquotesingle{})attr(\textquotesingle{}red\textquotesingle{}),attr(\textquotesingle{}B\+L\+UE\textquotesingle{}),attr(\textquotesingle{}bold\textquotesingle{}),\textquotesingle{}Hello!\textquotesingle{}, \& \& attr(\textquotesingle{}/\+B\+L\+UE\textquotesingle{}),\textquotesingle{} Well, this is boring without a nice background color.\textquotesingle{},attr(\textquotesingle{}reset\textquotesingle{}) write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}yes\textquotesingle{})\textquotesingle{} Back to a normal write statement.\textquotesingle{} end subroutine printme end program functional
+program functional use M\+\_\+escape, only \+: attr, esc\+\_\+mode implicit none call printme(\textquotesingle{}color\textquotesingle{}) call printme(\textquotesingle{}plain\textquotesingle{}) call printme(\textquotesingle{}raw\textquotesingle{}) contains subroutine printme(mymode) character(len=$\ast$),intent(in) \+:\+: mymode call esc\+\_\+mode(mymode) write($\ast$,\textquotesingle{}(a)\textquotesingle{})mymode write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}no\textquotesingle{}) \& \& attr(\textquotesingle{}red\+:\+B\+L\+UE\+:bold\textquotesingle{},\textquotesingle{}Hello!\textquotesingle{}), \& \& \textquotesingle{}and everything is back to defaults or \textquotesingle{}, \& \& attr(\textquotesingle{}R\+E\+D\+:blue\+:bold\textquotesingle{}),\textquotesingle{}Hello Again!\textquotesingle{}, \& \& attr(\textquotesingle{}/\+B\+L\+UE\textquotesingle{}),\textquotesingle{} Well, the text color is still on.\textquotesingle{},attr(\textquotesingle{}reset\textquotesingle{}) write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}yes\textquotesingle{})\textquotesingle{} Back to normal writes.\textquotesingle{} end subroutine printme end program functional
 
 \subsubsection*{A\+L\+T\+E\+R\+N\+A\+TE O\+B\+J\+E\+CT O\+R\+I\+E\+N\+T\+ED}
 
 \subsection{Function/\+Subroutine Documentation}
-\mbox{\Hypertarget{namespacem__escape_ab9ee8dee0ee167567e9c2f570f398987}\label{namespacem__escape_ab9ee8dee0ee167567e9c2f570f398987}} 
+\mbox{\Hypertarget{namespacem__escape_a916b16ce9be553d669f54cb9575a91be}\label{namespacem__escape_a916b16ce9be553d669f54cb9575a91be}} 
 \index{m\+\_\+escape@{m\+\_\+escape}!attr@{attr}}
 \index{attr@{attr}!m\+\_\+escape@{m\+\_\+escape}}
 \subsubsection{\texorpdfstring{attr()}{attr()}}
-{\footnotesize\ttfamily character(len=\+:) function, allocatable, public m\+\_\+escape\+::attr (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in)}]{attribute }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily character(len=\+:) function, allocatable, public m\+\_\+escape\+::attr (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in)}]{attribute,  }\item[{character(len=$\ast$), intent(in), optional}]{text }\end{DoxyParamCaption})}
 
 
 
@@ -311,13 +309,13 @@ character(len=$\ast$),intent(in) \+:\+: attribute character(len=\+:),allocatable
 
 attr(3f) uses the same keywords as esc(3f) to send A\+N\+SI escape sequences to the display screen, except instead of using a pseudo-\/\+X\+ML string to select the codes it uses a simple colon-\/delimited list of the keywords. \subsubsection*{O\+P\+T\+I\+O\+NS}
 
-attribute colon-\/delimited list of attribute keywords as defined in the esc(3f) procedure. \subsubsection*{R\+E\+T\+U\+R\+NS}
+attribute colon-\/delimited list of attribute keywords as defined in the esc(3f) procedure. text if supplied it is printed and then an attribute reset is added \subsubsection*{R\+E\+T\+U\+R\+NS}
 
 out the output is the strings (by default A\+N\+SI video display escape sequences, see update(3f) ) assigned by the keywords. \subsubsection*{E\+X\+A\+M\+P\+LE}
 
 Sample program
 
-program functional use M\+\_\+escape, only \+: attr, esc\+\_\+mode implicit none call printme(\textquotesingle{}color\textquotesingle{}) call printme(\textquotesingle{}plain\textquotesingle{}) call printme(\textquotesingle{}raw\textquotesingle{}) contains subroutine printme(mymode) character(len=$\ast$),intent(in) \+:\+: mymode call esc\+\_\+mode(mymode) write($\ast$,\textquotesingle{}(a)\textquotesingle{})mymode write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}no\textquotesingle{})attr(\textquotesingle{}red\+:\+B\+L\+UE\+:bold\textquotesingle{}),\textquotesingle{}Hello!\textquotesingle{}, \& \& attr(\textquotesingle{}/\+B\+L\+UE\textquotesingle{}),\textquotesingle{} Well, this is boring without a nice background color.\textquotesingle{},attr(\textquotesingle{}reset\textquotesingle{}) write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}yes\textquotesingle{})\textquotesingle{} Back to a normal write statement.\textquotesingle{} end subroutine printme end program functional
+program functional use M\+\_\+escape, only \+: attr, esc\+\_\+mode implicit none call printme(\textquotesingle{}color\textquotesingle{}) call printme(\textquotesingle{}plain\textquotesingle{}) call printme(\textquotesingle{}raw\textquotesingle{}) contains subroutine printme(mymode) character(len=$\ast$),intent(in) \+:\+: mymode call esc\+\_\+mode(mymode) write($\ast$,\textquotesingle{}(a)\textquotesingle{})mymode write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}no\textquotesingle{})attr(\textquotesingle{}red\+:\+B\+L\+UE\+:bold\textquotesingle{},\textquotesingle{}Hello!\textquotesingle{}), \textquotesingle{}and everything is back to defaults or attr(\textquotesingle{}R\+E\+D\+:blue\+:bold\textquotesingle{}),\textquotesingle{}Hello Again!\textquotesingle{}, \& \& attr(\textquotesingle{}/\+B\+L\+UE\textquotesingle{}),\textquotesingle{} Well, this is boring without a nice background color.\textquotesingle{},attr(\textquotesingle{}reset\textquotesingle{}) write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}yes\textquotesingle{})\textquotesingle{} Back to a normal write statement.\textquotesingle{} end subroutine printme end program functional
 
 \subsubsection*{A\+U\+T\+H\+OR}
 
@@ -325,13 +323,13 @@ John S. Urban, 2020 \subsubsection*{L\+I\+C\+E\+N\+SE}
 
 Public Domain 
 
-References get(), mode, split(), and vt102().
+References esc(), get(), mode, split(), and vt102().
 
 Here is the call graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacem__escape_ab9ee8dee0ee167567e9c2f570f398987_cgraph}
+\includegraphics[width=350pt]{namespacem__escape_a916b16ce9be553d669f54cb9575a91be_cgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacem__escape_a36f016baad6b23f86189e6f3ee6db0cb}\label{namespacem__escape_a36f016baad6b23f86189e6f3ee6db0cb}} 
@@ -457,6 +455,13 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{namespacem__escape_a36f016baad6b23f86189e6f3ee6db0cb_cgraph}
 \end{center}
 \end{figure}
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=294pt]{namespacem__escape_a36f016baad6b23f86189e6f3ee6db0cb_icgraph}
+\end{center}
+\end{figure}
 \mbox{\Hypertarget{namespacem__escape_a4210456d81d9a1bf328093a9635e640b}\label{namespacem__escape_a4210456d81d9a1bf328093a9635e640b}} 
 \index{m\+\_\+escape@{m\+\_\+escape}!esc\+\_\+mode@{esc\+\_\+mode}}
 \index{esc\+\_\+mode@{esc\+\_\+mode}!m\+\_\+escape@{m\+\_\+escape}}
@@ -518,12 +523,11 @@ Here is the call graph for this function\+:\nopagebreak
 
 References counts, keywords, and values.
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=293pt]{namespacem__escape_af555c90c278ff964d8bce93ee0368a42_icgraph}
+\includegraphics[width=350pt]{namespacem__escape_af555c90c278ff964d8bce93ee0368a42_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacem__escape_a6add907828fd34e94b87f643a5cabc64}\label{namespacem__escape_a6add907828fd34e94b87f643a5cabc64}} 
@@ -587,8 +591,7 @@ References counts, keywords, and values.
 \subsubsection{\texorpdfstring{split()}{split()}}
 {\footnotesize\ttfamily subroutine m\+\_\+escape\+::split (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in)}]{input\+\_\+line,  }\item[{character(len=\+:), dimension(\+:), intent(out), allocatable}]{array,  }\item[{character(len=$\ast$), intent(in), optional}]{delimiters }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -650,8 +653,7 @@ Public Domain
 
 References counts, keywords, and values.
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -675,12 +677,11 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=338pt]{namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5_icgraph}
+\includegraphics[width=350pt]{namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacem__escape_a1bc574bc97157fe67d868d2bd180c91e}\label{namespacem__escape_a1bc574bc97157fe67d868d2bd180c91e}} 
@@ -693,8 +694,7 @@ Here is the caller graph for this function\+:
 
 References counts, keywords, and values.
 
-Here is the caller graph for this function\+:
-\nopagebreak
+Here is the caller graph for this function\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode

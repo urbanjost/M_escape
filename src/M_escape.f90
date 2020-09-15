@@ -136,11 +136,6 @@
 !!    program functional
 !!    use M_escape, only : attr, esc_mode
 !!    implicit none
-!!      ! attr takes a colon-delimited list of attribute keywords
-!!       write(*,'(*(g0))',advance='no')attr('red:BLUE:bold'),'Hello!', &
-!!        & attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset')
-!!       write(*,'(*(g0))',advance='yes')' Back to a normal write statement.'
-!!
 !!         call printme('color')
 !!         call printme('plain')
 !!         call printme('raw')
@@ -149,9 +144,12 @@
 !!    character(len=*),intent(in) :: mymode
 !!       call esc_mode(mymode)
 !!       write(*,'(a)')mymode
-!!       write(*,'(*(g0))',advance='no')attr('red'),attr('BLUE'),attr('bold'),'Hello!', &
-!!        & attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset')
-!!       write(*,'(*(g0))',advance='yes')' Back to a normal write statement.'
+!!       write(*,'(*(g0))',advance='no') &
+!!        & attr('red:BLUE:bold','Hello!'), &
+!!        & 'and everything is back to defaults or ', &
+!!        & attr('RED:blue:bold'),'Hello Again!', &
+!!        & attr('/BLUE'),' Well, the text color is still on.',attr('reset')
+!!       write(*,'(*(g0))',advance='yes')' Back to normal writes.'
 !!    end subroutine printme
 !!    end program functional
 !!
@@ -166,6 +164,7 @@ public esc_mode
 public update
 public print_dictionary
 
+!-!public flush_colors, init_colors
 public attr
 
 logical,save :: debug=.false.
@@ -888,6 +887,7 @@ integer                       :: imax                   ! length of longest toke
 !!##OPTIONS
 !!    attribute  colon-delimited list of attribute keywords as defined in the
 !!               esc(3f) procedure.
+!!    text       if supplied it is printed and then an attribute reset is added
 !!##RETURNS
 !!    out        the output is the strings (by default ANSI video
 !!               display escape sequences, see update(3f) ) assigned by the keywords.
@@ -906,7 +906,8 @@ integer                       :: imax                   ! length of longest toke
 !!    character(len=*),intent(in) :: mymode
 !!       call esc_mode(mymode)
 !!       write(*,'(a)')mymode
-!!       write(*,'(*(g0))',advance='no')attr('red:BLUE:bold'),'Hello!', &
+!!       write(*,'(*(g0))',advance='no')attr('red:BLUE:bold','Hello!'),
+!!       'and everything is back to defaults or attr('RED:blue:bold'),'Hello Again!', &
 !!        & attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset')
 !!       write(*,'(*(g0))',advance='yes')' Back to a normal write statement.'
 !!    end subroutine printme
@@ -916,12 +917,13 @@ integer                       :: imax                   ! length of longest toke
 !!    John S. Urban, 2020
 !!##LICENSE
 !!    Public Domain
-function attr(attribute) result(out)
+function attr(attribute,text) result(out)
 ! colon-delimited string of attributes
-character(len=*),intent(in)  :: attribute
-character(len=:),allocatable :: out
-character(len=:),allocatable :: array(:)
-integer                      :: i
+character(len=*),intent(in)          :: attribute
+character(len=*),intent(in),optional :: text
+character(len=:),allocatable         :: out
+character(len=:),allocatable         :: array(:)
+integer                              :: i
    if(.not.allocated(mode))then  ! set substitution mode
       mode='color'
       call vt102()
@@ -937,7 +939,93 @@ integer                      :: i
          out=out//get(trim(array(i)))
       endif
    enddo
+   if(present(text))then
+   out=out//text//esc('<reset>')
+   endif
 end function attr
+!===================================================================================================================================
+!()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
+!===================================================================================================================================
+! one question would be if the strings should not be parameters so you could flush and reset them.
+!-!subroutine color_reset()
+!-!! for direct use of escape sequences
+!-!
+!-!! foreground colors
+!-! fg_red      =  CODE_START//COLOR_FG_RED//CODE_END
+!-! fg_cyan     =  CODE_START//COLOR_FG_CYAN//CODE_END
+!-! fg_magenta  =  CODE_START//COLOR_FG_MAGENTA//CODE_END
+!-! fg_blue     =  CODE_START//COLOR_FG_BLUE//CODE_END
+!-! fg_green    =  CODE_START//COLOR_FG_GREEN//CODE_END
+!-! fg_yellow   =  CODE_START//COLOR_FG_YELLOW//CODE_END
+!-! fg_white    =  CODE_START//COLOR_FG_WHITE//CODE_END
+!-! fg_ebony    =  CODE_START//COLOR_FG_BLACK//CODE_END
+!-! fg_default  =  CODE_START//COLOR_FG_DEFAULT//CODE_END
+!-!
+!-!! background colors
+!-! bg_red      =  CODE_START//COLOR_BG_RED//CODE_END
+!-! bg_cyan     =  CODE_START//COLOR_BG_CYAN//CODE_END
+!-! bg_magenta  =  CODE_START//COLOR_BG_MAGENTA//CODE_END
+!-! bg_blue     =  CODE_START//COLOR_BG_BLUE//CODE_END
+!-! bg_green    =  CODE_START//COLOR_BG_GREEN//CODE_END
+!-! bg_yellow   =  CODE_START//COLOR_BG_YELLOW//CODE_END
+!-! bg_white    =  CODE_START//COLOR_BG_WHITE//CODE_END
+!-! bg_ebony    =  CODE_START//COLOR_BG_BLACK//CODE_END
+!-! bg_default  =  CODE_START//COLOR_BG_DEFAULT//CODE_END
+!-!
+!-!! attributes
+!-! bold        =  CODE_START//BOLD_ON//CODE_END
+!-! italic      =  CODE_START//ITALIC_ON//CODE_END
+!-! inverse     =  CODE_START//INVERSE_ON//CODE_END
+!-! underline   =  CODE_START//UNDERLINE_ON//CODE_END
+!-! unbold      =  CODE_START//BOLD_OFF//CODE_END
+!-! unitalic    =  CODE_START//ITALIC_OFF//CODE_END
+!-! uninverse   =  CODE_START//INVERSE_OFF//CODE_END
+!-! ununderline =  CODE_START//UNDERLINE_OFF//CODE_END
+!-!
+!-! reset       =  CODE_RESET
+!-! clear       =  CLEAR_DISPLAY
+!-!subroutine color_reset()
+!===================================================================================================================================
+!()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
+!===================================================================================================================================
+!-!subroutine color_flush()
+!-!! for direct use of escape sequences
+!-!
+!-!! foreground colors
+!-! fg_red      =  ''
+!-! fg_cyan     =  ''
+!-! fg_magenta  =  ''
+!-! fg_blue     =  ''
+!-! fg_green    =  ''
+!-! fg_yellow   =  ''
+!-! fg_white    =  ''
+!-! fg_ebony    =  ''
+!-! fg_default  =  ''
+!-!
+!-!! background colors
+!-! bg_red      =  ''
+!-! bg_cyan     =  ''
+!-! bg_magenta  =  ''
+!-! bg_blue     =  ''
+!-! bg_green    =  ''
+!-! bg_yellow   =  ''
+!-! bg_white    =  ''
+!-! bg_ebony    =  ''
+!-! bg_default  =  ''
+!-!
+!-!! attributes
+!-! bold        =  ''
+!-! italic      =  ''
+!-! inverse     =  ''
+!-! underline   =  ''
+!-! unbold      =  ''
+!-! unitalic    =  ''
+!-! uninverse   =  ''
+!-! ununderline =  ''
+!-!
+!-! reset       =  CODE_RESET
+!-! clear       =  CLEAR_DISPLAY
+!-!end subroutine color_flush
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
 !===================================================================================================================================
