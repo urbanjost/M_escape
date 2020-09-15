@@ -16,6 +16,9 @@
 !!    behaviors. or to perhaps in the future generate a CSS style sheet
 !!    and HTML instead of text to the terminal, ...
 !!
+!!    Alternatively, direct use of the escape sequences is supported, as
+!!    well as a functional interface, and an object-oriented approach.
+!!
 !!    The original concept was to allow formatting by using an existing
 !!    XML library to allow the user to write HTML and to format it on a
 !!    terminal like w3m, lynx, and link do. And in some ways this is an
@@ -24,7 +27,7 @@
 !!    much simpler approach programmatically for this prototype.
 !!
 !!    Typically, you should use M_system::system_istty(3f) to set the default
-!!    to "plain" instead of "vt102" when the output file is not a terminal.
+!!    to "plain" instead of "color" when the output file is not a terminal.
 !!
 !!##MAJOR FEATURES
 !!    o Add ANSI terminal escape sequences with an XML-like syntax with ESC(3f).
@@ -55,8 +58,24 @@
 !!    Should a call to system_istty(3f) be built in to turn off escape sequences
 !!    when a terminal is not present?
 !!
+!!    For color or pre-defined words a case statement could be used to call
+!!    specific functions to support platforms like old Microsoft consoles that
+!!    require a function call to assign text attributes instead of in-band ANSI
+!!    escape control sequences. See the "Rosetta Code" web site for examples
+!!    of generating color in Microsoft consoles.
+!!
 !!    Attributes are currently ended at the end of each call to esc(3f). Perhaps
 !!    allow multi-line formatting?
+!!
+!!    Ultimately, an object-oriented package with capabilities like ncurses to
+!!    define a "pad" and move and resize and format it would be ideal and very
+!!    useful. Also see fixedform(3f) in the GPF (General Fortran Package).
+!!
+!!    It is a shame xterm(1) does not support pixel-oriented abilities to define
+!!    a "graphics" area or support canvas(3c)-like in-band graphics, somewhat
+!!    like Tektronix terminals.
+!!
+!!    overload + to replace //
 !!
 !!##EXAMPLE
 !!
@@ -83,6 +102,60 @@
 !!       write(*,'(a)')esc(trim(line))
 !!
 !!    end program demo_M_escape
+!!
+!!##ALTERNATE DIRECT USE
+!!
+!!   Alternatively, you may use the escape sequences directly
+!!
+!!    program direct
+!!       use M_escape, only : &
+!!      ! FOREGROUND COLORS
+!!         & fg_red, fg_cyan, fg_magenta, fg_blue, &
+!!         & fg_green, fg_yellow, fg_white, fg_ebony, &
+!!         & fg_default, &
+!!      ! BACKGROUND COLORS
+!!         & bg_red, bg_cyan, bg_magenta, bg_blue, &
+!!         & bg_green, bg_yellow, bg_white, bg_ebony, &
+!!         & bg_default, &
+!!      ! ATTRIBUTES
+!!         & bold, italic, inverse, underline,  &
+!!         & unbold, unitalic, uninverse, ununderline,  &
+!!         & reset, &
+!!      ! DISPLAY
+!!         & clear
+!!       implicit none
+!!         write(*,'(*(g0))')fg_red,bg_green,bold,'Hello!',reset
+!!    end program direct
+!!
+!!##ALTERNATE FUNCTIONAL INTERFACE
+!!
+!!  If you prefer a functional interface, use the attr(3f) function with
+!!  the same keywords as with the esc(3f) function. Note that esc_mode(3f)
+!!  will work with this function.
+!!
+!!    program functional
+!!    use M_escape, only : attr, esc_mode
+!!    implicit none
+!!      ! attr takes a colon-delimited list of attribute keywords
+!!       write(*,'(*(g0))',advance='no')attr('red:BLUE:bold'),'Hello!', &
+!!        & attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset')
+!!       write(*,'(*(g0))',advance='yes')' Back to a normal write statement.'
+!!
+!!         call printme('color')
+!!         call printme('plain')
+!!         call printme('raw')
+!!    contains
+!!    subroutine printme(mymode)
+!!    character(len=*),intent(in) :: mymode
+!!       call esc_mode(mymode)
+!!       write(*,'(a)')mymode
+!!       write(*,'(*(g0))',advance='no')attr('red'),attr('BLUE'),attr('bold'),'Hello!', &
+!!        & attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset')
+!!       write(*,'(*(g0))',advance='yes')' Back to a normal write statement.'
+!!    end subroutine printme
+!!    end program functional
+!!
+!!##ALTERNATE OBJECT ORIENTED
 module M_escape
 use M_list, only : insert, locate, replace, remove
 use, intrinsic :: iso_fortran_env, only : stderr=>ERROR_UNIT,stdin=>INPUT_UNIT    ! access computing environment
@@ -92,6 +165,8 @@ public esc
 public esc_mode
 public update
 public print_dictionary
+
+public attr
 
 logical,save :: debug=.false.
 
@@ -107,26 +182,72 @@ character(len=*),parameter  :: ESCAPE=achar(27)                     ! "\" charac
 ! codes
 character(len=*),parameter  :: CODE_START=ESCAPE//'['               ! Start ANSI code, "\[".
 character(len=*),parameter  :: CODE_END='m'                         ! End ANSI code, "m".
-character(len=*),parameter  :: CODE_CLEAR=CODE_START//'0'//CODE_END ! Clear all styles, "\[0m".
+character(len=*),parameter  :: CODE_RESET=CODE_START//'0'//CODE_END ! Clear all styles, "\[0m".
 
 character(len=*),parameter  :: CLEAR_DISPLAY=CODE_START//'2J'
 character(len=*),parameter  :: BELL=achar(7)
 
-character(len=*),parameter  :: BLACK='30', RED='31', GREEN='32', YELLOW='33', BLUE='34', MAGENTA='35', CYAN='36', WHITE='37'
-character(len=*),parameter  :: DEFAULT='39'
 character(len=*),parameter  :: BOLD_ON='1',   ITALIC_ON='3',   UNDERLINE_ON='4',   INVERSE_ON='7'
 character(len=*),parameter  :: BOLD_OFF='22', ITALIC_OFF='23', UNDERLINE_OFF='24', INVERSE_OFF='27'
 
-character(len=*),parameter  :: BLACK_INTENSE='90',     RED_INTENSE='91',         GREEN_INTENSE='92',     YELLOW_INTENSE='93'
-character(len=*),parameter  :: BLUE_INTENSE='94',      MAGENTA_INTENSE='95',     CYAN_INTENSE='96',      WHITE_INTENSE='97'
+character(len=*),parameter  :: COLOR_FG_BLACK='30', COLOR_FG_RED='31',     COLOR_FG_GREEN='32', COLOR_FG_YELLOW='33'
+character(len=*),parameter  :: COLOR_FG_BLUE='34',  COLOR_FG_MAGENTA='35', COLOR_FG_CYAN='36',  COLOR_FG_WHITE='37'
+character(len=*),parameter  :: COLOR_FG_DEFAULT='39'
 
-character(len=*),parameter  :: BG_BLACK='40',          BG_RED='41',              BG_GREEN='42',          BG_YELLOW='43'
-character(len=*),parameter  :: BG_BLUE='44',           BG_MAGENTA='45',          BG_CYAN='46',           BG_WHITE='47'
+character(len=*),parameter  :: COLOR_FG_BLACK_INTENSE='90', COLOR_FG_RED_INTENSE='91'
+character(len=*),parameter  :: COLOR_FG_GREEN_INTENSE='92', COLOR_FG_YELLOW_INTENSE='93'
+character(len=*),parameter  :: COLOR_FG_BLUE_INTENSE='94',  COLOR_FG_MAGENTA_INTENSE='95'
+character(len=*),parameter  :: COLOR_FG_CYAN_INTENSE='96',  COLOR_FG_WHITE_INTENSE='97'
 
-character(len=*),parameter  :: BG_DEFAULT='49'
+character(len=*),parameter  :: COLOR_BG_BLACK='40', COLOR_BG_RED='41',     COLOR_BG_GREEN='42', COLOR_BG_YELLOW='43'
+character(len=*),parameter  :: COLOR_BG_BLUE='44',  COLOR_BG_MAGENTA='45', COLOR_BG_CYAN='46',  COLOR_BG_WHITE='47'
 
-character(len=*),parameter  :: BG_BLACK_INTENSE='100', BG_RED_INTENSE='101',     BG_GREEN_INTENSE='102', BG_YELLOW_INTENSE='103'
-character(len=*),parameter  :: BG_BLUE_INTENSE='104',  BG_MAGENTA_INTENSE='105', BG_CYAN_INTENSE='106',  BG_WHITE_INTENSE='107'
+character(len=*),parameter  :: COLOR_BG_DEFAULT='49'
+
+character(len=*),parameter  :: COLOR_BG_BLACK_INTENSE='100', COLOR_BG_RED_INTENSE='101'
+character(len=*),parameter  :: COLOR_BG_GREEN_INTENSE='102', COLOR_BG_YELLOW_INTENSE='103'
+character(len=*),parameter  :: COLOR_BG_BLUE_INTENSE='104',  COLOR_BG_MAGENTA_INTENSE='105'
+character(len=*),parameter  :: COLOR_BG_CYAN_INTENSE='106',  COLOR_BG_WHITE_INTENSE='107'
+
+
+! for direct use of escape sequences
+
+! foreground colors
+character(len=*),parameter,public :: fg_red      =  CODE_START//COLOR_FG_RED//CODE_END
+character(len=*),parameter,public :: fg_cyan     =  CODE_START//COLOR_FG_CYAN//CODE_END
+character(len=*),parameter,public :: fg_magenta  =  CODE_START//COLOR_FG_MAGENTA//CODE_END
+character(len=*),parameter,public :: fg_blue     =  CODE_START//COLOR_FG_BLUE//CODE_END
+character(len=*),parameter,public :: fg_green    =  CODE_START//COLOR_FG_GREEN//CODE_END
+character(len=*),parameter,public :: fg_yellow   =  CODE_START//COLOR_FG_YELLOW//CODE_END
+character(len=*),parameter,public :: fg_white    =  CODE_START//COLOR_FG_WHITE//CODE_END
+character(len=*),parameter,public :: fg_ebony    =  CODE_START//COLOR_FG_BLACK//CODE_END
+character(len=*),parameter,public :: fg_default  =  CODE_START//COLOR_FG_DEFAULT//CODE_END
+
+! background colors
+character(len=*),parameter,public :: bg_red      =  CODE_START//COLOR_BG_RED//CODE_END
+character(len=*),parameter,public :: bg_cyan     =  CODE_START//COLOR_BG_CYAN//CODE_END
+character(len=*),parameter,public :: bg_magenta  =  CODE_START//COLOR_BG_MAGENTA//CODE_END
+character(len=*),parameter,public :: bg_blue     =  CODE_START//COLOR_BG_BLUE//CODE_END
+character(len=*),parameter,public :: bg_green    =  CODE_START//COLOR_BG_GREEN//CODE_END
+character(len=*),parameter,public :: bg_yellow   =  CODE_START//COLOR_BG_YELLOW//CODE_END
+character(len=*),parameter,public :: bg_white    =  CODE_START//COLOR_BG_WHITE//CODE_END
+character(len=*),parameter,public :: bg_ebony    =  CODE_START//COLOR_BG_BLACK//CODE_END
+character(len=*),parameter,public :: bg_default  =  CODE_START//COLOR_BG_DEFAULT//CODE_END
+
+! attributes
+character(len=*),parameter,public :: bold        =  CODE_START//BOLD_ON//CODE_END
+character(len=*),parameter,public :: italic      =  CODE_START//ITALIC_ON//CODE_END
+character(len=*),parameter,public :: inverse     =  CODE_START//INVERSE_ON//CODE_END
+character(len=*),parameter,public :: underline   =  CODE_START//UNDERLINE_ON//CODE_END
+character(len=*),parameter,public :: unbold      =  CODE_START//BOLD_OFF//CODE_END
+character(len=*),parameter,public :: unitalic    =  CODE_START//ITALIC_OFF//CODE_END
+character(len=*),parameter,public :: uninverse   =  CODE_START//INVERSE_OFF//CODE_END
+character(len=*),parameter,public :: ununderline =  CODE_START//UNDERLINE_OFF//CODE_END
+
+character(len=*),parameter,public :: reset       =  CODE_RESET
+character(len=*),parameter,public :: clear       =  CLEAR_DISPLAY
+
+
 contains
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
@@ -183,6 +304,8 @@ contains
 !!       clear
 !!       esc,       escape
 !!       default
+!!       gt
+!!       lt
 !!
 !!    By default, if the color mnemonics (ie. the keywords) are uppercase
 !!    they change the background color. If lowercase, the foreground color.
@@ -197,6 +320,10 @@ contains
 !!      o not all terminals obey the sequences. On Windows, it is best if
 !!        you use Windows 10+ and/or the Linux mode; although it has worked
 !!        with all CygWin and MinGW and Putty windows and mintty.
+!!      o you should use "<gt>" and "<lt>" instead of ">" and "<" in a string
+!!        processed by esc(3f) instead of in any plain text output so that the
+!!        raw mode will create correct input for the esc(3f) function if read
+!!        back in.
 !!
 !!##EXAMPLE
 !!
@@ -215,8 +342,8 @@ contains
 !!       call esc_mode(manner='raw')
 !!       call printstuff()
 !!
-!!       write(*,'(a)') esc('TEST MANNER=VT102:')
-!!       call esc_mode(manner='vt102')
+!!       write(*,'(a)') esc('TEST MANNER=color:')
+!!       call esc_mode(manner='color')
 !!       call printstuff()
 !!
 !!       write(*,'(a)') esc('TEST ADDING A CUSTOM SEQUENCE:')
@@ -269,7 +396,7 @@ else
    clear_at_end_local=.false.
 endif
 if(.not.allocated(mode))then  ! set substitution mode
-   mode='vt102' !'raw', 'xterm', 'dummy'|'plain'
+   mode='color' ! 'color'|'raw'|'plain'
    call vt102()
 endif
 
@@ -305,9 +432,6 @@ do
          if(name.eq.'debug')debug=.true.   !! developement version
          if(name.eq.'/debug')debug=.false. !! developement version
       endif
-   case('\')
-      i=i+1
-      expanded=expanded//padded(i:i)
    case default
       expanded=expanded//padded(i:i)
       i=i+1
@@ -316,7 +440,7 @@ do
 enddo
 if( (index(expanded,escape).ne.0).and.(.not.clear_at_end_local))then
    if((mode.ne.'raw').and.(mode.ne.'plain'))then
-      expanded=expanded//CODE_CLEAR                                   ! Clear all styles
+      expanded=expanded//CODE_RESET                                   ! Clear all styles
    endif
 endif
 end function esc
@@ -327,134 +451,62 @@ subroutine vt102()
 ! create a dictionary with character keywords, values, and value lengths
 ! using the routines for maintaining a list
 
-
    call wipe_dictionary()
    ! insert and replace entries
 
-   call update('bold',CODE_START//BOLD_ON//CODE_END)
-   call update('/bold',CODE_START//BOLD_OFF//CODE_END)
-   call update('bo',CODE_START//BOLD_ON//CODE_END)
-   call update('/bo',CODE_START//BOLD_OFF//CODE_END)
-   call update('livid',CODE_START//BOLD_ON//CODE_END)
-   call update('/livid',CODE_START//BOLD_OFF//CODE_END)
-   call update('li',CODE_START//BOLD_ON//CODE_END)
-   call update('/li',CODE_START//BOLD_OFF//CODE_END)
+   call update('bold',bold)
+   call update('/bold',unbold)
+   call update('bo',bold)
+   call update('/bo',unbold)
+   call update('livid',bold)
+   call update('/livid',unbold)
+   call update('li',bold)
+   call update('/li',unbold)
 
-   call update('italic',CODE_START//ITALIC_ON//CODE_END)
-   call update('/italic',CODE_START//ITALIC_OFF//CODE_END)
-   call update('it',CODE_START//ITALIC_ON//CODE_END)
-   call update('/it',CODE_START//ITALIC_OFF//CODE_END)
+   call update('italic',italic)
+   call update('/italic',unitalic)
+   call update('it',italic)
+   call update('/it',unitalic)
 
-   call update('inverse',CODE_START//INVERSE_ON//CODE_END)
-   call update('/inverse',CODE_START//INVERSE_OFF//CODE_END)
-   call update('in',CODE_START//INVERSE_ON//CODE_END)
-   call update('/in',CODE_START//INVERSE_OFF//CODE_END)
+   call update('inverse',inverse)
+   call update('/inverse',uninverse)
+   call update('in',inverse)
+   call update('/in',uninverse)
 
-   call update('underline',CODE_START//UNDERLINE_ON//CODE_END)
-   call update('/underline',CODE_START//UNDERLINE_OFF//CODE_END)
-   call update('un',CODE_START//UNDERLINE_ON//CODE_END)
-   call update('/un',CODE_START//UNDERLINE_OFF//CODE_END)
+   call update('underline',underline)
+   call update('/underline',ununderline)
+   call update('un',underline)
+   call update('/un',ununderline)
 
    call update('esc',ESCAPE)
    call update('escape',ESCAPE)
 
-   call update('clear',CLEAR_DISPLAY)
-   call update('default',CODE_CLEAR)
+   call update('clear',clear)
+   call update('reset',reset)
    call update('bell',BELL)
+   call update('gt','>')
+   call update('lt','<')
 
    ! foreground colors
-   call update('r',CODE_START//RED//CODE_END)
-   call update('/r',CODE_START//DEFAULT//CODE_END)
-   call update('red',CODE_START//RED//CODE_END)
-   call update('/red',CODE_START//DEFAULT//CODE_END)
-
-   call update('c',CODE_START//CYAN//CODE_END)
-   call update('/c',CODE_START//DEFAULT//CODE_END)
-   call update('cyan',CODE_START//CYAN//CODE_END)
-   call update('/cyan',CODE_START//DEFAULT//CODE_END)
-
-   call update('m',CODE_START//MAGENTA//CODE_END)
-   call update('/m',CODE_START//DEFAULT//CODE_END)
-   call update('magenta',CODE_START//MAGENTA//CODE_END)
-   call update('/magenta',CODE_START//DEFAULT//CODE_END)
-
-   call update('b',CODE_START//BLUE//CODE_END)
-   call update('/b',CODE_START//DEFAULT//CODE_END)
-   call update('blue',CODE_START//BLUE//CODE_END)
-   call update('/blue',CODE_START//DEFAULT//CODE_END)
-
-   call update('g',CODE_START//GREEN//CODE_END)
-   call update('green',CODE_START//GREEN//CODE_END)
-   call update('/g',CODE_START//DEFAULT//CODE_END)
-   call update('/green',CODE_START//DEFAULT//CODE_END)
-
-   call update('yellow',CODE_START//YELLOW//CODE_END)
-   call update('/yellow',CODE_START//DEFAULT//CODE_END)
-   call update('y',CODE_START//YELLOW//CODE_END)
-   call update('/y',CODE_START//DEFAULT//CODE_END)
-
-   call update('white',CODE_START//WHITE//CODE_END)
-   call update('/white',CODE_START//DEFAULT//CODE_END)
-   call update('w',CODE_START//WHITE//CODE_END)
-   call update('/w',CODE_START//DEFAULT//CODE_END)
-
-   call update('ebony',CODE_START//BLACK//CODE_END)
-   call update('/ebony',CODE_START//DEFAULT//CODE_END)
-   call update('e',CODE_START//BLACK//CODE_END)
-   call update('/e',CODE_START//DEFAULT//CODE_END)
+   call update('r',fg_red);     call update('/r',fg_default); call update('red',fg_red);         call update('/red',fg_default)
+   call update('c',fg_cyan);    call update('/c',fg_default); call update('cyan',fg_cyan);       call update('/cyan',fg_default)
+   call update('m',fg_magenta); call update('/m',fg_default); call update('magenta',fg_magenta); call update('/magenta',fg_default)
+   call update('b',fg_blue);    call update('/b',fg_default); call update('blue',fg_blue);       call update('/blue',fg_default)
+   call update('g',fg_green);   call update('/g',fg_default); call update('green',fg_green);     call update('/green',fg_default)
+   call update('y',fg_yellow);  call update('/y',fg_default); call update('yellow',fg_yellow);   call update('/yellow',fg_default)
+   call update('w',fg_white);   call update('/w',fg_default); call update('white',fg_white);     call update('/white',fg_default)
+   call update('e',fg_ebony);   call update('/e',fg_default); call update('ebony',fg_ebony);     call update('/ebony',fg_default)
 
    ! background colors
-   call update('R',CODE_START//BG_RED//CODE_END)
-   call update('/R',CODE_START//BG_DEFAULT//CODE_END)
-   call update('RED',CODE_START//BG_RED//CODE_END)
-   call update('/RED',CODE_START//BG_DEFAULT//CODE_END)
+   call update('R',bg_red);     call update('/R',bg_default); call update('RED',bg_red);         call update('/RED',bg_default)
+   call update('C',bg_cyan);    call update('/C',bg_default); call update('CYAN',bg_cyan);       call update('/CYAN',bg_default)
+   call update('M',bg_magenta); call update('/M',bg_default); call update('MAGENTA',bg_magenta); call update('/MAGENTA',bg_default)
+   call update('B',bg_blue);    call update('/B',bg_default); call update('BLUE',bg_blue);       call update('/BLUE',bg_default)
+   call update('G',bg_green);   call update('/G',bg_default); call update('GREEN',bg_green);     call update('/GREEN',bg_default)
+   call update('Y',bg_yellow);  call update('/Y',bg_default); call update('YELLOW',bg_yellow);   call update('/YELLOW',bg_default)
+   call update('W',bg_white);   call update('/W',bg_default); call update('WHITE',bg_white);     call update('/WHITE',bg_default)
+   call update('E',bg_ebony);   call update('/E',bg_default); call update('EBONY',bg_ebony);     call update('/EBONY',bg_default)
 
-   call update('C',CODE_START//BG_CYAN//CODE_END)
-   call update('/C',CODE_START//BG_DEFAULT//CODE_END)
-   call update('CYAN',CODE_START//BG_CYAN//CODE_END)
-   call update('/CYAN',CODE_START//BG_DEFAULT//CODE_END)
-
-   call update('M',CODE_START//BG_MAGENTA//CODE_END)
-   call update('/M',CODE_START//BG_DEFAULT//CODE_END)
-   call update('MAGENTA',CODE_START//BG_MAGENTA//CODE_END)
-   call update('/MAGENTA',CODE_START//BG_DEFAULT//CODE_END)
-
-   call update('B',CODE_START//BG_BLUE//CODE_END)
-   call update('/B',CODE_START//BG_DEFAULT//CODE_END)
-   call update('BLUE',CODE_START//BG_BLUE//CODE_END)
-   call update('/BLUE',CODE_START//BG_DEFAULT//CODE_END)
-
-   call update('G',CODE_START//BG_GREEN//CODE_END)
-   call update('GREEN',CODE_START//BG_GREEN//CODE_END)
-   call update('/G',CODE_START//BG_DEFAULT//CODE_END)
-   call update('/GREEN',CODE_START//BG_DEFAULT//CODE_END)
-
-   call update('YELLOW',CODE_START//BG_YELLOW//CODE_END)
-   call update('/YELLOW',CODE_START//BG_DEFAULT//CODE_END)
-   call update('Y',CODE_START//BG_YELLOW//CODE_END)
-   call update('/Y',CODE_START//BG_DEFAULT//CODE_END)
-
-   call update('WHITE',CODE_START//BG_WHITE//CODE_END)
-   call update('/WHITE',CODE_START//BG_DEFAULT//CODE_END)
-   call update('W',CODE_START//BG_WHITE//CODE_END)
-   call update('/W',CODE_START//BG_DEFAULT//CODE_END)
-
-   call update('EBONY',CODE_START//BG_BLACK//CODE_END)
-   call update('/EBONY',CODE_START//BG_DEFAULT//CODE_END)
-   call update('E',CODE_START//BG_BLACK//CODE_END)
-   call update('/E',CODE_START//BG_DEFAULT//CODE_END)
-
-   ! show array
-   !write(*,'(*(a,"==>","[",a,"]",/))')(trim(keywords(i)),values(i)(:counts(i)),i=1,size(keywords))
-   ! remove some entries
-   !call update('a')
-   !call update('c')
-   !write(*,'(*(a,"==>","[",a,"]",/))')(trim(keywords(i)),values(i)(:counts(i)),i=1,size(keywords))
-   !! get some values
-   !write(*,*)'get b=>',get('b')
-   !write(*,*)'get d=>',get('d')
-   !write(*,*)'get notthere=>',get('notthere')
-   !call print_dictionary('')
 end subroutine vt102
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
@@ -478,7 +530,7 @@ end subroutine vt102
 !!            procedure are
 !!
 !!        plain          suppress the output associated with keywords
-!!        ansi(default)  commonly supported escape sequences
+!!        color(default) commonly supported escape sequences
 !!        raw            echo the input to ESC(3f) as its output
 !!        reload         restore original keyword meanings deleted or
 !!                       replaced by calls to update(3f).
@@ -516,12 +568,16 @@ end subroutine vt102
 !!    end program demo_esc_mode
 subroutine esc_mode(manner)
 character(len=*),intent(in) :: manner
+   if(.not.allocated(mode))then  ! set substitution mode
+      mode='color'
+      call vt102()
+   endif
    select case(manner)
-   case('vt102','ANSI','ansi')
-      mode='vt102'
+   case('vt102','ANSI','ansi','color','COLOR')
+      mode='color'
    case('reload')
       call vt102()
-      mode='vt102'
+      mode='color'
    case('xterm')
       mode=manner
    case('raw')
@@ -529,6 +585,8 @@ character(len=*),intent(in) :: manner
    case('dummy','plain','text')
       mode='plain'
    case default
+      write(*,*)'unknown manner. Try color|raw|plain'
+      mode='color'
    end select
 end subroutine esc_mode
 !===================================================================================================================================
@@ -709,6 +767,133 @@ integer          :: i
       endif
    endif
 end subroutine print_dictionary
+!===================================================================================================================================
+!()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
+!===================================================================================================================================
+subroutine split(input_line,array,delimiters)
+!-----------------------------------------------------------------------------------------------------------------------------------
+
+!$@(#) M_strings::split(3f): parse string on delimiter characters and store tokens into an allocatable array
+
+!  John S. Urban
+!-----------------------------------------------------------------------------------------------------------------------------------
+intrinsic index, min, present, len
+!-----------------------------------------------------------------------------------------------------------------------------------
+!  given a line of structure " par1 par2 par3 ... parn " store each par(n) into a separate variable in array.
+!    o by default adjacent delimiters in the input string do not create an empty string in the output array
+!    o no quoting of delimiters is supported
+character(len=*),intent(in)              :: input_line  ! input string to tokenize
+character(len=*),optional,intent(in)     :: delimiters  ! list of delimiter characters
+character(len=:),allocatable,intent(out) :: array(:)    ! output array of tokens
+!-----------------------------------------------------------------------------------------------------------------------------------
+integer                       :: n                      ! max number of strings INPUT_LINE could split into if all delimiter
+integer,allocatable           :: ibegin(:)              ! positions in input string where tokens start
+integer,allocatable           :: iterm(:)               ! positions in input string where tokens end
+character(len=:),allocatable  :: dlim                   ! string containing delimiter characters
+integer                       :: ii                     ! loop parameters used to control print order
+integer                       :: icount                 ! number of tokens found
+integer                       :: ilen                   ! length of input string with trailing spaces trimmed
+integer                       :: i10,i20,i30            ! loop counters
+integer                       :: icol                   ! pointer into input string as it is being parsed
+integer                       :: idlim                  ! number of delimiter characters
+integer                       :: ifound                 ! where next delimiter character is found in remaining input string data
+integer                       :: inotnull               ! count strings not composed of delimiters
+integer                       :: ireturn                ! number of tokens returned
+integer                       :: imax                   ! length of longest token
+!-----------------------------------------------------------------------------------------------------------------------------------
+   ! decide on value for optional DELIMITERS parameter
+   if (present(delimiters)) then                                     ! optional delimiter list was present
+      if(delimiters.ne.'')then                                       ! if DELIMITERS was specified and not null use it
+         dlim=delimiters
+      else                                                           ! DELIMITERS was specified on call as empty string
+         dlim=' '//char(9)//char(10)//char(11)//char(12)//char(13)//char(0) ! use default delimiter when not specified
+      endif
+   else                                                              ! no delimiter value was specified
+      dlim=' '//char(9)//char(10)//char(11)//char(12)//char(13)//char(0)    ! use default delimiter when not specified
+   endif
+   idlim=len(dlim)                                                   ! dlim a lot of blanks on some machines if dlim is a big string
+!-----------------------------------------------------------------------------------------------------------------------------------
+   n=len(input_line)+1                        ! max number of strings INPUT_LINE could split into if all delimiter
+   allocate(ibegin(n))                        ! allocate enough space to hold starting location of tokens if string all tokens
+   allocate(iterm(n))                         ! allocate enough space to hold ending location of tokens if string all tokens
+   ibegin(:)=1
+   iterm(:)=1
+!-----------------------------------------------------------------------------------------------------------------------------------
+   ilen=len(input_line)                                           ! ILEN is the column position of the last non-blank character
+   icount=0                                                       ! how many tokens found
+   inotnull=0                                                     ! how many tokens found not composed of delimiters
+   imax=0                                                         ! length of longest token found
+!-----------------------------------------------------------------------------------------------------------------------------------
+   select case (ilen)
+!-----------------------------------------------------------------------------------------------------------------------------------
+   case (:0)                                                      ! command was totally blank
+!-----------------------------------------------------------------------------------------------------------------------------------
+   case default                                                   ! there is at least one non-delimiter in INPUT_LINE if get here
+      icol=1                                                      ! initialize pointer into input line
+      INFINITE: do i30=1,ilen,1                                   ! store into each array element
+         ibegin(i30)=icol                                         ! assume start new token on the character
+         if(index(dlim(1:idlim),input_line(icol:icol)).eq.0)then  ! if current character is not a delimiter
+            iterm(i30)=ilen                                       ! initially assume no more tokens
+            do i10=1,idlim                                        ! search for next delimiter
+               ifound=index(input_line(ibegin(i30):ilen),dlim(i10:i10))
+               IF(ifound.gt.0)then
+                  iterm(i30)=min(iterm(i30),ifound+ibegin(i30)-2)
+               endif
+            enddo
+            icol=iterm(i30)+2                                     ! next place to look as found end of this token
+            inotnull=inotnull+1                                   ! increment count of number of tokens not composed of delimiters
+         else                                                     ! character is a delimiter for a null string
+            iterm(i30)=icol-1                                     ! record assumed end of string. Will be less than beginning
+            icol=icol+1                                           ! advance pointer into input string
+         endif
+         imax=max(imax,iterm(i30)-ibegin(i30)+1)
+         icount=i30                                               ! increment count of number of tokens found
+         if(icol.gt.ilen)then                                     ! no text left
+            exit INFINITE
+         endif
+      enddo INFINITE
+!-----------------------------------------------------------------------------------------------------------------------------------
+   end select
+!-----------------------------------------------------------------------------------------------------------------------------------
+      ireturn=inotnull
+   allocate(character(len=imax) :: array(ireturn))                ! allocate the array to return
+   !allocate(array(ireturn))                                       ! allocate the array to turn
+!-----------------------------------------------------------------------------------------------------------------------------------
+   ii=1
+   do i20=1,icount                                                ! fill the array with the tokens that were found
+      if(iterm(i20).lt.ibegin(i20))then
+      else
+         array(ii)=input_line(ibegin(i20):iterm(i20))
+         ii=ii+1
+      endif
+   enddo
+!-----------------------------------------------------------------------------------------------------------------------------------
+   end subroutine split
+!===================================================================================================================================
+!()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
+!===================================================================================================================================
+function attr(attribute) result(out)
+! colon-delimited string of attributes
+character(len=*),intent(in)  :: attribute
+character(len=:),allocatable :: out
+character(len=:),allocatable :: array(:)
+integer                      :: i
+   if(.not.allocated(mode))then  ! set substitution mode
+      mode='color'
+      call vt102()
+   endif
+   out=''
+   call split(attribute,array,delimiters=':')
+   do i=1,size(array)
+      if(mode=='raw')then
+         out=out//'<'//trim(array(i))//'>'
+      elseif(mode=='plain')then
+         out=''
+      else
+         out=out//get(trim(array(i)))
+      endif
+   enddo
+end function attr
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
 !===================================================================================================================================

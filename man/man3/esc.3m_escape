@@ -75,6 +75,8 @@ current keywords
       clear
       esc,       escape
       default
+      gt
+      lt
 
 .fam T
 .fi
@@ -92,6 +94,11 @@ colors are not nestable, keywords are case-sensitive,
 not all terminals obey the sequences. On Windows, it is best if
 you use Windows 10+ and/or the Linux mode; although it has worked
 with all CygWin and MinGW and Putty windows and mintty.
+.IP \(bu 3
+you should use "<gt>" and "<lt>" instead of ">" and "<" in a string
+processed by \fBesc\fP(3f) instead of in any plain text output so that the
+raw mode will create correct input for the \fBesc\fP(3f) function if read
+back in.
 .SH EXAMPLE
 Sample program
 .PP
@@ -110,8 +117,8 @@ Sample program
       call esc_mode(manner='raw')
       call printstuff()
 
-      write(*,'(a)') esc('TEST MANNER=VT102:')
-      call esc_mode(manner='vt102')
+      write(*,'(a)') esc('TEST MANNER=color:')
+      call esc_mode(manner='color')
       call printstuff()
 
       write(*,'(a)') esc('TEST ADDING A CUSTOM SEQUENCE:')

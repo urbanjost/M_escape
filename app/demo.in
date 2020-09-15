@@ -1,0 +1,20 @@
+TEST MANNER=RAW:
+<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>
+<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>
+<w>WHITE</w> and <e>EBONY</e>
+Adding <bo>bold</bo>
+<bo><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></bo>
+<bo><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></bo>
+<bo><w>WHITE</w> and <e>EBONY</e></bo>
+Adding <ul>underline</ul>
+<bo><ul><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></ul></bo>
+<bo><ul><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></ul></bo>
+<bo><ul><w>WHITE</w> and <e>EBONY</e></ul></bo>
+Adding <ul>italic</ul>
+<bo><ul><it><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></it></ul></bo>
+<bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</it></y></ul></bo>
+<bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo>
+Adding <in>inverse</in>
+<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></it></ul></bo></in>
+<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</it></y></ul></bo></in>
+<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>

@@ -64,8 +64,11 @@ a.existingWikiWord[title]{ //border: 1px dashed #BBB; }
 <A HREF=#4>Limitations</A><BR>
 <A HREF=#5>Future</A><BR>
 <A HREF=#6>Example</A><BR>
+<A HREF=#7>Alternate Direct Use</A><BR>
+<A HREF=#8>Alternate Functional Interface</A><BR>
+<A HREF=#9>Alternate Object Oriented</A><BR>
 </BLOCKQUOTE>
-<A name=7>
+<A name=10>
 
      <H3>SYNOPSIS</H3>
 
@@ -90,6 +93,9 @@ device. This routine provides the basic structure to support such
 behaviors. or to perhaps in the future generate a CSS style sheet
 and HTML instead of text to the terminal, &#46;&#46;&#46;
 <P>
+Alternatively, direct <B>use</B> of the escape sequences is supported, as
+well as a functional interface, and an object-oriented approach.
+<P>
 The original concept was to allow formatting by using an existing
 XML library to allow the user to write HTML and to format it on a
 terminal like w3m, lynx, and link do. And in some ways this is an
@@ -98,7 +104,7 @@ a similar syntax to directly generate text attributes; but it is a
 much simpler approach programmatically for this prototype.
 <P>
 Typically, you should <B>use</B> <B>M_system::system_istty</B>(3f) to set the default
-to "plain" instead of "vt102" when the output file is not a terminal.
+to "plain" instead of "color" when the output file is not a terminal.
 </BLOCKQUOTE>
 <A name=3>
 
@@ -170,8 +176,24 @@ colors and so on?
 Should a call to <B>system_istty</B>(3f) be built in to turn off escape sequences
 when a terminal is not present?
 <P>
+For color or pre-defined words a case statement could be used to call
+specific functions to support platforms like old Microsoft consoles that
+require a function call to assign text attributes instead of in-band ANSI
+escape control sequences. See the "Rosetta Code" web site for examples
+of generating color in Microsoft consoles.
+<P>
 Attributes are currently ended at the end of each call to <B>esc</B>(3f). Perhaps
 allow multi-line formatting?
+<P>
+Ultimately, an object-oriented package with capabilities like ncurses to
+define a "pad" and move and resize and format it would be ideal and very
+useful. Also see <B>fixedform</B>(3f) in the GPF (General Fortran Package).
+<P>
+It is a shame <B>xterm</B>(1) does not support pixel-oriented abilities to define
+a "graphics" area or support <B>canvas</B>(3c)<B>-like</B> in-band graphics, somewhat
+like Tektronix terminals.
+<P>
+overload + to replace //
 </BLOCKQUOTE>
 <A name=6>
 
@@ -206,8 +228,82 @@ Sample program
 <P>
 </PRE>
 </BLOCKQUOTE>
+<A name=7>
+
+     <H3>ALTERNATE DIRECT USE</H3>
+
+</A>
+<BLOCKQUOTE>
+<P>
+Alternatively, you may <B>use</B> the escape sequences directly
+<P>
+<PRE>
+   program direct
+      use M_escape, only : &
+     ! FOREGROUND COLORS
+        & fg_red, fg_cyan, fg_magenta, fg_blue, &
+        & fg_green, fg_yellow, fg_white, fg_ebony, &
+        & fg_default, &
+     ! BACKGROUND COLORS
+        & bg_red, bg_cyan, bg_magenta, bg_blue, &
+        & bg_green, bg_yellow, bg_white, bg_ebony, &
+        & bg_default, &
+     ! ATTRIBUTES
+        & bold, italic, inverse, underline,  &
+        & unbold, unitalic, uninverse, ununderline,  &
+        & reset, &
+     ! DISPLAY
+        & clear
+      implicit none
+        write(*,&#146;(*(g0))&#146;)fg_red,bg_green,bold,&#146;Hello!&#146;,reset
+   end program direct
+<P>
+</PRE>
+</BLOCKQUOTE>
+<A name=8>
+
+     <H3>ALTERNATE FUNCTIONAL INTERFACE</H3>
+
+</A>
+<BLOCKQUOTE>
+<P>
+If you prefer a functional interface, <B>use</B> the <B>attr</B>(3f) function with
+the same keywords as with the <B>esc</B>(3f) function. Note that <B>esc_mode</B>(3f)
+will work with this function.
+<P>
+<PRE>
+   program functional
+   use M_escape, only : attr, esc_mode
+   implicit none
+     ! attr takes a colon-delimited list of attribute keywords
+      write(*,&#146;(*(g0))&#146;,advance=&#146;no&#146;)attr(&#146;red:BLUE:bold&#146;),&#146;Hello!&#146;, &
+       & attr(&#146;/BLUE&#146;),&#146; Well, this is boring without a nice background color.&#146;,attr(&#146;reset&#146;)
+      write(*,&#146;(*(g0))&#146;,advance=&#146;yes&#146;)&#146; Back to a normal write statement.&#146;
+<P>
+        call printme(&#146;color&#146;)
+        call printme(&#146;plain&#146;)
+        call printme(&#146;raw&#146;)
+</PRE>
+contains
+subroutine <B>printme</B>(mymode)
+<B>character</B>(len=*),intent(in) :: mymode
+call <B>esc_mode</B>(mymode)
+<B>write</B>(*,&#146;(a)&#146;)mymode
+<B>write</B>(*,&#146;(*(g0))&#146;,advance=&#146;no&#146;)<B>attr</B>(&#146;red&#146;),<B>attr</B>(&#146;BLUE&#146;),<B>attr</B>(&#146;bold&#146;),&#146;Hello!&#146;, &
+& <B>attr</B>(&#146;/BLUE&#146;),&#146; Well, this is boring without a nice background <B>color.&#146;,attr</B>(&#146;reset&#146;)
+<B>write</B>(*,&#146;(*(g0))&#146;,advance=&#146;yes&#146;)&#146; Back to a normal write statement.&#146;
+end subroutine printme
+end program functional
+</BLOCKQUOTE>
+<A name=9>
+
+     <H3>ALTERNATE OBJECT ORIENTED</H3>
+
+</A>
+<BLOCKQUOTE>
+</BLOCKQUOTE>
 <P><HR>
-<TABLE width=100%><TR> <TD width=33%><I></I></TD> <TD width=33% align=center>M_escape (3m_escape)</TD> <TD align=right width=33%><I>September 14, 2020</I></TD> </TR></TABLE><FONT SIZE=-1>Generated by <A HREF="http://www.squarebox.co.uk/download/manServer.shtml">manServer 1.08</A> from bae1d06b-f1aa-476a-a8ae-43f5ce2b6945 using man macros.</FONT>
+<TABLE width=100%><TR> <TD width=33%><I></I></TD> <TD width=33% align=center>M_escape (3m_escape)</TD> <TD align=right width=33%><I>September 14, 2020</I></TD> </TR></TABLE><FONT SIZE=-1>Generated by <A HREF="http://www.squarebox.co.uk/download/manServer.shtml">manServer 1.08</A> from a16bab8b-0cb8-4af2-86d8-5962c7d3b652 using man macros.</FONT>
 <br><br><center><img src="images/M_escape.gif"></center>
 </div>
 </div>

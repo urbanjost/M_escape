@@ -18,19 +18,28 @@ that I will "get around to" "one of these days"!
    M_escape(3f) is a Fortran module that writes common ANSI escape
    sequences to control terminal attributes like text color. It is
    designed to allow the sequences to be suppressed and for the user
-   program to completely customize it -- user can add, delete and replace
-   the sequences associated with a keyword without changing the code.
+   program to completely customize it -- the user can add, delete and
+   replace the sequences associated with a keyword without changing
+   the code.
 
    Attributes are specified by writing lines with XML-like structure.
 
    The advantage of the approach of replacing in-band escape sequences
-   with formatting directives contained on each line is that it is easy
-   to turn off when running batch, but more importantly your program can
-   be run in "raw" mode and write a file with the directives in it that
-   can then be read back in by a simple filter program that strips it
-   back to plain text or displays it to a screen in color or converts it
+   with formatting directives contained on each line is that it is easy to
+   turn off when running batch, but more importantly your program can be
+   run in "raw" mode and write a file with the directives in it that can
+   then be read back in by a simple filter program that strips it back to
+   [plain text](app/plain/plain.f90)
+   or display it to a screen 
+   [in color](app/light/light.f90)
+   or convert it
    to HTML or Adobe PDF. By making each line self-contained by default
    this can still be done with any selected group of lines from the file.
+
+   So it is trivial to read specially-formatted data from a file like a
+   message catalog (perhaps with various versions in different languages)
+   and colorize it display it as plain text using the esc(3f) procedure,
+   for example.
 
 ## DOWNLOAD
    ```bash
@@ -108,15 +117,60 @@ or emulator of such:
 ```
 ![sample](docs/images/sample.gif)
 
+If you do not like the XML approach, perhaps you prefer using the escape sequences directly
+
+```fortran
+   program direct
+      use M_escape, only : &
+     ! FOREGROUND COLORS
+        & fg_red, fg_cyan, fg_magenta, fg_blue, fg_green, fg_yellow, fg_white, fg_ebony, fg_default, &
+     ! BACKGROUND COLORS
+        & bg_red, bg_cyan, bg_magenta, bg_blue, bg_green, bg_yellow, bg_white, bg_ebony, bg_default, &
+     ! ATTRIBUTES
+        & bold, italic, inverse, underline,  unbold, unitalic, uninverse, ununderline,  reset, &
+     ! DISPLAY
+        & clear
+      implicit none
+	write(*,'(*(g0))')fg_red,bg_green,bold,'Hello!',reset
+   end program direct
+```
+
+or a more functional programming approach
+
+```fortran
+   program functional
+   use M_escape, only : attr, esc_mode
+   implicit none
+        call printme('color')
+        call printme('plain')
+        call printme('raw')
+   contains
+   subroutine printme(mymode)
+   character(len=*),intent(in) :: mymode
+      call esc_mode(mymode)
+      write(*,'(a)')mymode
+      write(*,'(*(g0))',advance='no')attr('red:BLUE:bold'),'Hello!', &
+       & attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset')
+      write(*,'(*(g0))',advance='yes')' Back to a normal write statement.'
+   end subroutine printme
+   end program functional
+```
+
 ## SEE ALSO
 
 * [**Fortran Wiki example**](http://fortranwiki.org/fortran/show/ansi_colors) for an example that covers the basics
-* [**Rosetta Code examples**](https://rosettacode.org/wiki/Terminal_control/Coloured_text) for how other languages do color
+* [**Rosetta Code examples**](https://rosettacode.org/wiki/Terminal_control/Coloured_text) for how other languages do color.
+  I find the Ncurses, Fortran, bash and C++ examples particularly interestinnng.
 * [**Wikipedia**](https://en.wikipedia.org/wiki/ANSI_escape_code) a description of the basic ANSI escape sequences.
 * [**FACE**](https://github.com/szaghi/FACE) A Fortran library for generating ANSI escape sequences
 * [**foul**](http://foul.sourceforge.net/) A library for controlling the attributes of output text using Fortran
 * [**Fortran Standard Library project**](https://github.com/fortran-lang/stdlib/issues/229) discussion about
   adding ANSI control sequences to the Fortran Standard Library project.
+* [terminal colors](http://www.pixelbeat.org/docs/terminal_colours/)
+
+## OF INTEREST
+* [ansi2html](https://github.com/ralphbean/ansi2html) ANSI escape codes to HTML from programs and as a bash shell
+* [M_ncurses](https://github.com/urbanjost/M_ncurses) A Fortran interface to Ncurses(3c)
 
 ## OTHER LANGUAGES
 

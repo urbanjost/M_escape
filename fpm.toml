@@ -17,3 +17,8 @@ test = [
    { name="demo6", source-dir="test/demo6", main="dump.f90" },
    { name="demo9", source-dir="test/demo9", main="mixed.f90" }
 ]
+executable = [
+   { name="demo", source-dir="app/demo", main="main.f90" },
+   { name="plain", source-dir="app/plain", main="plain.f90" },
+   { name="light", source-dir="app/light", main="light.f90" },
+]

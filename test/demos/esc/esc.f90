@@ -11,8 +11,8 @@
              call esc_mode(manner='raw')
              call printstuff()
 
-             write(*,'(a)') esc('TEST MANNER=VT102:')
-             call esc_mode(manner='vt102')
+             write(*,'(a)') esc('TEST MANNER=color:')
+             call esc_mode(manner='color')
              call printstuff()
 
              write(*,'(a)') esc('TEST ADDING A CUSTOM SEQUENCE:')

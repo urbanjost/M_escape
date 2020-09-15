@@ -35,9 +35,7 @@ procedure are
 .TP
 .B plain
 suppress the output associated with keywords
-.TP
-.B \fBansi\fP(default)
-commonly supported escape sequences
+\fBcolor\fP(default) commonly supported escape sequences
 .TP
 .B raw
 echo the input to \fBESC\fP(3f) as its output

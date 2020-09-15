@@ -26,6 +26,9 @@ device. This routine provides the basic structure to support such
 behaviors. or to perhaps in the future generate a CSS style sheet
 and HTML instead of text to the terminal, \.\.\.
 .PP
+Alternatively, direct \fBuse\fP of the escape sequences is supported, as
+well as a functional interface, and an object-oriented approach.
+.PP
 The original concept was to allow formatting by using an existing
 XML library to allow the user to write HTML and to format it on a
 terminal like w3m, lynx, and link do. And in some ways this is an
@@ -34,7 +37,7 @@ a similar syntax to directly generate text attributes; but it is a
 much simpler approach programmatically for this prototype.
 .PP
 Typically, you should \fBuse\fP \fBM_system::system_istty\fP(3f) to set the default
-to "plain" instead of "vt102" when the output file is not a terminal.
+to "plain" instead of "color" when the output file is not a terminal.
 .SH MAJOR FEATURES
 .IP \(bu 3
 Add ANSI terminal escape sequences with an XML-like syntax with \fBESC\fP(3f).
@@ -73,8 +76,24 @@ colors and so on?
 Should a call to \fBsystem_istty\fP(3f) be built in to turn off escape sequences
 when a terminal is not present?
 .PP
+For color or pre-defined words a case statement could be used to call
+specific functions to support platforms like old Microsoft consoles that
+require a function call to assign text attributes instead of in-band ANSI
+escape control sequences. See the "Rosetta Code" web site for examples
+of generating color in Microsoft consoles.
+.PP
 Attributes are currently ended at the end of each call to \fBesc\fP(3f). Perhaps
 allow multi-line formatting?
+.PP
+Ultimately, an object-oriented package with capabilities like ncurses to
+define a "pad" and move and resize and format it would be ideal and very
+useful. Also see \fBfixedform\fP(3f) in the GPF (General Fortran Package).
+.PP
+It is a shame \fBxterm\fP(1) does not support pixel-oriented abilities to define
+a "graphics" area or support \fBcanvas\fP(3c)\fB-like\fP in-band graphics, somewhat
+like Tektronix terminals.
+.PP
+overload + to replace //
 .SH EXAMPLE
 Sample program
 .PP
@@ -102,3 +121,67 @@ Sample program
 
    end program demo_M_escape
 
+.fam T
+.fi
+.SH ALTERNATE DIRECT USE
+
+Alternatively, you may \fBuse\fP the escape sequences directly
+.PP
+.nf
+.fam C
+   program direct
+      use M_escape, only : &
+     ! FOREGROUND COLORS
+        & fg_red, fg_cyan, fg_magenta, fg_blue, &
+        & fg_green, fg_yellow, fg_white, fg_ebony, &
+        & fg_default, &
+     ! BACKGROUND COLORS
+        & bg_red, bg_cyan, bg_magenta, bg_blue, &
+        & bg_green, bg_yellow, bg_white, bg_ebony, &
+        & bg_default, &
+     ! ATTRIBUTES
+        & bold, italic, inverse, underline,  &
+        & unbold, unitalic, uninverse, ununderline,  &
+        & reset, &
+     ! DISPLAY
+        & clear
+      implicit none
+        write(*,'(*(g0))')fg_red,bg_green,bold,'Hello!',reset
+   end program direct
+
+.fam T
+.fi
+.SH ALTERNATE FUNCTIONAL INTERFACE
+
+If you prefer a functional interface, \fBuse\fP the \fBattr\fP(3f) function with
+the same keywords as with the \fBesc\fP(3f) function. Note that \fBesc_mode\fP(3f)
+will work with this function.
+.PP
+.nf
+.fam C
+   program functional
+   use M_escape, only : attr, esc_mode
+   implicit none
+     ! attr takes a colon-delimited list of attribute keywords
+      write(*,'(*(g0))',advance='no')attr('red:BLUE:bold'),'Hello!', &
+       & attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset')
+      write(*,'(*(g0))',advance='yes')' Back to a normal write statement.'
+
+.nf
+.fam C
+        call printme('color')
+        call printme('plain')
+        call printme('raw')
+.fam T
+.fi
+contains
+subroutine \fBprintme\fP(mymode)
+\fBcharacter\fP(len=*),intent(in) :: mymode
+call \fBesc_mode\fP(mymode)
+\fBwrite\fP(*,'(a)')mymode
+\fBwrite\fP(*,'(*(g0))',advance='no')\fBattr\fP('red'),\fBattr\fP('BLUE'),\fBattr\fP('bold'),'Hello!', &
+& \fBattr\fP('/BLUE'),' Well, this is boring without a nice background \fBcolor.',attr\fP('reset')
+\fBwrite\fP(*,'(*(g0))',advance='yes')' Back to a normal write statement.'
+end subroutine printme
+end program functional
+.SH ALTERNATE OBJECT ORIENTED

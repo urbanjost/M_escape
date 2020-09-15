@@ -1,15 +1,15 @@
 var searchData=
 [
-  ['remove',['remove',['../interfacem__list_1_1remove.html',1,'m_list']]],
-  ['remove_5fc',['remove_c',['../interfacem__list_1_1remove.html#ae5113f879bd6fb1200ccd5ce6a588aa5',1,'m_list::remove::remove_c()'],['../namespacem__list.html#a216c9ec18769ee63a769cc25bc273022',1,'m_list::remove_c()']]],
-  ['remove_5fd',['remove_d',['../interfacem__list_1_1remove.html#ad82ff90a5f60f1ffb4eb9b29653886da',1,'m_list::remove::remove_d()'],['../namespacem__list.html#a6c5f971866302b40b5952ad919203461',1,'m_list::remove_d()']]],
-  ['remove_5fi',['remove_i',['../interfacem__list_1_1remove.html#a7a269ce865e3e5fec02a9a2a49f3c832',1,'m_list::remove::remove_i()'],['../namespacem__list.html#acdc3299515ed0402f4213d76d3e4d4cf',1,'m_list::remove_i()']]],
-  ['remove_5fl',['remove_l',['../interfacem__list_1_1remove.html#ab2eefaeadd492f0256efaf3a27ba3126',1,'m_list::remove::remove_l()'],['../namespacem__list.html#a138b6450613db943177df6258f58e89b',1,'m_list::remove_l()']]],
-  ['remove_5fr',['remove_r',['../interfacem__list_1_1remove.html#ab1ff763ace170a3e1cd6df7a42bbe729',1,'m_list::remove::remove_r()'],['../namespacem__list.html#af5940ed6b39d9e3429e2784767db9e56',1,'m_list::remove_r()']]],
-  ['replace',['replace',['../interfacem__list_1_1replace.html',1,'m_list']]],
-  ['replace_5fc',['replace_c',['../interfacem__list_1_1replace.html#aad4e731687891682a6e8f492aa9d0ad5',1,'m_list::replace::replace_c()'],['../namespacem__list.html#adddd2b7443557b3727320c314170e001',1,'m_list::replace_c()']]],
-  ['replace_5fd',['replace_d',['../interfacem__list_1_1replace.html#a4335c634f2c3a245bed87574c22a9d40',1,'m_list::replace::replace_d()'],['../namespacem__list.html#a9cac0a0b0d325d26267d37648f8eada6',1,'m_list::replace_d()']]],
-  ['replace_5fi',['replace_i',['../interfacem__list_1_1replace.html#a36315bb68af9cd1845a2d2b9c79a9cb2',1,'m_list::replace::replace_i()'],['../namespacem__list.html#a8c67651ca2c2c90d921f23146577491b',1,'m_list::replace_i()']]],
-  ['replace_5fl',['replace_l',['../interfacem__list_1_1replace.html#a0070f232e6ce6a3cff06e1ba4244b075',1,'m_list::replace::replace_l()'],['../namespacem__list.html#a0de977b7f38554ccd2e8b6e668f11648',1,'m_list::replace_l()']]],
-  ['replace_5fr',['replace_r',['../interfacem__list_1_1replace.html#ad5be185ea029e2f1c2613e55babc8bd1',1,'m_list::replace::replace_r()'],['../namespacem__list.html#ac2ef50718d66bfe2fc102a3d48a28cb2',1,'m_list::replace_r()']]]
+  ['insert',['insert',['../interfacem__list_1_1insert.html',1,'m_list']]],
+  ['insert_5fc',['insert_c',['../interfacem__list_1_1insert.html#a742ebd548e7a83112b3a82280946a5d4',1,'m_list::insert::insert_c()'],['../namespacem__list.html#ac9b841bea6c2cfed1608b2809aaf07b4',1,'m_list::insert_c()']]],
+  ['insert_5fd',['insert_d',['../interfacem__list_1_1insert.html#ae044e850bd7b5dae0d979e10110a8f1b',1,'m_list::insert::insert_d()'],['../namespacem__list.html#ae2356cb1ec5b313c3fcbad090d6eb440',1,'m_list::insert_d()']]],
+  ['insert_5fi',['insert_i',['../interfacem__list_1_1insert.html#ad841a688476fbbd90d735f42c69e1edf',1,'m_list::insert::insert_i()'],['../namespacem__list.html#a7d50f88bd8d25138af4e6d484aca2cbc',1,'m_list::insert_i()']]],
+  ['insert_5fl',['insert_l',['../interfacem__list_1_1insert.html#a00c923bee9588fb3f3089990dd24e096',1,'m_list::insert::insert_l()'],['../namespacem__list.html#a6108584670ced9dc4469e76ceb808730',1,'m_list::insert_l()']]],
+  ['insert_5fr',['insert_r',['../interfacem__list_1_1insert.html#a644fd8539d1489bb0e1c45f5da42ecb4',1,'m_list::insert::insert_r()'],['../namespacem__list.html#affd8a9996750ccf655cf677136d9fc4e',1,'m_list::insert_r()']]],
+  ['inverse',['inverse',['../namespacem__escape.html#a568054a95202a9290fc4f314ff7c9012',1,'m_escape']]],
+  ['inverse_5foff',['inverse_off',['../namespacem__escape.html#affae80c7d63858227a9f3134e6191f96',1,'m_escape']]],
+  ['inverse_5fon',['inverse_on',['../namespacem__escape.html#afacdc9d33171b768ee026b1eb6726f8a',1,'m_escape']]],
+  ['italic',['italic',['../namespacem__escape.html#afbb060c43fe019ca7fc699073cf30399',1,'m_escape']]],
+  ['italic_5foff',['italic_off',['../namespacem__escape.html#a93fc5a4e6f0ed044c9f6cf29412a05cb',1,'m_escape']]],
+  ['italic_5fon',['italic_on',['../namespacem__escape.html#a5bd07ea0cedbfd7d0e04b3b0be74821f',1,'m_escape']]]
 ];
