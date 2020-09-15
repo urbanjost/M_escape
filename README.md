@@ -30,15 +30,15 @@ that I will "get around to" "one of these days"!
    run in "raw" mode and write a file with the directives in it that can
    then be read back in by a simple filter program that strips it back to
    [plain text](app/plain/plain.f90)
-   or display it to a screen 
+   or displays it to a screen 
    [in color](app/light/light.f90)
-   or convert it
+   or converts it
    to HTML or Adobe PDF. By making each line self-contained by default
    this can still be done with any selected group of lines from the file.
 
    So it is trivial to read specially-formatted data from a file like a
    message catalog (perhaps with various versions in different languages)
-   and colorize it display it as plain text using the esc(3f) procedure,
+   and colorize it or display it as plain text using the esc(3f) procedure,
    for example.
 
 ## DOWNLOAD
