@@ -353,7 +353,7 @@ attr(3f) - [M_escape] colorize text using a simple function-based approach (LICE
 <p>attribute colon-delimited list of attribute keywords as defined in the esc(3f) procedure. text if supplied it is printed and then an attribute reset is added </p><h2>RETURNS</h2>
 <p>out the output is the strings (by default ANSI video display escape sequences, see update(3f) ) assigned by the keywords. </p><h2>EXAMPLE</h2>
 <p>Sample program</p>
-<p>program functional use M_escape, only : attr, esc_mode implicit none call printme('color') call printme('plain') call printme('raw') contains subroutine printme(mymode) character(len=*),intent(in) :: mymode call esc_mode(mymode) write(*,'(a)')mymode write(*,'(*(g0))',advance='no')attr('red:BLUE:bold','Hello!'), 'and everything is back to defaults or attr('RED:blue:bold'),'Hello Again!', &amp; &amp; attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset') write(*,'(*(g0))',advance='yes')' Back to a normal write statement.' end subroutine printme end program functional</p>
+<p>program demo_attr use M_escape, only : attr, esc_mode implicit none call printme('color') call printme('plain') call printme('raw') contains subroutine printme(mymode) character(len=*),intent(in) :: mymode call esc_mode(mymode) write(*,'(a)')mymode write(*,'(*(g0))',advance='no')attr('red:BLUE:bold','Hello!'), &amp; &amp; 'and everything is back to defaults or ', &amp; &amp; attr('RED:blue:bold'),'Hello Again!', &amp; &amp; attr('/RED'),' Well, the text color is still blue.',attr('reset') write(*,'(*(g0))',advance='yes')' Back to a normal write statement.' end subroutine printme end program demo_attr</p>
 <h2>AUTHOR</h2>
 <p>John S. Urban, 2020 </p><h2>LICENSE</h2>
 <p>Public Domain </p>
