@@ -85,6 +85,8 @@ The included demo programs provide templates for the most common usage:
 - [demo4](test/demo4/vt102.f90)   explicit call to set default mode
 - [demo5](test/demo5/custom.f90)  how to add, delete, and replace attribute strings
 - [demo6](test/demo6/dump.f90)    dump the dictionary. Intended for debugging but might be generally useful.
+- [demo7](test/demo7/functional.f90)    use attr(3f) instead of esc(3f) for a more functionally-oriented programming interface
+- [demo8](test/demo8/direct.f90)    direct use of named strings of escape codes
 - [demo9](test/demo9/mixed.f90)   multiple modes and mixed attributes
 
 ### manpages
