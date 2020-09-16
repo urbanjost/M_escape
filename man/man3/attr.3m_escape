@@ -30,8 +30,8 @@ the codes it uses a simple colon-delimited list of the keywords.
 .SH OPTIONS
 .TP
 .B \fIattribute\fP
-colon-delimited list of \fIattribute\fP keywords as defined in the
-\fBesc\fP(3f) procedure.
+colon, space, or comma-delimited list of \fIattribute\fP keywords
+as defined in the \fBesc\fP(3f) procedure.
 .TP
 .B text
 if supplied it is printed and then an \fIattribute\fP reset is added

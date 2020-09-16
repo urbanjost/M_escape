@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['fg_5fblack',['fg_black',['../namespacem__escape.html#af2f18b52e294d4b9f312369d9e29421b',1,'m_escape']]],
   ['fg_5fblue',['fg_blue',['../namespacem__escape.html#a94792b1429eb9880530d93643e9ce22c',1,'m_escape']]],
   ['fg_5fcyan',['fg_cyan',['../namespacem__escape.html#abdd10ab49027c01752c5a165d42dca95',1,'m_escape']]],
   ['fg_5fdefault',['fg_default',['../namespacem__escape.html#a518f003512a7505cb8bf9585c103900e',1,'m_escape']]],

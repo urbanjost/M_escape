@@ -109,14 +109,23 @@ or emulator of such:
 ```fortran
    program demo_M_escape
    use M_escape, only : esc, esc_mode
-      do i=1,2
-         write(*,'(a)') esc('<r><W>ERROR:</W>This should appear as red text</y>')
-         write(*,'(a)') esc('<y><B>WARNING:</B></y> This should appear as default text')
-         call esc_mode(manner='plain')
-      enddo
+
+      write(*,'(/,a,/)')esc('<GREEN><bold><white> FIRST PASS IN COLOR <reset>')
+      call printme()
+
+      write(*,'(/,a,/)')esc('<G><bo><w> SECOND PASS AS PLAIN TEXT <reset>')
+      call esc_mode(manner='plain')
+      call printme()
+
+   contains 
+   subroutine printme()
+      write(*,'(3x,a)') esc('<W><bo><r> ERROR   </W>  This should appear as red text</y>')
+      write(*,'(3x,a)') esc('<B><bo><y> WARNING </B></y>  This should appear as default text')
+   end subroutine printme
+
    end program demo_M_escape
 ```
-![sample](docs/images/sample.gif)
+![sample](docs/images/snap1.gif)
 
 If you do not like the XML approach, perhaps you prefer using the escape sequences directly
 
@@ -135,6 +144,7 @@ If you do not like the XML approach, perhaps you prefer using the escape sequenc
 	write(*,'(*(g0))')fg_red,bg_green,bold,'Hello!',reset
    end program direct
 ```
+![sample](docs/images/snap2.gif)
 
 or a more functional programming approach
 
@@ -142,20 +152,25 @@ or a more functional programming approach
    program functional
    use M_escape, only : attr, esc_mode
    implicit none
+        write(*,'(a)')attr('clear')
         call printme('color')
         call printme('plain')
         call printme('raw')
    contains
+
    subroutine printme(mymode)
    character(len=*),intent(in) :: mymode
+      call esc_mode('color')
+      write(*,'(/,a,/)')attr('GREEN ebony intense',' '//mymode//' ')
       call esc_mode(mymode)
-      write(*,'(a)')mymode
-      write(*,'(*(g0))',advance='no')attr('red:BLUE:bold'),'Hello!', &
+      write(*,'(3x,*(g0))')attr('red:BLUE:bold'),'Hello!', &
        & attr('/BLUE'),' Well, this is boring without a nice background color.',attr('reset')
-      write(*,'(*(g0))',advance='yes')' Back to a normal write statement.'
+      write(*,'(3x,*(g0))')'Back to a normal write statement.'
    end subroutine printme
+
    end program functional
 ```
+![sample](docs/images/snap3.gif)
 
 ## SEE ALSO
 

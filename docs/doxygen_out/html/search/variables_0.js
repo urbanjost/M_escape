@@ -1,6 +1,7 @@
 var searchData=
 [
   ['bell',['bell',['../namespacem__escape.html#a2cd9c30d3783af9d1f74a50e7f1dbd7f',1,'m_escape']]],
+  ['bg_5fblack',['bg_black',['../namespacem__escape.html#a2f34e53ba01ebac10ab70f25e3c9727a',1,'m_escape']]],
   ['bg_5fblue',['bg_blue',['../namespacem__escape.html#afab2229302287eaa0eb05add07bb6621',1,'m_escape']]],
   ['bg_5fcyan',['bg_cyan',['../namespacem__escape.html#a7b7a979cd6dc44533f962d323c65a7b6',1,'m_escape']]],
   ['bg_5fdefault',['bg_default',['../namespacem__escape.html#a329b88dbfe4ad42f896cdf408dcd9784',1,'m_escape']]],

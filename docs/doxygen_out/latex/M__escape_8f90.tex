@@ -63,6 +63,8 @@ character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_aaaf7224f2
 \item 
 character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_a9d45e30ea5891b89dc9a61ba1b5dbc03}{m\+\_\+escape\+::clear\+\_\+display}} =C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//\textquotesingle{}2\+J\textquotesingle{}
 \item 
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_ae4634ac062742627f215df29998fc677}{m\+\_\+escape\+::home\+\_\+display}} =C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//\textquotesingle{}H\textquotesingle{}
+\item 
 character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_a2cd9c30d3783af9d1f74a50e7f1dbd7f}{m\+\_\+escape\+::bell}} =achar(7)
 \item 
 character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_a8f30470c66af08cf881d9afe23357a03}{m\+\_\+escape\+::bold\+\_\+on}} =\textquotesingle{}1\textquotesingle{}
@@ -165,6 +167,8 @@ character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_ad
 \item 
 character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_a7b93e25003e389c21833a5ca8605d2de}{m\+\_\+escape\+::fg\+\_\+ebony}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//C\+O\+L\+O\+R\+\_\+\+F\+G\+\_\+\+B\+L\+A\+CK//C\+O\+D\+E\+\_\+\+E\+ND
 \item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_af2f18b52e294d4b9f312369d9e29421b}{m\+\_\+escape\+::fg\+\_\+black}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//C\+O\+L\+O\+R\+\_\+\+F\+G\+\_\+\+B\+L\+A\+CK//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
 character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_a518f003512a7505cb8bf9585c103900e}{m\+\_\+escape\+::fg\+\_\+default}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//C\+O\+L\+O\+R\+\_\+\+F\+G\+\_\+\+D\+E\+F\+A\+U\+LT//C\+O\+D\+E\+\_\+\+E\+ND
 \item 
 character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_a3cd9ef6cdd5ab3dda36cc9402dff0806}{m\+\_\+escape\+::bg\+\_\+red}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//C\+O\+L\+O\+R\+\_\+\+B\+G\+\_\+\+R\+ED//C\+O\+D\+E\+\_\+\+E\+ND
@@ -182,6 +186,8 @@ character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_af
 character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_a87dfd88e3190a8717cc574d4f2a4445c}{m\+\_\+escape\+::bg\+\_\+white}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//C\+O\+L\+O\+R\+\_\+\+B\+G\+\_\+\+W\+H\+I\+TE//C\+O\+D\+E\+\_\+\+E\+ND
 \item 
 character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_ab3691cc02cfaf12d6f7e18fac8a70b0b}{m\+\_\+escape\+::bg\+\_\+ebony}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//C\+O\+L\+O\+R\+\_\+\+B\+G\+\_\+\+B\+L\+A\+CK//C\+O\+D\+E\+\_\+\+E\+ND
+\item 
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_a2f34e53ba01ebac10ab70f25e3c9727a}{m\+\_\+escape\+::bg\+\_\+black}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//C\+O\+L\+O\+R\+\_\+\+B\+G\+\_\+\+B\+L\+A\+CK//C\+O\+D\+E\+\_\+\+E\+ND
 \item 
 character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_a329b88dbfe4ad42f896cdf408dcd9784}{m\+\_\+escape\+::bg\+\_\+default}} = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//C\+O\+L\+O\+R\+\_\+\+B\+G\+\_\+\+D\+E\+F\+A\+U\+LT//C\+O\+D\+E\+\_\+\+E\+ND
 \item 
@@ -203,5 +209,5 @@ character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_ad
 \item 
 character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_ae02be34bb084db8024b234bc87058d3a}{m\+\_\+escape\+::reset}} = C\+O\+D\+E\+\_\+\+R\+E\+S\+ET
 \item 
-character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_a49210f3a0332fb37df08c519b3252bef}{m\+\_\+escape\+::clear}} = C\+L\+E\+A\+R\+\_\+\+D\+I\+S\+P\+L\+AY
+character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_a49210f3a0332fb37df08c519b3252bef}{m\+\_\+escape\+::clear}} = H\+O\+M\+E\+\_\+\+D\+I\+S\+P\+L\+AY//C\+L\+E\+A\+R\+\_\+\+D\+I\+S\+P\+L\+AY
 \end{DoxyCompactItemize}

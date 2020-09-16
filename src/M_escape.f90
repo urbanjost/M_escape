@@ -184,6 +184,7 @@ character(len=*),parameter  :: CODE_END='m'                         ! End ANSI c
 character(len=*),parameter  :: CODE_RESET=CODE_START//'0'//CODE_END ! Clear all styles, "\[0m".
 
 character(len=*),parameter  :: CLEAR_DISPLAY=CODE_START//'2J'
+character(len=*),parameter  :: HOME_DISPLAY=CODE_START//'H'
 character(len=*),parameter  :: BELL=achar(7)
 
 character(len=*),parameter  :: BOLD_ON='1',   ITALIC_ON='3',   UNDERLINE_ON='4',   INVERSE_ON='7'
@@ -220,6 +221,7 @@ character(len=*),parameter,public :: fg_green    =  CODE_START//COLOR_FG_GREEN//
 character(len=*),parameter,public :: fg_yellow   =  CODE_START//COLOR_FG_YELLOW//CODE_END
 character(len=*),parameter,public :: fg_white    =  CODE_START//COLOR_FG_WHITE//CODE_END
 character(len=*),parameter,public :: fg_ebony    =  CODE_START//COLOR_FG_BLACK//CODE_END
+character(len=*),parameter,public :: fg_black    =  CODE_START//COLOR_FG_BLACK//CODE_END
 character(len=*),parameter,public :: fg_default  =  CODE_START//COLOR_FG_DEFAULT//CODE_END
 
 ! background colors
@@ -231,6 +233,7 @@ character(len=*),parameter,public :: bg_green    =  CODE_START//COLOR_BG_GREEN//
 character(len=*),parameter,public :: bg_yellow   =  CODE_START//COLOR_BG_YELLOW//CODE_END
 character(len=*),parameter,public :: bg_white    =  CODE_START//COLOR_BG_WHITE//CODE_END
 character(len=*),parameter,public :: bg_ebony    =  CODE_START//COLOR_BG_BLACK//CODE_END
+character(len=*),parameter,public :: bg_black    =  CODE_START//COLOR_BG_BLACK//CODE_END
 character(len=*),parameter,public :: bg_default  =  CODE_START//COLOR_BG_DEFAULT//CODE_END
 
 ! attributes
@@ -244,7 +247,7 @@ character(len=*),parameter,public :: uninverse   =  CODE_START//INVERSE_OFF//COD
 character(len=*),parameter,public :: ununderline =  CODE_START//UNDERLINE_OFF//CODE_END
 
 character(len=*),parameter,public :: reset       =  CODE_RESET
-character(len=*),parameter,public :: clear       =  CLEAR_DISPLAY
+character(len=*),parameter,public :: clear       =  HOME_DISPLAY//CLEAR_DISPLAY
 
 
 contains
@@ -389,6 +392,7 @@ character(len=:),allocatable :: name
 integer                      :: i
 integer                      :: ii
 integer                      :: maxlen
+integer                      :: place
 if(present(clear_at_end))then
    clear_at_end_local=clear_at_end
 else
@@ -423,13 +427,18 @@ do
          name=padded(i+1:i+ii-1)
          name=trim(adjustl(name))
          if(debug)write(*,*)'DEBUG:*esc* 1: NAME=',name,get(name)
-         i=ii+i+1
+         call locate(keywords,name,place)
+         if(debug)write(*,*)'DEBUG:*esc* 1: LOCATE=',place
+
          if(mode.eq.'plain')then
+         elseif(place.le.0)then     ! unknown name; print what you found
+            expanded=expanded//padded(i:i+ii)
          else
             expanded=expanded//get(name)
          endif
          if(name.eq.'debug')debug=.true.   !! developement version
          if(name.eq.'/debug')debug=.false. !! developement version
+         i=ii+i+1
       endif
    case default
       expanded=expanded//padded(i:i)
@@ -495,6 +504,7 @@ subroutine vt102()
    call update('y',fg_yellow);  call update('/y',fg_default); call update('yellow',fg_yellow);   call update('/yellow',fg_default)
    call update('w',fg_white);   call update('/w',fg_default); call update('white',fg_white);     call update('/white',fg_default)
    call update('e',fg_ebony);   call update('/e',fg_default); call update('ebony',fg_ebony);     call update('/ebony',fg_default)
+   call update('x',fg_ebony);   call update('/x',fg_default); call update('black',fg_ebony);     call update('/black',fg_default)
 
    ! background colors
    call update('R',bg_red);     call update('/R',bg_default); call update('RED',bg_red);         call update('/RED',bg_default)
@@ -505,6 +515,7 @@ subroutine vt102()
    call update('Y',bg_yellow);  call update('/Y',bg_default); call update('YELLOW',bg_yellow);   call update('/YELLOW',bg_default)
    call update('W',bg_white);   call update('/W',bg_default); call update('WHITE',bg_white);     call update('/WHITE',bg_default)
    call update('E',bg_ebony);   call update('/E',bg_default); call update('EBONY',bg_ebony);     call update('/EBONY',bg_default)
+   call update('X',bg_ebony);   call update('/X',bg_default); call update('BLACK',bg_ebony);     call update('/BLACK',bg_default)
 
 end subroutine vt102
 !===================================================================================================================================
@@ -771,7 +782,7 @@ end subroutine print_dictionary
 subroutine split(input_line,array,delimiters)
 !-----------------------------------------------------------------------------------------------------------------------------------
 
-!$@(#) M_strings::split(3f): parse string on delimiter characters and store tokens into an allocatable array
+!$@(#) M_escape::split(3f): parse string on delimiter characters and store tokens into an allocatable array
 
 !  John S. Urban
 !-----------------------------------------------------------------------------------------------------------------------------------
@@ -885,8 +896,8 @@ integer                       :: imax                   ! length of longest toke
 !!    to the display screen, except instead of using a pseudo-XML string to select
 !!    the codes it uses a simple colon-delimited list of the keywords.
 !!##OPTIONS
-!!    attribute  colon-delimited list of attribute keywords as defined in the
-!!               esc(3f) procedure.
+!!    attribute  colon, space, or comma-delimited list of attribute keywords
+!!               as defined in the esc(3f) procedure.
 !!    text       if supplied it is printed and then an attribute reset is added
 !!##RETURNS
 !!    out        the output is the strings (by default ANSI video
@@ -919,7 +930,7 @@ integer                       :: imax                   ! length of longest toke
 !!##LICENSE
 !!    Public Domain
 function attr(attribute,text) result(out)
-! colon-delimited string of attributes
+! colon,space, or comma-delimited string of attributes
 character(len=*),intent(in)          :: attribute
 character(len=*),intent(in),optional :: text
 character(len=:),allocatable         :: out
@@ -930,7 +941,7 @@ integer                              :: i
       call vt102()
    endif
    out=''
-   call split(attribute,array,delimiters=':')
+   call split(attribute,array,delimiters=' :,')
    do i=1,size(array)
       if(mode=='raw')then
          out=out//'<'//trim(array(i))//'>'
