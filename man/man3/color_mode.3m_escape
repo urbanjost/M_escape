@@ -13,9 +13,7 @@
 .SH SYNOPSIS
 .nf
 .fam C
-.TP
-.B subroutine
-\fBcolor_mode\fP(\fIswitch\fP)
+subroutine \fBcolor_mode\fP(\fIswitch\fP)
 .PP
 .nf
 .fam C

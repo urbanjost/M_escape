@@ -563,7 +563,7 @@ end function color
 !!    (LICENSE:PD)
 !!##SYNOPSIS
 !!
-!!     subroutine  color_mode(switch)
+!!     subroutine color_mode(switch)
 !!
 !!      logical,intent(in) :: switch
 !!
