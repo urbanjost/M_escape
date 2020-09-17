@@ -209,17 +209,25 @@ The included demo programs provide templates for the most common usage:
 - [demo3](test/demo3/raw.f90)     simple demo setting color but in raw echo mode showing input as-is
 - [demo4](test/demo4/vt102.f90)   explicit call to set default mode
 - [demo5](test/demo5/custom.f90)  how to add, delete, and replace attribute strings
-- [demo6](test/demo6/dump.f90)    dump the dictionary. Intended for debugging but might be generally useful.
-- [demo7](test/demo7/functional.f90)    use attr(3f) instead of esc(3f) for a more functionally-oriented programming interface
-- [demo8](test/demo8/direct.f90)    direct use of named strings of escape codes
 - [demo9](test/demo9/mixed.f90)   multiple modes and mixed attributes
+
+- [demo6](test/demo6/dump.f90)    dump the dictionary. Intended for debugging but might be generally useful.
+
+- [demo7](test/demo7/functional.f90)    use attr(3f) instead of esc(3f) for a more functionally-oriented programming interface
+
+- [demo8](test/demo8/direct.f90)    direct use of named strings of escape codes
+- [demo10](test/demo10/color.f90)   alternate fixed strings an color(3f) and colormode(3f)
 
 ### manpages
 - [M_escape](https://urbanjost.github.io/M_escape/M_escape.3m_escape.html)  -- An overview of the M_escape module
 - [esc](https://urbanjost.github.io/M_escape/esc.3m_escape.html)  -- the main function
 - [esc_mode](https://urbanjost.github.io/M_escape/esc_mode.3m_escape.html)  -- setting processed or plain output mode
 - [update](https://urbanjost.github.io/M_escape/update.3m_escape.html)  -- customizing
+
 - [attr](https://urbanjost.github.io/M_escape/attr.3m_escape.html)  -- alternate function that just takes keywords
+
+- [color](https://urbanjost.github.io/M_escape/attr.3m_escape.html)  -- alternate function that just uses string constants
+- [color_mode](https://urbanjost.github.io/M_escape/attr.3m_escape.html)  -- toggle color from color(3f) on and off
 
 ### All manpages amalgamated
 - [BOOK_M_escape](https://urbanjost.github.io/M_escape/BOOK_M_escape.html) -- All manpages consolidated using JavaScript
