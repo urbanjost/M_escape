@@ -21,21 +21,21 @@
    languages. It was hard to even share simple text files, as what bit
    pattern represents a particular character is rather arbitrary.
 
-   But a few standards started emerging, several based on how to
-   represent the basic American-ized Roman alphabet. This allowed
-   some basic devices such as simple printers to support multiple
-   platforms. Customers often had computers from multiple vendors and
-   did not want to have separate printers, COM machines (microfiche --
-   look it up), data archives, and (later) terminals for each computer type
-   they used. So this standardization was basically driven to please the
-   customers and let them exchange data between their systems and get
-   shared use of peripheral devices. A lot of the vendors that already
-   had a large market share did not really want to standardize as it
-   allowed newcomers into their markets; but standards did emerge. And
-   the computer vendors for the most part were ooncentrating on their
-   computers -- not printers and terminals (That was lucky for the likes
-   of Xerox and HP who made a lot of money from printing, and Lear Zeigler
-   and Tektronix who did pretty well with terminals and graphics displays).
+   But a few standards started emerging, several based on how to represent
+   the basic American-ized Roman alphabet. This allowed some basic devices
+   such as simple printers to support multiple platforms. Customers
+   often had computers from multiple vendors and did not want to
+   have separate printers, COM machines (microfiche -- look it up),
+   data archives, and (later) terminals for each computer type they
+   used. So this standardization was largely driven to allow customers to
+   exchange data between their systems and get shared use of peripheral
+   devices. A lot of the vendors that already had a large market share
+   did not really want to standardize as it allowed newcomers into their
+   markets; but standards did emerge. And the computer vendors for the
+   most part were ooncentrating on their computers -- not printers and
+   terminals (That was lucky for the likes of Xerox and HP who made a
+   lot of money from printing, and Lear Zeigler and Tektronix who did
+   pretty well with terminals and graphics displays).
 
    As new-fangled interactive computing evolved from using line printers
    to monochrome terminals the terminals at first very much emulated
@@ -46,22 +46,23 @@
    hard to even image today).
 
    So one device that could take advantage of the newly standardized
-   character and one of the few early devices that could often be used
-   cross-platform to some extent became the video terminal, at least
-   briefly.
+   characters and one of the few early devices that could often be used
+   cross-platform to some extent became the video terminal (briefly,
+   at least).
 
-   Terminals quickly evolved to allow very un-teletype-like behavior like
-   clearing screen regions, cursor positioning, and supporting various
-   font sizes and display sizes (some could even beep!).  These new
-   features continued to be accessible from almost any language because
-   they were typically accessed by sending in-band signaling. That is,
-   they used the bit patterns that did not represent printable characters
-   to access these new features (The new features were triggered by
-   sending signals in the same way characters were sent to the terminals,
-   so it was just special "character patterns" that triggered the new
-   features). Initially, graphics was done this way as well. The beauty
-   of that was that almost any language could be used to generate text
-   and graphics, as essentially all languages can write an output stream.
+   But terminals quickly evolved to allow very un-teletype-like behavior
+   such as clearing screen regions, cursor positioning, and supporting
+   various font sizes and display sizes (some could even beep!).
+   These new features continued to be accessible from almost any
+   language because they were typically accessed by sending in-band
+   signaling. That is, they used the bit patterns that did not represent
+   printable characters to access these new features (The new features
+   were triggered by sending signals in the same way characters were
+   sent to the terminals, so it was just special "character patterns"
+   that triggered the new features). Initially, graphics was done this
+   way as well. The beauty of that was that almost any language could be
+   used to generate text and graphics, as essentially all general-purpose
+   languages can write an output stream.
 
    But these new devices all used different sequences to trigger the new
    features. This drove developers to create an abstraction layer than
@@ -82,7 +83,7 @@
    Code which only supported uppercase, ASCII 6/12 which required two
    "characters" to represent a lowercase letter, ...). This was long
    before UNICODE, so there were not many character glyphs, but this
-   basic few was pretty much now set.
+   character set was pretty much now ubiquitious.
 
    Well, keyboards were not even standardized early-on, so you might
    not have a tilde or pound key to hit though!
@@ -104,16 +105,18 @@
    standardized control sequences. Microsoft Console windows were the
    basic holdout along with IBM TN3220 terminals -- but there were
    options even for those. Microsoft Windows 10 consoles now have a
-   relatively easy to activate ANSI compatibility mode!
+   relatively easy to activate ANSI compatibility mode! They were trying
+   to get people to quit using terminals, so I suppose there was not
+   much motivation to make a good terminal emulator.
 
    Highly-extended Fortran owned most graphics and utilities still
-   unsurpassed to this day let you easily format screens from Fortran
-   (most machines did not even have a C compiler, "everyone" had extended
+   unsurpassed let you easily format screens from Fortran (most
+   machines did not even have a C compiler, "everyone" had extended
    Fortran). Utilities like the CDC NOS TDU interface and a variety of
    packages on Digital VMS let you build multi-window terminal interfaces
    in a few minutes from Fortran.
 
-   And now we are back to how to color your terminal output from
+   And now we are back to how to simply color your terminal output from
    Fortran. How that happened is an even longer story.
 
    The result of this chain of events is that there are special
@@ -370,8 +373,9 @@ sequences directly. Per **@certik**:
     **@certik** : some intermediate representation (XML) that can be parsed into,
     and then manipulated to any output (HTML, ANSI, latex, ...)
 
-    That is were the esc(3f) function is headed, but right now to do the HTML or latex output the user would have to
-    use the update(3f) procedure to change all the keywords to output HTML.
+That is were the esc(3f) function is headed, but right now to do the HTML
+or latex output the user would have to use the update(3f) procedure to
+change all the keywords to output HTML.
 
 ## SEE ALSO
 
