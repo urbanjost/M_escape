@@ -559,7 +559,7 @@ end function color
 !===================================================================================================================================
 !>
 !!##NAME
-!!    color(3f) - [M_escape] toggle style effects of color(3f) on and off
+!!    color_mode(3f) - [M_escape] toggle style effects of color(3f) on and off
 !!    (LICENSE:PD)
 !!##SYNOPSIS
 !!
