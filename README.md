@@ -226,8 +226,8 @@ The included demo programs provide templates for the most common usage:
 
 - [attr](https://urbanjost.github.io/M_escape/attr.3m_escape.html)  -- alternate function that just takes keywords
 
-- [color](https://urbanjost.github.io/M_escape/attr.3m_escape.html)  -- alternate function that just uses string constants
-- [color_mode](https://urbanjost.github.io/M_escape/attr.3m_escape.html)  -- toggle color from color(3f) on and off
+- [color](https://urbanjost.github.io/M_escape/color.3m_escape.html)  -- alternate function that just uses string constants
+- [color_mode](https://urbanjost.github.io/M_escape/color_mode.3m_escape.html)  -- toggle color from color(3f) on and off
 
 ### All manpages amalgamated
 - [BOOK_M_escape](https://urbanjost.github.io/M_escape/BOOK_M_escape.html) -- All manpages consolidated using JavaScript
