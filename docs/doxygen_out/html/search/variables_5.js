@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['home_5fdisplay',['home_display',['../namespacem__escape.html#ae4634ac062742627f215df29998fc677',1,'m_escape']]]
+  ['g_5fcolor',['g_color',['../namespacem__escape.html#a67ff4e5b90da8436f0da5882c4a5720c',1,'m_escape']]]
 ];

@@ -14,6 +14,14 @@ character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__es
 \begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
 
 esc(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax (prototype) in strings \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__escape_af7d28a73e65efb58beeb684d7bdeefec}{color}} (string, fg, bg, style)
+\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
+
+color(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\item 
+subroutine, public \mbox{\hyperlink{namespacem__escape_a24566737cb6aa1672180eaa21c8d4f66}{color\+\_\+mode}} (switch)
+\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
+
+color(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} toggle style effects of color(3f) on and off (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\item 
 subroutine \mbox{\hyperlink{namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5}{vt102}} ()
 \item 
 subroutine, public \mbox{\hyperlink{namespacem__escape_a4210456d81d9a1bf328093a9635e640b}{esc\+\_\+mode}} (manner)
@@ -40,6 +48,8 @@ character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__es
 attr(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
+\item 
+logical, save \mbox{\hyperlink{namespacem__escape_a67ff4e5b90da8436f0da5882c4a5720c}{g\+\_\+color}} =.true.
 \item 
 logical, save \mbox{\hyperlink{namespacem__escape_af068eb2561159352a9a406c95157b131}{debug}} =.false.
 \item 
@@ -338,6 +348,90 @@ Here is the call graph for this function\+:\nopagebreak
 \includegraphics[width=350pt]{namespacem__escape_a916b16ce9be553d669f54cb9575a91be_cgraph}
 \end{center}
 \end{figure}
+\mbox{\Hypertarget{namespacem__escape_af7d28a73e65efb58beeb684d7bdeefec}\label{namespacem__escape_af7d28a73e65efb58beeb684d7bdeefec}} 
+\index{m\+\_\+escape@{m\+\_\+escape}!color@{color}}
+\index{color@{color}!m\+\_\+escape@{m\+\_\+escape}}
+\subsubsection{\texorpdfstring{color()}{color()}}
+{\footnotesize\ttfamily character(len=\+:) function, allocatable, public m\+\_\+escape\+::color (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in)}]{string,  }\item[{character(len=$\ast$), intent(in), optional}]{fg,  }\item[{character(len=$\ast$), intent(in), optional}]{bg,  }\item[{character(len=$\ast$), intent(in), optional}]{style }\end{DoxyParamCaption})}
+
+
+
+\subsubsection*{N\+A\+ME}
+
+color(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}
+
+use M\+\_\+escape, only \+: color, color\+\_\+mode, \&
+
+! F\+O\+R\+E\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& fg\+\_\+red, fg\+\_\+cyan, fg\+\_\+magenta, fg\+\_\+blue, \& \& fg\+\_\+green, fg\+\_\+yellow, fg\+\_\+white, fg\+\_\+ebony, \& \& fg\+\_\+default, \& ! B\+A\+C\+K\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& bg\+\_\+red, bg\+\_\+cyan, bg\+\_\+magenta, bg\+\_\+blue, \& \& bg\+\_\+green, bg\+\_\+yellow, bg\+\_\+white, bg\+\_\+ebony, \& \& bg\+\_\+default, \& ! A\+T\+T\+R\+I\+B\+U\+T\+ES \& bold, italic, inverse, underline, \& \& unbold, unitalic, uninverse, ununderline, \& \& reset, \& ! D\+I\+S\+P\+L\+AY \& clear
+
+function color(string,fg,bg,style) result (out)
+
+character(len=$\ast$),intent(in) \+:\+: string character(len=$\ast$),intent(in),optional \+:\+: fg character(len=$\ast$),intent(in),optional \+:\+: bg character(len=$\ast$),intent(in),optional \+:\+: style
+
+\subsubsection*{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}
+
+The color constant strings can be used directly but unconditionally in an output statement. To allow the attributes to be ignored they can be called with the color(3f) routine, which the color\+\_\+mode(3f) procedure can be used to toggle on and off. Note that this routine does an implicit reset at the end of each use.
+
+\subsubsection*{O\+P\+T\+I\+O\+NS}
+
+string string to assign attributes to fg foreground color constant bg background color constant style style keyword or concatenated style keywords
+
+\subsubsection*{E\+X\+A\+M\+P\+LE}
+
+Sample program
+
+program demo\+\_\+color use M\+\_\+escape, only \+: color, color\+\_\+mode, \& ! F\+O\+R\+E\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& fg\+\_\+red, fg\+\_\+cyan, fg\+\_\+magenta, fg\+\_\+blue, \& \& fg\+\_\+green, fg\+\_\+yellow, fg\+\_\+white, fg\+\_\+ebony, \& \& fg\+\_\+default, \& ! B\+A\+C\+K\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& bg\+\_\+red, bg\+\_\+cyan, bg\+\_\+magenta, bg\+\_\+blue, \& \& bg\+\_\+green, bg\+\_\+yellow, bg\+\_\+white, bg\+\_\+ebony, \& \& bg\+\_\+default, \& ! A\+T\+T\+R\+I\+B\+U\+T\+ES \& bold, italic, inverse, underline, \& \& unbold, unitalic, uninverse, ununderline, \& \& reset, \& ! D\+I\+S\+P\+L\+AY \& clear implicit none write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{})fg\+\_\+red,bg\+\_\+green,bold,\textquotesingle{} Hello! \textquotesingle{},reset
+
+write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},fg=fg\+\_\+white,bg=bg\+\_\+red,style=italic//bold) call color\+\_\+mode(.false.) write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},fg=fg\+\_\+red,bg=bg\+\_\+red,style=italic//bold) end program demo\+\_\+color
+
+\subsubsection*{A\+U\+T\+H\+OR}
+
+John S. Urban, 2020 \subsubsection*{L\+I\+C\+E\+N\+SE}
+
+Public Domain 
+
+References g\+\_\+color, and reset.
+
+\mbox{\Hypertarget{namespacem__escape_a24566737cb6aa1672180eaa21c8d4f66}\label{namespacem__escape_a24566737cb6aa1672180eaa21c8d4f66}} 
+\index{m\+\_\+escape@{m\+\_\+escape}!color\+\_\+mode@{color\+\_\+mode}}
+\index{color\+\_\+mode@{color\+\_\+mode}!m\+\_\+escape@{m\+\_\+escape}}
+\subsubsection{\texorpdfstring{color\+\_\+mode()}{color\_mode()}}
+{\footnotesize\ttfamily subroutine, public m\+\_\+escape\+::color\+\_\+mode (\begin{DoxyParamCaption}\item[{logical, intent(in)}]{switch }\end{DoxyParamCaption})}
+
+
+
+\subsubsection*{N\+A\+ME}
+
+color(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} toggle style effects of color(3f) on and off (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}
+
+subroutine color\+\_\+mode(switch)
+
+logical,intent(in) \+:\+: switch
+
+\subsubsection*{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}
+
+The color constant strings can be used directly but unconditionally in an output statement. To allow the attributes to be ignored they can be called with the color(3f) routine, which the color\+\_\+mode(3f) procedure can be used to toggle on and off. Note that this routine does an implicit reset at the end of each use.
+
+\subsubsection*{O\+P\+T\+I\+O\+NS}
+
+switch turn attributes set by color(3f) on and off
+
+\subsubsection*{E\+X\+A\+M\+P\+LE}
+
+Sample program
+
+program demo\+\_\+color\+\_\+mode use M\+\_\+escape, only \+: color, color\+\_\+mode, \& ! F\+O\+R\+E\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& fg\+\_\+red, fg\+\_\+cyan, fg\+\_\+magenta, fg\+\_\+blue, \& \& fg\+\_\+green, fg\+\_\+yellow, fg\+\_\+white, fg\+\_\+ebony, \& \& fg\+\_\+default, \& ! B\+A\+C\+K\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& bg\+\_\+red, bg\+\_\+cyan, bg\+\_\+magenta, bg\+\_\+blue, \& \& bg\+\_\+green, bg\+\_\+yellow, bg\+\_\+white, bg\+\_\+ebony, \& \& bg\+\_\+default, \& ! A\+T\+T\+R\+I\+B\+U\+T\+ES \& bold, italic, inverse, underline, \& \& unbold, unitalic, uninverse, ununderline, \& \& reset, \& ! D\+I\+S\+P\+L\+AY \& clear implicit none write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{})fg\+\_\+red,bg\+\_\+green,bold,\textquotesingle{} Hello! \textquotesingle{},reset
+
+write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},fg=fg\+\_\+white,bg=bg\+\_\+red,style=italic//bold) call color\+\_\+mode(.false.) write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},fg=fg\+\_\+red,bg=bg\+\_\+red,style=italic//bold) end program demo\+\_\+color\+\_\+mode
+
+\subsubsection*{A\+U\+T\+H\+OR}
+
+John S. Urban, 2020 \subsubsection*{L\+I\+C\+E\+N\+SE}
+
+Public Domain 
+
+References g\+\_\+color.
+
 \mbox{\Hypertarget{namespacem__escape_a36f016baad6b23f86189e6f3ee6db0cb}\label{namespacem__escape_a36f016baad6b23f86189e6f3ee6db0cb}} 
 \index{m\+\_\+escape@{m\+\_\+escape}!esc@{esc}}
 \index{esc@{esc}!m\+\_\+escape@{m\+\_\+escape}}
@@ -1105,6 +1199,12 @@ Here is the caller graph for this function\+:\nopagebreak
 \index{fg\+\_\+yellow@{fg\+\_\+yellow}!m\+\_\+escape@{m\+\_\+escape}}
 \subsubsection{\texorpdfstring{fg\+\_\+yellow}{fg\_yellow}}
 {\footnotesize\ttfamily character(len=$\ast$), parameter, public m\+\_\+escape\+::fg\+\_\+yellow = C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//C\+O\+L\+O\+R\+\_\+\+F\+G\+\_\+\+Y\+E\+L\+L\+OW//C\+O\+D\+E\+\_\+\+E\+ND}
+
+\mbox{\Hypertarget{namespacem__escape_a67ff4e5b90da8436f0da5882c4a5720c}\label{namespacem__escape_a67ff4e5b90da8436f0da5882c4a5720c}} 
+\index{m\+\_\+escape@{m\+\_\+escape}!g\+\_\+color@{g\+\_\+color}}
+\index{g\+\_\+color@{g\+\_\+color}!m\+\_\+escape@{m\+\_\+escape}}
+\subsubsection{\texorpdfstring{g\+\_\+color}{g\_color}}
+{\footnotesize\ttfamily logical, save m\+\_\+escape\+::g\+\_\+color =.true.\hspace{0.3cm}{\ttfamily [private]}}
 
 \mbox{\Hypertarget{namespacem__escape_ae4634ac062742627f215df29998fc677}\label{namespacem__escape_ae4634ac062742627f215df29998fc677}} 
 \index{m\+\_\+escape@{m\+\_\+escape}!home\+\_\+display@{home\+\_\+display}}

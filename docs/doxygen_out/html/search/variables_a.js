@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['reset',['reset',['../namespacem__escape.html#ae02be34bb084db8024b234bc87058d3a',1,'m_escape']]]
+  ['nl',['nl',['../namespacem__escape.html#aa17be0f87e5ec9012a38c04bfbb5e588',1,'m_escape']]]
 ];

@@ -14,6 +14,14 @@ character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__es
 \begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
 
 esc(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax (prototype) in strings \end{DoxyCompactList}\item 
+character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__escape_af7d28a73e65efb58beeb684d7bdeefec}{m\+\_\+escape\+::color}} (string, fg, bg, style)
+\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
+
+color(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\item 
+subroutine, public \mbox{\hyperlink{namespacem__escape_a24566737cb6aa1672180eaa21c8d4f66}{m\+\_\+escape\+::color\+\_\+mode}} (switch)
+\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
+
+color(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} toggle style effects of color(3f) on and off (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\item 
 subroutine \mbox{\hyperlink{namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5}{m\+\_\+escape\+::vt102}} ()
 \item 
 subroutine, public \mbox{\hyperlink{namespacem__escape_a4210456d81d9a1bf328093a9635e640b}{m\+\_\+escape\+::esc\+\_\+mode}} (manner)
@@ -40,6 +48,8 @@ character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__es
 attr(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
+\item 
+logical, save \mbox{\hyperlink{namespacem__escape_a67ff4e5b90da8436f0da5882c4a5720c}{m\+\_\+escape\+::g\+\_\+color}} =.true.
 \item 
 logical, save \mbox{\hyperlink{namespacem__escape_af068eb2561159352a9a406c95157b131}{m\+\_\+escape\+::debug}} =.false.
 \item 

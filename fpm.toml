@@ -16,7 +16,8 @@ test = [
    { name="demo6", source-dir="test/demo6", main="dump.f90" },
    { name="demo7", source-dir="test/demo7", main="functional.f90" },
    { name="demo8", source-dir="test/demo8", main="direct.f90" },
-   { name="demo9", source-dir="test/demo9", main="mixed.f90" }
+   { name="demo9", source-dir="test/demo9", main="mixed.f90" },
+   { name="demo10", source-dir="test/demo10", main="color_mode.f90" }
 ]
 executable = [
    { name="plain", source-dir="app/plain", main="plain.f90" },

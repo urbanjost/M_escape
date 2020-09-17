@@ -45,7 +45,7 @@ a.existingWikiWord[title]{ //border: 1px dashed #BBB; }
 <div id="Container">
 <div id="Content">
 <CENTER>
-<H1><HR><I>Manual Reference Pages &nbsp;-&nbsp;</I><NOBR>update (3m_escape)</NOBR><HR></H1>
+<H1><HR><I>Manual Reference Pages &nbsp;-&nbsp;</I><NOBR>color (3m_escape)</NOBR><HR></H1>
 </CENTER>
 <A name=0>
 
@@ -53,7 +53,7 @@ a.existingWikiWord[title]{ //border: 1px dashed #BBB; }
 
 </A>
 <BLOCKQUOTE>
-<B>update(3f) </B>- [M_escape] update internal dictionary given keyword and value
+<B>color(3f) </B>- [M_escape] toggle style effects of <B>color</B>(3f) on and off
 <B>(LICENSE:PD)
 </B></BLOCKQUOTE>
 <A name=contents></A><H3>CONTENTS</H3></A>
@@ -72,10 +72,16 @@ a.existingWikiWord[title]{ //border: 1px dashed #BBB; }
 </A>
 <BLOCKQUOTE>
 <PRE>
-subroutine <B>update</B>(key,val)
+</PRE>
+<TABLE cellpadding=3>
+<TR valign=top><TD colspan=2>
+<B>subroutine</B> </TD></TR><TR valign=top><TD width=6%>&nbsp;</TD><TD>
+<B>color_mode</B>(<I>switch</I>)
+</TD></TR>
+<TR></TR></TABLE><!-- .nf -->
+<PRE>
+     logical,intent(in) :: switch
 <P>
-   character(len=*),intent(in)           :: key
-   character(len=*),intent(in),optional  :: val
 </PRE>
 </BLOCKQUOTE>
 <A name=2>
@@ -84,7 +90,11 @@ subroutine <B>update</B>(key,val)
 
 </A>
 <BLOCKQUOTE>
-Update internal dictionary in <B>M_escape</B>(3fm) module.
+The color constant strings can be used directly but unconditionally
+in an output statement. To allow the attributes to be ignored they
+can be called with the <B>color</B>(3f) routine, which the <B>color_mode</B>(3f)
+procedure can be used to toggle on and off. Note that this routine
+does an implicit reset at the end of each use.
 </BLOCKQUOTE>
 <A name=3>
 
@@ -94,13 +104,8 @@ Update internal dictionary in <B>M_escape</B>(3fm) module.
 <BLOCKQUOTE>
 <TABLE cellpadding=3>
 <TR valign=top><TD width=6% nowrap>
-<B>key</B> </TD><TD valign=bottom>
-name of keyword to add, replace, or delete from dictionary
-</TD></TR>
-<TR valign=top><TD width=6% nowrap>
-<B>val</B> </TD><TD valign=bottom>
-if present add or replace value associated with keyword. If not
-present remove keyword entry from dictionary.
+<B></B><I>switch</I> </TD><TD valign=bottom>
+turn attributes set by <B>color</B>(3f) on and off
 </TD></TR>
 <TR></TR></TABLE></BLOCKQUOTE>
 <A name=4>
@@ -112,33 +117,31 @@ present remove keyword entry from dictionary.
 Sample program
 <P>
 <PRE>
-          program demo_update
-          use M_escape, only : esc, update
-             write(*,&#146;(a)&#146;) esc(&#146;&lt;clear&gt;TEST CUSTOMIZED:&#146;)
-             ! add custom keywords
-             call update(&#146;blink&#146;,char(27)//&#146;[5m&#146;)
-             call update(&#146;/blink&#146;,char(27)//&#146;[38m&#146;)
+   program demo_color_mode
+      use M_escape, only : color, color_mode, &
+     ! FOREGROUND COLORS
+        & fg_red, fg_cyan, fg_magenta, fg_blue, &
+        & fg_green, fg_yellow, fg_white, fg_ebony, &
+        & fg_default, &
+     ! BACKGROUND COLORS
+        & bg_red, bg_cyan, bg_magenta, bg_blue, &
+        & bg_green, bg_yellow, bg_white, bg_ebony, &
+        & bg_default, &
+     ! ATTRIBUTES
+        & bold, italic, inverse, underline,  &
+        & unbold, unitalic, uninverse, ununderline,  &
+        & reset, &
+     ! DISPLAY
+        & clear
+      implicit none
+        write(*,&#146;(*(g0))&#146;)fg_red,bg_green,bold,&#146; Hello! &#146;,reset
 <P>
-             write(*,&#146;(a)&#146;) esc(&#146;&lt;blink&gt;Items for Friday&lt;blink/&gt;&#146;)
-<P>
-             write(*,&#146;(a)&#146;,advance=&#146;no&#146;) esc(&#146;&lt;r&gt;RED&lt;/r&gt;,&#146;)
-             write(*,&#146;(a)&#146;,advance=&#146;no&#146;) esc(&#146;&lt;b&gt;BLUE&lt;/b&gt;,&#146;)
-             write(*,&#146;(a)&#146;,advance=&#146;yes&#146;) esc(&#146;&lt;g&gt;GREEN&lt;/g&gt;&#146;)
-<P>
-             ! delete
-             call update(&#146;r&#146;)
-             call update(&#146;/r&#146;)
-             ! replace
-             call update(&#146;b&#146;,&#146;&lt;&lt;&lt;&lt;&#146;)
-             call update(&#146;/b&#146;,&#146;&gt;&gt;&gt;&gt;&#146;)
-             write(*,&#146;(a)&#146;,advance=&#146;no&#146;) esc(&#146;&lt;r&gt;RED&lt;/r&gt;,&#146;)
-             write(*,&#146;(a)&#146;,advance=&#146;no&#146;) esc(&#146;&lt;b&gt;BLUE&lt;/b&gt;,&#146;)
-             write(*,&#146;(a)&#146;,advance=&#146;yes&#146;) esc(&#146;&lt;g&gt;GREEN&lt;/g&gt;&#146;)
+        write(*,&#146;(a)&#146;)color(&#146; Hello! &#146;,fg=fg_white,bg=bg_red,style=italic//bold)
+        call color_mode(.false.)
+        write(*,&#146;(a)&#146;)color(&#146; Hello! &#146;,fg=fg_red,bg=bg_red,style=italic//bold)
+   end program demo_color_mode
 <P>
 </PRE>
-<BLOCKQUOTE>
-end program demo_update
-</BLOCKQUOTE>
 </BLOCKQUOTE>
 <A name=5>
 
@@ -157,8 +160,8 @@ John S. Urban, 2020
 Public Domain
 </BLOCKQUOTE>
 <P><HR>
-<TABLE width=100%><TR> <TD width=33%><I></I></TD> <TD width=33% align=center>update (3m_escape)</TD> <TD align=right width=33%><I>September 16, 2020</I></TD> </TR></TABLE><FONT SIZE=-1>Generated by <A HREF="http://www.squarebox.co.uk/download/manServer.shtml">manServer 1.08</A> from 3e1f8877-7dc1-40aa-99a0-78bd954721d5 using man macros.</FONT>
-<br><br><center><img src="images/update.gif"></center>
+<TABLE width=100%><TR> <TD width=33%><I></I></TD> <TD width=33% align=center>color (3m_escape)</TD> <TD align=right width=33%><I>September 16, 2020</I></TD> </TR></TABLE><FONT SIZE=-1>Generated by <A HREF="http://www.squarebox.co.uk/download/manServer.shtml">manServer 1.08</A> from 6763f53f-627a-482b-8dd4-0a85f1d1e73b using man macros.</FONT>
+<br><br><center><img src="images/color.gif"></center>
 </div>
 </div>
 </body>

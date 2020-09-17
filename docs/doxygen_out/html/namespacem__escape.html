@@ -80,6 +80,16 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memdesc:a36f016baad6b23f86189e6f3ee6db0cb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><h2>NAME</h2>
 esc(3f) - [M_escape] substitute escape sequences for XML-like syntax (prototype) in strings  <a href="#a36f016baad6b23f86189e6f3ee6db0cb">More...</a><br /></td></tr>
 <tr class="separator:a36f016baad6b23f86189e6f3ee6db0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7d28a73e65efb58beeb684d7bdeefec"><td class="memItemLeft" align="right" valign="top">character(len=:) function, allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#af7d28a73e65efb58beeb684d7bdeefec">color</a> (string, fg, bg, style)</td></tr>
+<tr class="memdesc:af7d28a73e65efb58beeb684d7bdeefec"><td class="mdescLeft">&#160;</td><td class="mdescRight"><h2>NAME</h2>
+color(3f) - [M_escape] colorize text using a simple function-based approach (LICENSE:PD) </p><h2>SYNOPSIS</h2>
+ <a href="#af7d28a73e65efb58beeb684d7bdeefec">More...</a><br /></td></tr>
+<tr class="separator:af7d28a73e65efb58beeb684d7bdeefec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24566737cb6aa1672180eaa21c8d4f66"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#a24566737cb6aa1672180eaa21c8d4f66">color_mode</a> (switch)</td></tr>
+<tr class="memdesc:a24566737cb6aa1672180eaa21c8d4f66"><td class="mdescLeft">&#160;</td><td class="mdescRight"><h2>NAME</h2>
+color(3f) - [M_escape] toggle style effects of color(3f) on and off (LICENSE:PD) </p><h2>SYNOPSIS</h2>
+ <a href="#a24566737cb6aa1672180eaa21c8d4f66">More...</a><br /></td></tr>
+<tr class="separator:a24566737cb6aa1672180eaa21c8d4f66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9d40717b2e75e90e2505d5fed6435c5"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#ae9d40717b2e75e90e2505d5fed6435c5">vt102</a> ()</td></tr>
 <tr class="separator:ae9d40717b2e75e90e2505d5fed6435c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4210456d81d9a1bf328093a9635e640b"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b">esc_mode</a> (manner)</td></tr>
@@ -111,6 +121,8 @@ attr(3f) - [M_escape] colorize text using a simple function-based approach (LICE
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a67ff4e5b90da8436f0da5882c4a5720c"><td class="memItemLeft" align="right" valign="top">logical, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#a67ff4e5b90da8436f0da5882c4a5720c">g_color</a> =.true.</td></tr>
+<tr class="separator:a67ff4e5b90da8436f0da5882c4a5720c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af068eb2561159352a9a406c95157b131"><td class="memItemLeft" align="right" valign="top">logical, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#af068eb2561159352a9a406c95157b131">debug</a> =.false.</td></tr>
 <tr class="separator:af068eb2561159352a9a406c95157b131"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35e957e007844dbfe641b3d915fba048"><td class="memItemLeft" align="right" valign="top">character(len=:), dimension(:), allocatable, save&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#a35e957e007844dbfe641b3d915fba048">keywords</a></td></tr>
@@ -378,6 +390,104 @@ Here is the call graph for this function:</div>
 <area shape="rect" id="node5" href="namespacem__escape.html#a5efd612f60d281003917329484a7960c" title="NAMEupdate(3f) &#45; [M_escape] update internal dictionary given keyword and value (LICENSE:PD) SYNOPSIS..." alt="" coords="554,56,695,83"/>
 </map>
 </div>
+
+</div>
+</div>
+<a id="af7d28a73e65efb58beeb684d7bdeefec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7d28a73e65efb58beeb684d7bdeefec">&#9670;&nbsp;</a></span>color()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">character(len=:) function, allocatable, public m_escape::color </td>
+          <td>(</td>
+          <td class="paramtype">character(len=*), intent(in)&#160;</td>
+          <td class="paramname"><em>string</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">character(len=*), intent(in), optional&#160;</td>
+          <td class="paramname"><em>fg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">character(len=*), intent(in), optional&#160;</td>
+          <td class="paramname"><em>bg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">character(len=*), intent(in), optional&#160;</td>
+          <td class="paramname"><em>style</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><h2>NAME</h2>
+color(3f) - [M_escape] colorize text using a simple function-based approach (LICENSE:PD) </p><h2>SYNOPSIS</h2>
+</p>
+<p>use M_escape, only : color, color_mode, &amp;</p>
+<p>! FOREGROUND COLORS &amp; fg_red, fg_cyan, fg_magenta, fg_blue, &amp; &amp; fg_green, fg_yellow, fg_white, fg_ebony, &amp; &amp; fg_default, &amp; ! BACKGROUND COLORS &amp; bg_red, bg_cyan, bg_magenta, bg_blue, &amp; &amp; bg_green, bg_yellow, bg_white, bg_ebony, &amp; &amp; bg_default, &amp; ! ATTRIBUTES &amp; bold, italic, inverse, underline, &amp; &amp; unbold, unitalic, uninverse, ununderline, &amp; &amp; reset, &amp; ! DISPLAY &amp; clear</p>
+<p>function color(string,fg,bg,style) result (out)</p>
+<p>character(len=*),intent(in) :: string character(len=*),intent(in),optional :: fg character(len=*),intent(in),optional :: bg character(len=*),intent(in),optional :: style</p>
+<h2>DESCRIPTION</h2>
+<p>The color constant strings can be used directly but unconditionally in an output statement. To allow the attributes to be ignored they can be called with the color(3f) routine, which the color_mode(3f) procedure can be used to toggle on and off. Note that this routine does an implicit reset at the end of each use.</p>
+<h2>OPTIONS</h2>
+<p>string string to assign attributes to fg foreground color constant bg background color constant style style keyword or concatenated style keywords</p>
+<h2>EXAMPLE</h2>
+<p>Sample program</p>
+<p>program demo_color use M_escape, only : color, color_mode, &amp; ! FOREGROUND COLORS &amp; fg_red, fg_cyan, fg_magenta, fg_blue, &amp; &amp; fg_green, fg_yellow, fg_white, fg_ebony, &amp; &amp; fg_default, &amp; ! BACKGROUND COLORS &amp; bg_red, bg_cyan, bg_magenta, bg_blue, &amp; &amp; bg_green, bg_yellow, bg_white, bg_ebony, &amp; &amp; bg_default, &amp; ! ATTRIBUTES &amp; bold, italic, inverse, underline, &amp; &amp; unbold, unitalic, uninverse, ununderline, &amp; &amp; reset, &amp; ! DISPLAY &amp; clear implicit none write(*,'(*(g0))')fg_red,bg_green,bold,' Hello! ',reset</p>
+<p>write(*,'(a)')color(' Hello! ',fg=fg_white,bg=bg_red,style=italic//bold) call color_mode(.false.) write(*,'(a)')color(' Hello! ',fg=fg_red,bg=bg_red,style=italic//bold) end program demo_color</p>
+<h2>AUTHOR</h2>
+<p>John S. Urban, 2020 </p><h2>LICENSE</h2>
+<p>Public Domain </p>
+
+<p class="reference">References <a class="el" href="namespacem__escape.html#a67ff4e5b90da8436f0da5882c4a5720c">g_color</a>, and <a class="el" href="namespacem__escape.html#ae02be34bb084db8024b234bc87058d3a">reset</a>.</p>
+
+</div>
+</div>
+<a id="a24566737cb6aa1672180eaa21c8d4f66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24566737cb6aa1672180eaa21c8d4f66">&#9670;&nbsp;</a></span>color_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public m_escape::color_mode </td>
+          <td>(</td>
+          <td class="paramtype">logical, intent(in)&#160;</td>
+          <td class="paramname"><em>switch</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><h2>NAME</h2>
+color(3f) - [M_escape] toggle style effects of color(3f) on and off (LICENSE:PD) </p><h2>SYNOPSIS</h2>
+</p>
+<p>subroutine color_mode(switch)</p>
+<p>logical,intent(in) :: switch</p>
+<h2>DESCRIPTION</h2>
+<p>The color constant strings can be used directly but unconditionally in an output statement. To allow the attributes to be ignored they can be called with the color(3f) routine, which the color_mode(3f) procedure can be used to toggle on and off. Note that this routine does an implicit reset at the end of each use.</p>
+<h2>OPTIONS</h2>
+<p>switch turn attributes set by color(3f) on and off</p>
+<h2>EXAMPLE</h2>
+<p>Sample program</p>
+<p>program demo_color_mode use M_escape, only : color, color_mode, &amp; ! FOREGROUND COLORS &amp; fg_red, fg_cyan, fg_magenta, fg_blue, &amp; &amp; fg_green, fg_yellow, fg_white, fg_ebony, &amp; &amp; fg_default, &amp; ! BACKGROUND COLORS &amp; bg_red, bg_cyan, bg_magenta, bg_blue, &amp; &amp; bg_green, bg_yellow, bg_white, bg_ebony, &amp; &amp; bg_default, &amp; ! ATTRIBUTES &amp; bold, italic, inverse, underline, &amp; &amp; unbold, unitalic, uninverse, ununderline, &amp; &amp; reset, &amp; ! DISPLAY &amp; clear implicit none write(*,'(*(g0))')fg_red,bg_green,bold,' Hello! ',reset</p>
+<p>write(*,'(a)')color(' Hello! ',fg=fg_white,bg=bg_red,style=italic//bold) call color_mode(.false.) write(*,'(a)')color(' Hello! ',fg=fg_red,bg=bg_red,style=italic//bold) end program demo_color_mode</p>
+<h2>AUTHOR</h2>
+<p>John S. Urban, 2020 </p><h2>LICENSE</h2>
+<p>Public Domain </p>
+
+<p class="reference">References <a class="el" href="namespacem__escape.html#a67ff4e5b90da8436f0da5882c4a5720c">g_color</a>.</p>
 
 </div>
 </div>
@@ -2139,6 +2249,28 @@ Here is the caller graph for this function:</div>
           <td class="memname">character(len=*), parameter, public m_escape::fg_yellow = CODE_START//COLOR_FG_YELLOW//CODE_END</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a67ff4e5b90da8436f0da5882c4a5720c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67ff4e5b90da8436f0da5882c4a5720c">&#9670;&nbsp;</a></span>g_color</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">logical, save m_escape::g_color =.true.</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

@@ -167,6 +167,11 @@ public print_dictionary
 !-!public flush_colors, init_colors
 public attr
 
+! direct use of constant strings
+public color
+public color_mode
+logical,save :: G_color=.true.
+
 logical,save :: debug=.false.
 
 character(len=:),allocatable,save :: keywords(:)
@@ -208,7 +213,6 @@ character(len=*),parameter  :: COLOR_BG_BLACK_INTENSE='100', COLOR_BG_RED_INTENS
 character(len=*),parameter  :: COLOR_BG_GREEN_INTENSE='102', COLOR_BG_YELLOW_INTENSE='103'
 character(len=*),parameter  :: COLOR_BG_BLUE_INTENSE='104',  COLOR_BG_MAGENTA_INTENSE='105'
 character(len=*),parameter  :: COLOR_BG_CYAN_INTENSE='106',  COLOR_BG_WHITE_INTENSE='107'
-
 
 ! for direct use of escape sequences
 
@@ -452,6 +456,163 @@ if( (index(expanded,escape).ne.0).and.(.not.clear_at_end_local))then
    endif
 endif
 end function esc
+!===================================================================================================================================
+!()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
+!===================================================================================================================================
+!>
+!!##NAME
+!!    color(3f) - [M_escape] colorize text using a simple function-based approach
+!!    (LICENSE:PD)
+!!##SYNOPSIS
+!!
+!!    use M_escape, only : color, color_mode, &
+!!
+!!     ! FOREGROUND COLORS
+!!         & fg_red, fg_cyan, fg_magenta, fg_blue, &
+!!         & fg_green, fg_yellow, fg_white, fg_ebony, &
+!!         & fg_default, &
+!!     ! BACKGROUND COLORS
+!!         & bg_red, bg_cyan, bg_magenta, bg_blue, &
+!!         & bg_green, bg_yellow, bg_white, bg_ebony, &
+!!         & bg_default, &
+!!      ! ATTRIBUTES
+!!         & bold, italic, inverse, underline,  &
+!!         & unbold, unitalic, uninverse, ununderline,  &
+!!         & reset, &
+!!      ! DISPLAY
+!!         & clear
+!!
+!!     function color(string,fg,bg,style) result (out)
+!!
+!!      character(len=*),intent(in)          :: string
+!!      character(len=*),intent(in),optional :: fg
+!!      character(len=*),intent(in),optional :: bg
+!!      character(len=*),intent(in),optional :: style
+!!
+!!##DESCRIPTION
+!!     The color constant strings can be used directly but unconditionally
+!!     in an output statement. To allow the attributes to be ignored they
+!!     can be called with the color(3f) routine, which the color_mode(3f)
+!!     procedure can be used to toggle on and off. Note that this routine
+!!     does an implicit reset at the end of each use.
+!!
+!!##OPTIONS
+!!    string     string to assign attributes to
+!!    fg         foreground color constant
+!!    bg         background color constant
+!!    style      style keyword or concatenated style keywords
+!!
+!!##EXAMPLE
+!!
+!!   Sample program
+!!
+!!    program demo_color
+!!       use M_escape, only : color, color_mode, &
+!!      ! FOREGROUND COLORS
+!!         & fg_red, fg_cyan, fg_magenta, fg_blue, &
+!!         & fg_green, fg_yellow, fg_white, fg_ebony, &
+!!         & fg_default, &
+!!      ! BACKGROUND COLORS
+!!         & bg_red, bg_cyan, bg_magenta, bg_blue, &
+!!         & bg_green, bg_yellow, bg_white, bg_ebony, &
+!!         & bg_default, &
+!!      ! ATTRIBUTES
+!!         & bold, italic, inverse, underline,  &
+!!         & unbold, unitalic, uninverse, ununderline,  &
+!!         & reset, &
+!!      ! DISPLAY
+!!         & clear
+!!       implicit none
+!!         write(*,'(*(g0))')fg_red,bg_green,bold,' Hello! ',reset
+!!
+!!         write(*,'(a)')color(' Hello! ',fg=fg_white,bg=bg_red,style=italic//bold)
+!!         call color_mode(.false.)
+!!         write(*,'(a)')color(' Hello! ',fg=fg_red,bg=bg_red,style=italic//bold)
+!!    end program demo_color
+!!
+!!##AUTHOR
+!!    John S. Urban, 2020
+!!##LICENSE
+!!    Public Domain
+function color(string,fg,bg,style) result (out)
+
+! ident_1="@(#)use the color string constants, optionally ignoring them if G_switch is .false. as set by color_mode(3f)"
+
+character(len=*),intent(in)          :: string
+character(len=*),intent(in),optional :: fg
+character(len=*),intent(in),optional :: bg
+character(len=*),intent(in),optional :: style
+character(len=:),allocatable         :: out
+out=''
+if(G_color)then
+   if(present(style))out=out//style
+   if(present(bg))out=out//bg
+   if(present(fg))out=out//fg
+   out=out//string
+   out=out//reset
+else
+   out=string
+endif
+end function color
+!===================================================================================================================================
+!()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
+!===================================================================================================================================
+!>
+!!##NAME
+!!    color(3f) - [M_escape] toggle style effects of color(3f) on and off
+!!    (LICENSE:PD)
+!!##SYNOPSIS
+!!
+!!     subroutine  color_mode(switch)
+!!
+!!      logical,intent(in) :: switch
+!!
+!!##DESCRIPTION
+!!     The color constant strings can be used directly but unconditionally
+!!     in an output statement. To allow the attributes to be ignored they
+!!     can be called with the color(3f) routine, which the color_mode(3f)
+!!     procedure can be used to toggle on and off. Note that this routine
+!!     does an implicit reset at the end of each use.
+!!
+!!##OPTIONS
+!!     switch   turn attributes set by color(3f) on and off
+!!
+!!##EXAMPLE
+!!
+!!   Sample program
+!!
+!!    program demo_color_mode
+!!       use M_escape, only : color, color_mode, &
+!!      ! FOREGROUND COLORS
+!!         & fg_red, fg_cyan, fg_magenta, fg_blue, &
+!!         & fg_green, fg_yellow, fg_white, fg_ebony, &
+!!         & fg_default, &
+!!      ! BACKGROUND COLORS
+!!         & bg_red, bg_cyan, bg_magenta, bg_blue, &
+!!         & bg_green, bg_yellow, bg_white, bg_ebony, &
+!!         & bg_default, &
+!!      ! ATTRIBUTES
+!!         & bold, italic, inverse, underline,  &
+!!         & unbold, unitalic, uninverse, ununderline,  &
+!!         & reset, &
+!!      ! DISPLAY
+!!         & clear
+!!       implicit none
+!!         write(*,'(*(g0))')fg_red,bg_green,bold,' Hello! ',reset
+!!
+!!         write(*,'(a)')color(' Hello! ',fg=fg_white,bg=bg_red,style=italic//bold)
+!!         call color_mode(.false.)
+!!         write(*,'(a)')color(' Hello! ',fg=fg_red,bg=bg_red,style=italic//bold)
+!!    end program demo_color_mode
+!!
+!!##AUTHOR
+!!    John S. Urban, 2020
+!!##LICENSE
+!!    Public Domain
+subroutine color_mode(switch)
+logical,intent(in) :: switch
+   G_color=switch
+end subroutine color_mode
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
 !===================================================================================================================================
