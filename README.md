@@ -219,11 +219,13 @@ sequences directly. Per **@certik**:
 ![sample](docs/images/snap2c.gif)
 
    Nice and simple. The biggest problem is that the constant strings cannot be turned off trivially. 
+
    The constant strings could be variables instead, with a function that initializes them and sets them
    to null I suppose, but adding a simple function to use the variables and a trivial subroutine to turn
-   off using them you get
+   off the escape sequences them is easy enough.
 
    So simply adding the color(3f) and color_mode(3f) procedures
+
 ```fortran
    program direct2
       use M_escape, only : color, color_mode
@@ -236,9 +238,21 @@ sequences directly. Per **@certik**:
       ! unlike the constants it is easy to turn off the color
       call color_mode(.false.)
       print *, color('Hello!', fg=fg_red, bg=bg_green, style=bold)
+       NOTE:
+       where supported the isatty(3f) function can be used to turn off the sequences when the file is
+       not a tty.
+       call color_mode(isatty(stdin)) ! isatty(3f) is an extension, but supported by GNU, Intel, PGI, ...
    end program direct2
 ```
 ![sample](docs/images/snap2b.gif)
+
+       ### NOTE:
+       where supported the isatty(3f) function can be used to turn off the sequences when the file is
+       not a tty.
+
+          call color_mode(isatty(stdin)) 
+
+       isatty(3f) is an extension, but supported by GNU, Intel, PGI, ...
 
    You could eliminate the fg= and bg= parameters and just concatenate any combination of the strings as
    a style= value as well.
