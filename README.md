@@ -182,6 +182,42 @@ sequences directly. Per **@certik**:
 ```
 ![sample](docs/images/snap2.gif)
 
+   A more extensive example
+```fortran
+   program testit
+   use M_escape,                     only : color,color_mode, bg_blue, fg_white, reset, fg_yellow, bold, clear
+   implicit none
+   character(len=47)   :: line
+   character(len=256)  :: message
+   integer             :: ios
+   real                :: value
+      !call color_mode(isatty(stdout)) ! ISATTY() is an extension, but found in Intel, GNU, PGI, ... compiler
+   
+   
+      ! clear screen, set attributes and print messages
+      line=' Ready for next temperature.'
+      write(*,'(*(a))') color(line,bg=bg_blue,fg=fg_white,style=clear//bold)
+   
+      value=123.45
+      write(line,'(*(g0))')' Current value=',value
+      write(*,'(*(a))') color(line,bg=bg_blue,fg=fg_white,style=bold)
+   
+   
+      ! prompt for new value
+      write(*,'(*(a))',advance='no') bg_blue,fg_white,repeat('_',len(line)),fg_yellow,bold, char(13),' ENTER>'
+   
+      ! read new value
+      read(*,advance='yes',iostat=ios,fmt='(g20.13)',iomsg=message)value
+      write(*,'(a)',advance='no') reset
+      if(ios.ne.0)then
+         write(*,'(*(g0))')ios,' ',trim(message)
+      endif
+   
+      write(*,'(*(g0))')'value=',value
+   end program testit
+```
+![sample](docs/images/snap2c.gif)
+
    Nice and simple. The biggest problem is that the constant strings cannot be turned off trivially. 
    The constant strings could be variables instead, with a function that initializes them and sets them
    to null I suppose, but adding a simple function to use the variables and a trivial subroutine to turn
