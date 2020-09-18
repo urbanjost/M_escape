@@ -222,7 +222,7 @@ sequences directly. Per **@certik**:
 
    The constant strings could be variables instead, with a function that initializes them and sets them
    to null I suppose, but adding a simple function to use the variables and a trivial subroutine to turn
-   off the escape sequences them is easy enough.
+   off the escape sequences is easy enough.
 
    So simply adding the color(3f) and color_mode(3f) procedures
 
