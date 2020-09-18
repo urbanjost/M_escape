@@ -185,23 +185,20 @@ sequences directly. Per **@certik**:
    A more extensive example
 ```fortran
    program testit
-   use M_escape,                     only : color,color_mode, bg_blue, fg_white, reset, fg_yellow, bold, clear
+   use M_escape, only : bg_blue, fg_white, reset, fg_yellow, bold, clear
    implicit none
    character(len=47)   :: line
    character(len=256)  :: message
    integer             :: ios
    real                :: value
-      !call color_mode(isatty(stdout)) ! ISATTY() is an extension, but found in Intel, GNU, PGI, ... compiler
-   
    
       ! clear screen, set attributes and print messages
       line=' Ready for next temperature.'
-      write(*,'(*(a))') color(line,bg=bg_blue,fg=fg_white,style=clear//bold)
+      write(*,'(*(a))') clear,bg_blue,fg_white,bold,line,reset
    
       value=123.45
       write(line,'(*(g0))')' Current value=',value
-      write(*,'(*(a))') color(line,bg=bg_blue,fg=fg_white,style=bold)
-   
+      write(*,'(*(a))') bg_blue,fg_white,bold,line,reset
    
       ! prompt for new value
       write(*,'(*(a))',advance='no') bg_blue,fg_white,repeat('_',len(line)),fg_yellow,bold, char(13),' ENTER>'
