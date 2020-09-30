@@ -4,7 +4,7 @@
 
 \subsubsection*{N\+A\+ME}
 
-M\+\_\+escape(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax (prototype) in strings  
+M\+\_\+escape(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax in strings  
 
 
 \subsection*{Functions/\+Subroutines}
@@ -13,7 +13,7 @@ M\+\_\+escape(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences 
 character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__escape_a36f016baad6b23f86189e6f3ee6db0cb}{esc}} (string, clear\+\_\+at\+\_\+end)
 \begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
 
-esc(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax (prototype) in strings \end{DoxyCompactList}\item 
+esc(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax in strings \end{DoxyCompactList}\item 
 character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__escape_af7d28a73e65efb58beeb684d7bdeefec}{color}} (string, fg, bg, style)
 \begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
 
@@ -226,23 +226,25 @@ character(len= $\ast$), parameter, public \mbox{\hyperlink{namespacem__escape_a4
 \subsection{Detailed Description}
 \subsubsection*{N\+A\+ME}
 
-M\+\_\+escape(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax (prototype) in strings 
+M\+\_\+escape(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax in strings 
 
 \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}
 
-\begin{DoxyVerb} use M_list, only : esc, esc_mode, update
+\begin{DoxyVerb} use M_escape, only : esc, esc_mode, update
+ use M_escape, only : attr
+ use M_escape, only : color, color_mode
 \end{DoxyVerb}
 
 
 \subsubsection*{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}
 
-This is a prototype exploring using X\+M\+L-\/like syntax to add attributes to terminal output such as color.
+M\+\_\+escape is a Fortran module for using X\+M\+L-\/like syntax to add attributes to terminal output such as color.
 
 A\+N\+SI escape sequences are not universally supported by all terminal emulators; and normally should be suppressed when not going to a tty device. This routine provides the basic structure to support such behaviors. or to perhaps in the future generate a C\+SS style sheet and H\+T\+ML instead of text to the terminal, ...
 
 Alternatively, direct use of the escape sequences is supported, as well as a functional interface, and an object-\/oriented approach.
 
-The original concept was to allow formatting by using an existing X\+ML library to allow the user to write H\+T\+ML and to format it on a terminal like w3m, lynx, and link do. And in some ways this is an opposite approach in that it is directly formatting the text by using a similar syntax to directly generate text attributes; but it is a much simpler approach programmatically for this prototype.
+The original concept was to allow formatting by using an existing X\+ML library to allow the user to write H\+T\+ML and to format it on a terminal like w3m, lynx, and link do. And in some ways this is an opposite approach in that it is directly formatting the text by using a similar syntax to directly generate text attributes; but it is a much simpler approach programmatically.
 
 Typically, you should use M\+\_\+system\+::system\+\_\+istty(3f) to set the default to \char`\"{}plain\char`\"{} instead of \char`\"{}color\char`\"{} when the output file is not a terminal.
 
@@ -442,7 +444,7 @@ References g\+\_\+color.
 
 \subsubsection*{N\+A\+ME}
 
-esc(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax (prototype) in strings 
+esc(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax in strings 
 
 \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}
 
@@ -497,7 +499,7 @@ write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}T\+E
 
 write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}T\+E\+ST M\+A\+N\+N\+ER=color\+:\textquotesingle{}) call esc\+\_\+mode(manner=\textquotesingle{}color\textquotesingle{}) call printstuff()
 
-write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}T\+E\+ST A\+D\+D\+I\+NG A C\+U\+S\+T\+OM S\+E\+Q\+U\+E\+N\+CE\+:\textquotesingle{}) call update(\textquotesingle{}blink\textquotesingle{},char(27)//\textquotesingle{}\mbox{[}5m\textquotesingle{}) call update(\textquotesingle{}/blink\textquotesingle{},char(27)//\textquotesingle{}\mbox{[}38m\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$blink$>$Items for Friday$<$blink$>$\textquotesingle{})
+write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}T\+E\+ST A\+D\+D\+I\+NG A C\+U\+S\+T\+OM S\+E\+Q\+U\+E\+N\+CE\+:\textquotesingle{}) call update(\textquotesingle{}blink\textquotesingle{},char(27)//\textquotesingle{}\mbox{[}5m\textquotesingle{}) call update(\textquotesingle{}/blink\textquotesingle{},char(27)//\textquotesingle{}\mbox{[}38m\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$blink$>$Items for Friday$<$/blink$>$\textquotesingle{})
 
 contains subroutine printstuff()
 
@@ -725,7 +727,7 @@ Sample program \begin{DoxyVerb}    program demo_update
        call update('blink',char(27)//'[5m')
        call update('/blink',char(27)//'[38m')
 
-       write(*,'(a)') esc('<blink>Items for Friday<blink/>')
+       write(*,'(a)') esc('<blink>Items for Friday</blink>')
 
        write(*,'(a)',advance='no') esc('<r>RED</r>,')
        write(*,'(a)',advance='no') esc('<b>BLUE</b>,')

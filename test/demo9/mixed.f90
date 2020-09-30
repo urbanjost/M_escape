@@ -18,7 +18,7 @@
              write(*,'(a)') esc('TEST ADDING A CUSTOM SEQUENCE:')
              call update('blink',char(27)//'[5m')
              call update('/blink',char(27)//'[38m')
-             write(*,'(a)') esc('<blink>Items for Friday<blink/>')
+             write(*,'(a)') esc('<blink>Items for Friday</blink>')
 
           contains
           subroutine printstuff()

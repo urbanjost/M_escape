@@ -1,13 +1,15 @@
 !>
 !!##NAME
-!!    M_escape(3f) - [M_escape] substitute escape sequences for XML-like syntax (prototype) in strings
+!!    M_escape(3f) - [M_escape] substitute escape sequences for XML-like syntax in strings
 !!
 !!##SYNOPSIS
 !!
-!!     use M_list, only : esc, esc_mode, update
+!!     use M_escape, only : esc, esc_mode, update
+!!     use M_escape, only : attr
+!!     use M_escape, only : color, color_mode
 !!
 !!##DESCRIPTION
-!!    This is a prototype exploring using XML-like syntax to add attributes
+!!    M_escape is a Fortran module for using XML-like syntax to add attributes
 !!    to terminal output such as color.
 !!
 !!    ANSI escape sequences are not universally supported by all terminal
@@ -24,7 +26,7 @@
 !!    terminal like w3m, lynx, and link do. And in some ways this is an
 !!    opposite approach in that it is directly formatting the text by using
 !!    a similar syntax to directly generate text attributes; but it is a
-!!    much simpler approach programmatically for this prototype.
+!!    much simpler approach programmatically.
 !!
 !!    Typically, you should use M_system::system_istty(3f) to set the default
 !!    to "plain" instead of "color" when the output file is not a terminal.
@@ -260,7 +262,7 @@ contains
 !===================================================================================================================================
 !>
 !!##NAME
-!!    esc(3f) - [M_escape] substitute escape sequences for XML-like syntax (prototype) in strings
+!!    esc(3f) - [M_escape] substitute escape sequences for XML-like syntax in strings
 !!
 !!##SYNOPSIS
 !!
@@ -355,7 +357,7 @@ contains
 !!       write(*,'(a)') esc('TEST ADDING A CUSTOM SEQUENCE:')
 !!       call update('blink',char(27)//'[5m')
 !!       call update('/blink',char(27)//'[38m')
-!!       write(*,'(a)') esc('<blink>Items for Friday<blink/>')
+!!       write(*,'(a)') esc('<blink>Items for Friday</blink>')
 !!
 !!    contains
 !!    subroutine printstuff()
@@ -801,7 +803,7 @@ end subroutine wipe_dictionary
 !!              call update('blink',char(27)//'[5m')
 !!              call update('/blink',char(27)//'[38m')
 !!
-!!              write(*,'(a)') esc('<blink>Items for Friday<blink/>')
+!!              write(*,'(a)') esc('<blink>Items for Friday</blink>')
 !!
 !!              write(*,'(a)',advance='no') esc('<r>RED</r>,')
 !!              write(*,'(a)',advance='no') esc('<b>BLUE</b>,')

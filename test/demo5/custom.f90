@@ -5,7 +5,7 @@
              call update('blink',char(27)//'[5m')
              call update('/blink',char(27)//'[38m')
 
-             write(*,'(a)') esc('<blink>Items for Friday<blink/>')
+             write(*,'(a)') esc('<blink>Items for Friday</blink>')
 
              write(*,'(a)',advance='no') esc('<r>RED</r>,')
              write(*,'(a)',advance='no') esc('<b>BLUE</b>,')

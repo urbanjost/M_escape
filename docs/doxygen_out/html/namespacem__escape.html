@@ -71,14 +71,14 @@ $(function() {
 <div class="contents">
 
 <p><h2>NAME</h2>
-M_escape(3f) - [M_escape] substitute escape sequences for XML-like syntax (prototype) in strings  
+M_escape(3f) - [M_escape] substitute escape sequences for XML-like syntax in strings  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a36f016baad6b23f86189e6f3ee6db0cb"><td class="memItemLeft" align="right" valign="top">character(len=:) function, allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb">esc</a> (string, clear_at_end)</td></tr>
 <tr class="memdesc:a36f016baad6b23f86189e6f3ee6db0cb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><h2>NAME</h2>
-esc(3f) - [M_escape] substitute escape sequences for XML-like syntax (prototype) in strings  <a href="#a36f016baad6b23f86189e6f3ee6db0cb">More...</a><br /></td></tr>
+esc(3f) - [M_escape] substitute escape sequences for XML-like syntax in strings  <a href="#a36f016baad6b23f86189e6f3ee6db0cb">More...</a><br /></td></tr>
 <tr class="separator:a36f016baad6b23f86189e6f3ee6db0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7d28a73e65efb58beeb684d7bdeefec"><td class="memItemLeft" align="right" valign="top">character(len=:) function, allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#af7d28a73e65efb58beeb684d7bdeefec">color</a> (string, fg, bg, style)</td></tr>
 <tr class="memdesc:af7d28a73e65efb58beeb684d7bdeefec"><td class="mdescLeft">&#160;</td><td class="mdescRight"><h2>NAME</h2>
@@ -296,14 +296,16 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h2>NAME</h2>
-<p>M_escape(3f) - [M_escape] substitute escape sequences for XML-like syntax (prototype) in strings </p>
+<p>M_escape(3f) - [M_escape] substitute escape sequences for XML-like syntax in strings </p>
 <h2>SYNOPSIS</h2>
-<pre class="fragment"> use M_list, only : esc, esc_mode, update
+<pre class="fragment"> use M_escape, only : esc, esc_mode, update
+ use M_escape, only : attr
+ use M_escape, only : color, color_mode
 </pre><h2>DESCRIPTION</h2>
-<p>This is a prototype exploring using XML-like syntax to add attributes to terminal output such as color.</p>
+<p>M_escape is a Fortran module for using XML-like syntax to add attributes to terminal output such as color.</p>
 <p>ANSI escape sequences are not universally supported by all terminal emulators; and normally should be suppressed when not going to a tty device. This routine provides the basic structure to support such behaviors. or to perhaps in the future generate a CSS style sheet and HTML instead of text to the terminal, ...</p>
 <p>Alternatively, direct use of the escape sequences is supported, as well as a functional interface, and an object-oriented approach.</p>
-<p>The original concept was to allow formatting by using an existing XML library to allow the user to write HTML and to format it on a terminal like w3m, lynx, and link do. And in some ways this is an opposite approach in that it is directly formatting the text by using a similar syntax to directly generate text attributes; but it is a much simpler approach programmatically for this prototype.</p>
+<p>The original concept was to allow formatting by using an existing XML library to allow the user to write HTML and to format it on a terminal like w3m, lynx, and link do. And in some ways this is an opposite approach in that it is directly formatting the text by using a similar syntax to directly generate text attributes; but it is a much simpler approach programmatically.</p>
 <p>Typically, you should use M_system::system_istty(3f) to set the default to "plain" instead of "color" when the output file is not a terminal.</p>
 <h2>MAJOR FEATURES</h2>
 <p>o Add ANSI terminal escape sequences with an XML-like syntax with ESC(3f). o suppress the escape sequence output with ESC_MODE(3f). o add, delete, and replace what strings are produced using UPDATE(3f).</p>
@@ -382,7 +384,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacem__escape_a916b16ce9be553d669f54cb9575a91be_cgraph.png" border="0" usemap="#namespacem__escape_a916b16ce9be553d669f54cb9575a91be_cgraph" alt=""/></div>
 <map name="namespacem__escape_a916b16ce9be553d669f54cb9575a91be_cgraph" id="namespacem__escape_a916b16ce9be553d669f54cb9575a91be_cgraph">
-<area shape="rect" id="node2" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax (prototype) in strings ..." alt="" coords="175,56,293,83"/>
+<area shape="rect" id="node2" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax in strings ..." alt="" coords="175,56,293,83"/>
 <area shape="rect" id="node3" href="namespacem__escape.html#ae9d40717b2e75e90e2505d5fed6435c5" title="m_escape::vt102" alt="" coords="344,31,477,57"/>
 <area shape="rect" id="node6" href="namespacem__escape.html#af555c90c278ff964d8bce93ee0368a42" title="m_escape::get" alt="" coords="352,81,469,108"/>
 <area shape="rect" id="node7" href="namespacem__escape.html#af23bd97702864e0f32258e6ec0d51506" title="m_escape::split" alt="" coords="172,157,296,184"/>
@@ -518,7 +520,7 @@ color_mode(3f) - [M_escape] toggle style effects of color(3f) on and off (LICENS
 </div><div class="memdoc">
 
 <p><h2>NAME</h2>
-esc(3f) - [M_escape] substitute escape sequences for XML-like syntax (prototype) in strings </p>
+esc(3f) - [M_escape] substitute escape sequences for XML-like syntax in strings </p>
 <h2>SYNOPSIS</h2>
 <pre class="fragment"> function esc(string,clear_at_end) result (expanded)
 
@@ -547,7 +549,7 @@ esc(3f) - [M_escape] substitute escape sequences for XML-like syntax (prototype)
 <p>write(*,'(a)') esc('TEST MANNER=PLAIN:') call esc_mode(manner='plain') call printstuff()</p>
 <p>write(*,'(a)') esc('TEST MANNER=RAW:') call esc_mode(manner='raw') call printstuff()</p>
 <p>write(*,'(a)') esc('TEST MANNER=color:') call esc_mode(manner='color') call printstuff()</p>
-<p>write(*,'(a)') esc('TEST ADDING A CUSTOM SEQUENCE:') call update('blink',char(27)//'[5m') call update('/blink',char(27)//'[38m') write(*,'(a)') esc('&lt;blink&gt;Items for Friday&lt;blink&gt;')</p>
+<p>write(*,'(a)') esc('TEST ADDING A CUSTOM SEQUENCE:') call update('blink',char(27)//'[5m') call update('/blink',char(27)//'[38m') write(*,'(a)') esc('&lt;blink&gt;Items for Friday&lt;/blink&gt;')</p>
 <p>contains subroutine printstuff()</p>
 <p>write(*,'(a)') esc('&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,<b>BLUE</b>') write(*,'(a)') esc('<code>CYAN</code>,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;') write(*,'(a)') esc('&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;')</p>
 <p>write(*,'(a)') esc('Adding &lt;bo&gt;bold&lt;/bo&gt;') write(*,'(a)') esc('&lt;bo&gt;&lt;r&gt;RED&lt;/r&gt;,&lt;g&gt;GREEN&lt;/g&gt;,<b>BLUE</b>&lt;/bo&gt;') write(*,'(a)') esc('&lt;bo&gt;<code>CYAN</code>,&lt;m&gt;MAGENTA&lt;/g&gt;,&lt;y&gt;YELLOW&lt;/y&gt;&lt;/bo&gt;') write(*,'(a)') esc('&lt;bo&gt;&lt;w&gt;WHITE&lt;/w&gt; and &lt;e&gt;EBONY&lt;/e&gt;&lt;/bo&gt;')</p>
@@ -704,7 +706,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacem__escape_af555c90c278ff964d8bce93ee0368a42_icgraph.png" border="0" usemap="#namespacem__escape_af555c90c278ff964d8bce93ee0368a42_icgraph" alt=""/></div>
 <map name="namespacem__escape_af555c90c278ff964d8bce93ee0368a42_icgraph" id="namespacem__escape_af555c90c278ff964d8bce93ee0368a42_icgraph">
-<area shape="rect" id="node2" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax (prototype) in strings ..." alt="" coords="171,5,289,32"/>
+<area shape="rect" id="node2" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax in strings ..." alt="" coords="171,5,289,32"/>
 <area shape="rect" id="node3" href="namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="337,31,456,57"/>
 </map>
 </div>
@@ -856,7 +858,7 @@ update(3f) - [M_escape] update internal dictionary given keyword and value (LICE
        call update('blink',char(27)//'[5m')
        call update('/blink',char(27)//'[38m')
 
-       write(*,'(a)') esc('&lt;blink&gt;Items for Friday&lt;blink/&gt;')
+       write(*,'(a)') esc('&lt;blink&gt;Items for Friday&lt;/blink&gt;')
 
        write(*,'(a)',advance='no') esc('&lt;r&gt;RED&lt;/r&gt;,')
        write(*,'(a)',advance='no') esc('&lt;b&gt;BLUE&lt;/b&gt;,')
@@ -884,7 +886,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacem__escape_a5efd612f60d281003917329484a7960c_icgraph.png" border="0" usemap="#namespacem__escape_a5efd612f60d281003917329484a7960c_icgraph" alt=""/></div>
 <map name="namespacem__escape_a5efd612f60d281003917329484a7960c_icgraph" id="namespacem__escape_a5efd612f60d281003917329484a7960c_icgraph">
 <area shape="rect" id="node2" href="namespacem__escape.html#ae9d40717b2e75e90e2505d5fed6435c5" title="m_escape::vt102" alt="" coords="195,56,328,83"/>
-<area shape="rect" id="node3" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax (prototype) in strings ..." alt="" coords="398,5,517,32"/>
+<area shape="rect" id="node3" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax in strings ..." alt="" coords="398,5,517,32"/>
 <area shape="rect" id="node4" href="namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="587,31,705,57"/>
 <area shape="rect" id="node5" href="namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b" title="NAMEesc_mode(3f) &#45; [M_escape] select processing mode for output from esc(3f) SYNOPSIS" alt="" coords="376,107,539,133"/>
 </map>
@@ -930,7 +932,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5_icgraph.png" border="0" usemap="#namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5_icgraph" alt=""/></div>
 <map name="namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5_icgraph" id="namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5_icgraph">
-<area shape="rect" id="node2" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax (prototype) in strings ..." alt="" coords="209,5,327,32"/>
+<area shape="rect" id="node2" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax in strings ..." alt="" coords="209,5,327,32"/>
 <area shape="rect" id="node3" href="namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="397,31,516,57"/>
 <area shape="rect" id="node4" href="namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b" title="NAMEesc_mode(3f) &#45; [M_escape] select processing mode for output from esc(3f) SYNOPSIS" alt="" coords="187,107,349,133"/>
 </map>
@@ -968,7 +970,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacem__escape_a1bc574bc97157fe67d868d2bd180c91e_icgraph.png" border="0" usemap="#namespacem__escape_a1bc574bc97157fe67d868d2bd180c91e_icgraph" alt=""/></div>
 <map name="namespacem__escape_a1bc574bc97157fe67d868d2bd180c91e_icgraph" id="namespacem__escape_a1bc574bc97157fe67d868d2bd180c91e_icgraph">
 <area shape="rect" id="node2" href="namespacem__escape.html#ae9d40717b2e75e90e2505d5fed6435c5" title="m_escape::vt102" alt="" coords="252,56,385,83"/>
-<area shape="rect" id="node3" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax (prototype) in strings ..." alt="" coords="455,5,574,32"/>
+<area shape="rect" id="node3" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax in strings ..." alt="" coords="455,5,574,32"/>
 <area shape="rect" id="node4" href="namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="644,31,763,57"/>
 <area shape="rect" id="node5" href="namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b" title="NAMEesc_mode(3f) &#45; [M_escape] select processing mode for output from esc(3f) SYNOPSIS" alt="" coords="433,107,596,133"/>
 </map>

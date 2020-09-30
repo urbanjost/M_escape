@@ -6,13 +6,6 @@
 
 ### M_escape - use in-band signaling to control the text attributes, formatting, color, and other output options on ANSI video text terminals
 
-   ** This is a WIP __(Work In Progress)__ **
-
-   __This is an uncompleted project but basically functional__.
-   Its primary purpose at this time is to further and summarize the
-   discussion concerning adding ANSI color escape sequences to the
-   [**Fortran Standard Library project**](https://github.com/fortran-lang/stdlib/issues/229).
-   __It is therefore subject to significant change__.
 
 ## DESCRIPTION
 
@@ -67,8 +60,10 @@
 
    or just list it as a dependency in your fpm.toml project file.
 
+```toml
         [dependencies]
         M_escape        = { git = "https://github.com/urbanjost/M_escape.git" }
+```
 
 ## FUNCTIONAL SPECIFICATION
 
@@ -313,6 +308,12 @@ change all the keywords to output HTML.
 
 ## SEE ALSO
 
+   __The primary purpose for originally creating this module
+   was to further and summarize the discussion concerning adding
+   ANSI color escape sequences to the [**Fortran Standard Library
+   project**](https://github.com/fortran-lang/stdlib/issues/229).
+
+### REFERENCES
 * [**Fortran Wiki example**](http://fortranwiki.org/fortran/show/ansi_colors) for an example that covers the basics
 * [**Rosetta Code examples**](https://rosettacode.org/wiki/Terminal_control/Coloured_text) for how other languages do color.
   I find the Ncurses, Fortran, bash and C++ examples particularly interesting.
@@ -323,11 +324,11 @@ change all the keywords to output HTML.
   adding ANSI control sequences to the Fortran Standard Library project.
 * [terminal colors](http://www.pixelbeat.org/docs/terminal_colours/)
 
-## OF INTEREST
+### OF INTEREST
 * [ansi2html](https://github.com/ralphbean/ansi2html) ANSI escape codes to HTML from programs and as a bash shell
 * [M_ncurses](https://github.com/urbanjost/M_ncurses) A Fortran interface to Ncurses(3c)
 
-## OTHER LANGUAGES
+### OTHER LANGUAGES
 
 *  [python](https://python-prompt-toolkit.readthedocs.io/en/master/pages/printing_text.html#html) prompt-toolkit
 
