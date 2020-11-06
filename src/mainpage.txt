@@ -1,9 +1,9 @@
 'mainpage.txt
 /**
-     @mainpage M_escape Fortran Library
+         @mainpage M_escape Fortran Library
 
-     @section Introduction
+         @section Introduction
       ANSI terminal escape sequences
 
-     @image html html/images/swirl.gif
+         @image html html/images/swirl.gif
 */'

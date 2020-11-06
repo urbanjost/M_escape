@@ -1,6 +1,0 @@
-<map id="m_escape::update" name="m_escape::update">
-<area shape="rect" id="node2" href="$namespacem__escape.html#ae9d40717b2e75e90e2505d5fed6435c5" title="m_escape::vt102" alt="" coords="195,56,328,83"/>
-<area shape="rect" id="node3" href="$namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax in strings ..." alt="" coords="398,5,517,32"/>
-<area shape="rect" id="node4" href="$namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="587,31,705,57"/>
-<area shape="rect" id="node5" href="$namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b" title="NAMEesc_mode(3f) &#45; [M_escape] select processing mode for output from esc(3f) SYNOPSIS" alt="" coords="376,107,539,133"/>
-</map>
