@@ -9,5 +9,5 @@
      ! DISPLAY
         & clear
       implicit none
-	write(*,'(*(g0))')fg_red,bg_green,bold,'Hello!',reset
+        write(*,'(*(g0))')fg_red,bg_green,bold,'Hello!',reset
    end program direct
