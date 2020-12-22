@@ -796,30 +796,30 @@ end subroutine wipe_dictionary
 !!
 !!   Sample program
 !!
-!!           program demo_update
-!!           use M_escape, only : esc, update
-!!              write(*,'(a)') esc('<clear>TEST CUSTOMIZED:')
-!!              ! add custom keywords
-!!              call update('blink',char(27)//'[5m')
-!!              call update('/blink',char(27)//'[38m')
+!!    program demo_update
+!!    use M_escape, only : esc, update
+!!       write(*,'(a)') esc('<clear>TEST CUSTOMIZED:')
+!!       ! add custom keywords
+!!       call update('blink',char(27)//'[5m')
+!!       call update('/blink',char(27)//'[38m')
 !!
-!!              write(*,'(a)') esc('<blink>Items for Friday</blink>')
+!!       write(*,'(a)') esc('<blink>Items for Friday</blink>')
 !!
-!!              write(*,'(a)',advance='no') esc('<r>RED</r>,')
-!!              write(*,'(a)',advance='no') esc('<b>BLUE</b>,')
-!!              write(*,'(a)',advance='yes') esc('<g>GREEN</g>')
+!!       write(*,'(a)',advance='no') esc('<r>RED</r>,')
+!!       write(*,'(a)',advance='no') esc('<b>BLUE</b>,')
+!!       write(*,'(a)',advance='yes') esc('<g>GREEN</g>')
 !!
-!!              ! delete
-!!              call update('r')
-!!              call update('/r')
-!!              ! replace
-!!              call update('b','<<<<')
-!!              call update('/b','>>>>')
-!!              write(*,'(a)',advance='no') esc('<r>RED</r>,')
-!!              write(*,'(a)',advance='no') esc('<b>BLUE</b>,')
-!!              write(*,'(a)',advance='yes') esc('<g>GREEN</g>')
+!!       ! delete
+!!       call update('r')
+!!       call update('/r')
+!!       ! replace
+!!       call update('b','<<<<')
+!!       call update('/b','>>>>')
+!!       write(*,'(a)',advance='no') esc('<r>RED</r>,')
+!!       write(*,'(a)',advance='no') esc('<b>BLUE</b>,')
+!!       write(*,'(a)',advance='yes') esc('<g>GREEN</g>')
 !!
-!!        end program demo_update
+!!    end program demo_update
 !!
 !!##AUTHOR
 !!    John S. Urban, 2020
@@ -874,50 +874,40 @@ end function get
 !===================================================================================================================================
 !>
 !!##NAME
-!!     print_dictionary(3f) - [ARGUMENTS:M_CLI2] print internal dictionary created by calls to set_args(3f)
-!!     (LICENSE:PD)
+!!    print_dictionary(3f) - [ARGUMENTS:M_CLI2] print internal dictionary created by calls to update(3f)
+!!    (LICENSE:PD)
 !!##SYNOPSIS
 !!
 !!
-!!     subroutine print_dictionary(header)
+!!    subroutine print_dictionary(header)
 !!
-!!      character(len=*),intent(in),optional :: header
+!!     character(len=*),intent(in),optional :: header
 !!##DESCRIPTION
-!!    Print the internal dictionary created by calls to set_args(3f).
+!!    Print the internal dictionary created by calls to update(3f).
 !!    This routine is intended to print the state of the argument list
-!!    if an error occurs in using the set_args(3f) procedure.
+!!    if an error occurs in using the update(3f) procedure.
 !!##OPTIONS
 !!     HEADER  label to print before printing the state of the command
 !!             argument list.
 !!##EXAMPLE
 !!
 !!
-!! Typical usage:
+!!   Typical usage:
 !!
-!!       program demo_print_dictionary
-!!       use M_CLI2,  only : set_args, get_args
-!!       implicit none
-!!       real :: x, y, z
-!!          call set_args('-x 10 -y 20 -z 30')
-!!          call get_args('x',x,'y',y,'z',z)
-!!          ! all done cracking the command line; use the values in your program.
-!!          write(*,*)x,y,z
-!!       end program demo_print_dictionary
+!!    program demo_print_dictionary
+!!    use M_escape, only : esc, update, print_dictionary
+!!    implicit none
+!!       write(*,'(a)') esc('<clear>TEST CUSTOMIZED:')
+!!       ! add custom keywords
+!!       call update('blink',char(27)//'[5m')
+!!       call update('/blink',char(27)//'[38m')
+!!       call print_dictionary('DICTIONARY')
+!!       write(*,'(a)') esc('<blink>Items for Friday</blink>')
+!!    end program demo_print_dictionary
 !!
-!!      Sample output
+!!   Sample output
 !!
-!!      Calling the sample program with an unknown parameter or the --usage
-!!      switch produces the following:
-!!
-!!         $ ./demo_print_dictionary -A
-!!         UNKNOWN SHORT KEYWORD: -A
-!!         KEYWORD             PRESENT  VALUE
-!!         z                   F        [3]
-!!         y                   F        [2]
-!!         x                   F        [1]
-!!         help                F        [F]
-!!         version             F        [F]
-!!         usage               F        [F]
+!!    demo_print_dictionary |cat -v -e -t
 !!
 !!##AUTHOR
 !!      John S. Urban, 2020
@@ -986,7 +976,9 @@ integer                       :: imax                   ! length of longest toke
    idlim=len(dlim)                                                   ! dlim a lot of blanks on some machines if dlim is a big string
 !-----------------------------------------------------------------------------------------------------------------------------------
    n=len(input_line)+1                        ! max number of strings INPUT_LINE could split into if all delimiter
+   if(allocated(ibegin))deallocate(ibegin)
    allocate(ibegin(n))                        ! allocate enough space to hold starting location of tokens if string all tokens
+   if(allocated(iterm))deallocate(iterm)
    allocate(iterm(n))                         ! allocate enough space to hold ending location of tokens if string all tokens
    ibegin(:)=1
    iterm(:)=1
@@ -1028,8 +1020,8 @@ integer                       :: imax                   ! length of longest toke
    end select
 !-----------------------------------------------------------------------------------------------------------------------------------
       ireturn=inotnull
+   if(allocated(array))deallocate(array)
    allocate(character(len=imax) :: array(ireturn))                ! allocate the array to return
-   !allocate(array(ireturn))                                       ! allocate the array to turn
 !-----------------------------------------------------------------------------------------------------------------------------------
    ii=1
    do i20=1,icount                                                ! fill the array with the tokens that were found
@@ -1040,6 +1032,8 @@ integer                       :: imax                   ! length of longest toke
       endif
    enddo
 !-----------------------------------------------------------------------------------------------------------------------------------
+   if(allocated(ibegin))deallocate(ibegin)
+   if(allocated(iterm))deallocate(iterm)
    end subroutine split
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=

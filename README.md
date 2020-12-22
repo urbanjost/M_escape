@@ -24,9 +24,9 @@
    be run in "raw" mode and write a clean text file with the directives
    in it that can then be read back in by a simple filter program that
    strips it back to
-   [plain text](app/plain/plain.f90)
+   [plain text](app/plain.f90)
    or displays it to a screen 
-   [in color](app/light/light.f90)
+   [in color](app/light.f90)
    or perhaps converts it to HTML or Adobe PDF. By making each line
    self-contained by default this can still be done with any arbitrarily
    selected group of lines from the file.

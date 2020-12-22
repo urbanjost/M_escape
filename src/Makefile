@@ -3,11 +3,11 @@
 NULL=
 #$(NULL)
 PROGFILES = \
-../app/demo/main.f90 \
-../test/demos/M_escape/M_escape.f90 \
-../test/demos/esc/esc.f90 \
-../test/demos/esc_mode/esc_mode.f90 \
-../test/demos/update/update.f90 \
+../app/main.f90 \
+../example/M_escape.f90 \
+../example/esc.f90 \
+../example/esc_mode.f90 \
+../example/update.f90 \
 ../test/demo1/default.f90 \
 ../test/demo2/plain.f90 \
 ../test/demo3/raw.f90 \
@@ -18,8 +18,8 @@ PROGFILES = \
 ../test/demo8/direct.f90 \
 ../test/demo9/mixed.f90 \
 ../test/demo10/color_mode.f90 \
-../app/plain/plain.f90 \
-../app/light/light.f90 \
+../app/plain.f90 \
+../app/light.f90 \
 $(NULL)
 PROG = ${PROGFILES:.f90=}
 SRCS =  M_escape.f90 M_list.f90

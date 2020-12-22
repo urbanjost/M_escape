@@ -21,6 +21,6 @@ test = [
    { name="demo10", source-dir="test/demo10", main="color_mode.f90" }
 ]
 executable = [
-   { name="plain", source-dir="app/plain", main="plain.f90" },
-   { name="light", source-dir="app/light", main="light.f90" },
+   { name="plain", source-dir="app", main="plain.f90" },
+   { name="light", source-dir="app", main="light.f90" },
 ]
