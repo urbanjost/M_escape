@@ -1,4 +1,6 @@
 build/*
 FODDER/*
 src/source/*
-man/cat*/*
+man/*
+docs/doxygen_out
+

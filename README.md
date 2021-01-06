@@ -10,7 +10,7 @@
 ## DESCRIPTION
 
    M_escape(3f) is a Fortran module that writes common ANSI escape
-   sequences to control terminal attributes like text color. It is
+   sequences which control terminal attributes like text color. It is
    designed to allow the sequences to be suppressed and for the user
    program to completely customize it -- the user can add, delete and
    replace the sequences associated with a keyword without changing
@@ -65,7 +65,6 @@
    ```bash
         git clone https://github.com/urbanjost/M_escape.git
         cd M_escape
-        fpm build
         fpm test
    ```
 
@@ -89,19 +88,19 @@
 ## DOCUMENTATION
 The included demo programs provide templates for the most common usage:
 
-- [demo1](test/demo1/default.f90) simple demo setting color
-- [demo2](test/demo2/plain.f90)   simple demo setting color but with escape sequences suppressed
-- [demo3](test/demo3/raw.f90)     simple demo setting color but in raw echo mode showing input as-is
-- [demo4](test/demo4/vt102.f90)   explicit call to set default mode
-- [demo5](test/demo5/custom.f90)  how to add, delete, and replace attribute strings
-- [demo9](test/demo9/mixed.f90)   multiple modes and mixed attributes
+- [demo1](test/default.f90) simple demo setting color
+- [demo2](test/plain.f90)   simple demo setting color but with escape sequences suppressed
+- [demo3](test/raw.f90)     simple demo setting color but in raw echo mode showing input as-is
+- [demo4](test/vt102.f90)   explicit call to set default mode
+- [demo5](test/custom.f90)  how to add, delete, and replace attribute strings
+- [demo9](test/mixed.f90)   multiple modes and mixed attributes
 
-- [demo6](test/demo6/dump.f90)    dump the dictionary. Intended for debugging but might be generally useful.
+- [demo6](test/dump.f90)    dump the dictionary. Intended for debugging but might be generally useful.
 
-- [demo7](test/demo7/functional.f90)    use attr(3f) instead of esc(3f) for a more functionally-oriented programming interface
+- [demo7](test/functional.f90)    use attr(3f) instead of esc(3f) for a more functionally-oriented programming interface
 
-- [demo8](test/demo8/direct.f90)    direct use of named strings of escape codes
-- [demo10](test/demo10/color.f90)   alternate fixed strings an color(3f) and colormode(3f)
+- [demo8](test/direct.f90)    direct use of named strings of escape codes
+- [demo10](test/color.f90)   alternate fixed strings an color(3f) and colormode(3f)
 
 ### manpages
 - [M_escape](https://urbanjost.github.io/M_escape/M_escape.3m_escape.html)  -- An overview of the M_escape module
@@ -117,9 +116,11 @@ The included demo programs provide templates for the most common usage:
 ### All manpages amalgamated
 - [BOOK_M_escape](https://urbanjost.github.io/M_escape/BOOK_M_escape.html) -- All manpages consolidated using JavaScript
 
+<!--
 ### doxygen
 
 - [doxygen(1) output](https://urbanjost.github.io/M_escape/doxygen_out/html/index.html).
+-->
 
 ## EXAMPLE PROGRAM
 
@@ -221,13 +222,16 @@ sequences directly. Per **@certik**:
 ```
 ![sample](docs/images/snap2c.gif)
 
-   Nice and simple. The biggest problem is that the constant strings cannot be turned off trivially. 
+   Nice and simple. The biggest problem is that the constant strings
+   cannot be turned off trivially.
 
-   The constant strings could be variables instead, with a function that initializes them and sets them
-   to null I suppose, but adding a simple function to use the variables and a trivial subroutine to turn
-   off the escape sequences is easy enough.
+   The constant strings could be variables instead, with a function that
+   initializes them and sets them to null I suppose, but adding a simple
+   function to use the variables and a trivial subroutine to turn off
+   the escape sequences is easy enough.
 
-   So simply adding the color(3f) and color_mode(3f) procedures
+   So, simply adding the color(3f) and color_mode(3f) procedures results
+   in a interface that looks like this:
 
 ```fortran
    program direct2

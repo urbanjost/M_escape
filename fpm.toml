@@ -9,16 +9,16 @@ description= "ANSI control escape sequences using an XML-like syntax for attribu
 
 # demo programs
 test = [
-   { name="demo1", source-dir="test/demo1", main="default.f90" },
-   { name="demo2", source-dir="test/demo2", main="plain.f90" },
-   { name="demo3", source-dir="test/demo3", main="raw.f90" },
-   { name="demo4", source-dir="test/demo4", main="vt102.f90" },
-   { name="demo5", source-dir="test/demo5", main="custom.f90" },
-   { name="demo6", source-dir="test/demo6", main="dump.f90" },
-   { name="demo7", source-dir="test/demo7", main="functional.f90" },
-   { name="demo8", source-dir="test/demo8", main="direct.f90" },
-   { name="demo9", source-dir="test/demo9", main="mixed.f90" },
-   { name="demo10", source-dir="test/demo10", main="color_mode.f90" }
+   { name="demo1", source-dir="test", main="default.f90" },
+   { name="demo2", source-dir="test", main="plain.f90" },
+   { name="demo3", source-dir="test", main="raw.f90" },
+   { name="demo4", source-dir="test", main="vt102.f90" },
+   { name="demo5", source-dir="test", main="custom.f90" },
+   { name="demo6", source-dir="test", main="dump.f90" },
+   { name="demo7", source-dir="test", main="functional.f90" },
+   { name="demo8", source-dir="test", main="direct.f90" },
+   { name="demo9", source-dir="test", main="mixed.f90" },
+   { name="demo10", source-dir="test", main="color_mode.f90" }
 ]
 executable = [
    { name="plain", source-dir="app", main="plain.f90" },

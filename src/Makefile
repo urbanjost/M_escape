@@ -4,22 +4,27 @@ NULL=
 #$(NULL)
 PROGFILES = \
 ../app/main.f90 \
-../example/M_escape.f90 \
-../example/esc.f90 \
-../example/esc_mode.f90 \
-../example/update.f90 \
-../test/demo1/default.f90 \
-../test/demo2/plain.f90 \
-../test/demo3/raw.f90 \
-../test/demo4/vt102.f90 \
-../test/demo5/custom.f90 \
-../test/demo6/dump.f90 \
-../test/demo7/functional.f90 \
-../test/demo8/direct.f90 \
-../test/demo9/mixed.f90 \
-../test/demo10/color_mode.f90 \
 ../app/plain.f90 \
 ../app/light.f90 \
+ \
+../example/demo_M_escape.f90 \
+../example/demo_attr.f90 \
+../example/demo_color.f90 \
+../example/demo_color_mode.f90 \
+../example/demo_esc.f90 \
+../example/demo_esc_mode.f90 \
+../example/demo_update.f90 \
+ \
+../test/default.f90 \
+../test/plain.f90 \
+../test/raw.f90 \
+../test/vt102.f90 \
+../test/custom.f90 \
+../test/dump.f90 \
+../test/functional.f90 \
+../test/direct.f90 \
+../test/mixed.f90 \
+../test/color_mode.f90 \
 $(NULL)
 PROG = ${PROGFILES:.f90=}
 SRCS =  M_escape.f90 M_list.f90
@@ -63,7 +68,7 @@ all: $(PROG)
 $(PROG): $(OBJS)
 	-$(F90) $(LDFLAGS) $@.f90 -o $@ $(OBJS) $(LIBS)
 clean:
-	rm -f $(PROG) $(CPROG) $(OBJS) *.mod
+	rm -f $(PROG) $(CPROG) $(OBJS) *.mod *.o
 .SUFFIXES: $(SUFFIXES) .f90 .F90 
 .f90.o:
 	$(F90) $(F90FLAGS) -c $<

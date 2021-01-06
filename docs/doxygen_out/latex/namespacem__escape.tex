@@ -27,25 +27,25 @@ subroutine \mbox{\hyperlink{namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5
 subroutine, public \mbox{\hyperlink{namespacem__escape_a4210456d81d9a1bf328093a9635e640b}{esc\+\_\+mode}} (manner)
 \begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
 
-esc\+\_\+mode(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} select processing mode for output from esc(3f) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\item 
+esc\+\_\+mode(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} select processing mode for output from esc(3f) \end{DoxyCompactList}\item 
 subroutine \mbox{\hyperlink{namespacem__escape_a1bc574bc97157fe67d868d2bd180c91e}{wipe\+\_\+dictionary}} ()
 \item 
 subroutine, public \mbox{\hyperlink{namespacem__escape_a5efd612f60d281003917329484a7960c}{update}} (key, valin)
 \begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
 
-update(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} update internal dictionary given keyword and value (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\item 
+update(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} update internal dictionary given keyword and value (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\item 
 character(len=\+:) function, allocatable \mbox{\hyperlink{namespacem__escape_af555c90c278ff964d8bce93ee0368a42}{get}} (key)
 \item 
 subroutine, public \mbox{\hyperlink{namespacem__escape_a6add907828fd34e94b87f643a5cabc64}{print\+\_\+dictionary}} (header)
 \begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
 
-print\+\_\+dictionary(3f) -\/ \mbox{[}A\+R\+G\+U\+M\+E\+N\+TS\+:M\+\_\+\+C\+L\+I2\mbox{]} print internal dictionary created by calls to update(3f) (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\item 
+print\+\_\+dictionary(3f) -\/ \mbox{[}A\+R\+G\+U\+M\+E\+N\+TS\+:M\+\_\+\+C\+L\+I2\mbox{]} print internal dictionary created by calls to update(3f) (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\item 
 subroutine \mbox{\hyperlink{namespacem__escape_af23bd97702864e0f32258e6ec0d51506}{split}} (input\+\_\+line, array, delimiters)
 \item 
 character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__escape_a916b16ce9be553d669f54cb9575a91be}{attr}} (attribute, text)
 \begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
 
-attr(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\end{DoxyCompactItemize}
+attr(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -286,9 +286,11 @@ overload + to replace //
 
 Sample program
 
-program demo\+\_\+\+M\+\_\+escape use M\+\_\+escape, only \+: esc, esc\+\_\+mode implicit none character(len=1024) \+:\+: line real \+:\+: value write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$r$>$$<$\+W$>$E\+R\+R\+OR\+:$<$/\+W$>$This should appear as red text$<$/y$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$y$>${\bfseries W\+A\+R\+N\+I\+NG\+:}$<$/y$>$ This should appear as default text\textquotesingle{})
+program demo\+\_\+\+M\+\_\+escape use M\+\_\+escape, only \+: esc, esc\+\_\+mode implicit none character(len=1024) \+:\+: line real \+:\+: value write($\ast$,\textquotesingle{}(a)\textquotesingle{})\& \&esc(\textquotesingle{}$<$r$>$$<$\+W$>$E\+R\+R\+OR\+:$<$/\+W$>$This should appear as red text$<$/y$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{})\& \&esc(\textquotesingle{}$<$y$>${\bfseries W\+A\+R\+N\+I\+NG\+:}$<$/y$>$ This should appear as default text\textquotesingle{})
 
-value=3.\+4567 if( (value$>$0.\+0) .and. (value$<$100.\+0))then write(line,fmt=\textquotesingle{}(\char`\"{}$<$w$>$$<$\+G$>$\+G\+R\+E\+A\+T$<$/\+G$>$$<$/w$>$\+:\+The new value $<$\+Y$>$$<$b$>$\char`\"{},f8.\+4,\char`\"{}$<$/b$>$$<$/\+Y$>$ is in range\char`\"{})\textquotesingle{})value else write(line,fmt=\textquotesingle{}(\char`\"{}$<$\+R$>$$<$e$>$\+E\+R\+R\+O\+R$<$/e$>$$<$/\+R$>$\+:\+The new value $<$\+Y$>$$<$b$>$\char`\"{},g0,\char`\"{}$<$/b$>$$<$/\+Y$>$ is out of range\char`\"{})\textquotesingle{})value endif
+value=3.\+4567 if( (value$>$0.\+0) .and. (value$<$100.\+0))then write(line,fmt=\& \&\textquotesingle{}(\char`\"{}$<$w$>$$<$\+G$>$\+G\+R\+E\+A\+T$<$/\+G$>$$<$/w$>$\+:\&
+          \&\+The new value $<$\+Y$>$$<$b$>$\char`\"{},f8.\+4,\char`\"{}$<$/b$>$$<$/\+Y$>$ is in range\char`\"{})\textquotesingle{})value else write(line,fmt=\& \&\textquotesingle{}(\char`\"{}$<$\+R$>$$<$e$>$\+E\+R\+R\+O\+R$<$/e$>$$<$/\+R$>$\+:\&
+          \&\+The new value $<$\+Y$>$$<$b$>$\char`\"{},g0,\char`\"{}$<$/b$>$$<$/\+Y$>$ is out of range\char`\"{})\textquotesingle{})value endif
 
 write($\ast$,\textquotesingle{}(a)\textquotesingle{})esc(trim(line)) ! write as plain text call esc\+\_\+mode(manner=\textquotesingle{}plain\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{})esc(trim(line))
 
@@ -319,17 +321,25 @@ program functional use M\+\_\+escape, only \+: attr, esc\+\_\+mode implicit none
 
 \subsubsection*{N\+A\+ME}
 
-attr(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}
+attr(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) 
+
+\subsubsection*{S\+Y\+N\+O\+P\+S\+IS}
 
 function attr(attribute) result (out)
 
-character(len=$\ast$),intent(in) \+:\+: attribute character(len=\+:),allocatable \+:\+: out \subsubsection*{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}
+character(len=$\ast$),intent(in) \+:\+: attribute character(len=\+:),allocatable \+:\+: out
 
-attr(3f) uses the same keywords as esc(3f) to send A\+N\+SI escape sequences to the display screen, except instead of using a pseudo-\/\+X\+ML string to select the codes it uses a simple colon-\/delimited list of the keywords. \subsubsection*{O\+P\+T\+I\+O\+NS}
+\subsubsection*{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}
 
-attribute colon, space, or comma-\/delimited list of attribute keywords as defined in the esc(3f) procedure. text if supplied it is printed and then an attribute reset is added \subsubsection*{R\+E\+T\+U\+R\+NS}
+attr(3f) uses the same keywords as esc(3f) to send A\+N\+SI escape sequences to the display screen, except instead of using a pseudo-\/\+X\+ML string to select the codes it uses a simple colon-\/delimited list of the keywords.
 
-out the output is the strings (by default A\+N\+SI video display escape sequences, see update(3f) ) assigned by the keywords. \subsubsection*{E\+X\+A\+M\+P\+LE}
+\subsubsection*{O\+P\+T\+I\+O\+NS}
+
+attribute colon, space, or comma-\/delimited list of attribute keywords as defined in the esc(3f) procedure. text if supplied it is printed and then an attribute reset is added
+
+\subsubsection*{R\+E\+T\+U\+R\+NS}
+
+out output the strings assigned by the keywords (by default A\+N\+SI video display escape sequences, see update(3f) ) \subsubsection*{E\+X\+A\+M\+P\+LE}
 
 Sample program
 
@@ -337,7 +347,9 @@ program demo\+\_\+attr use M\+\_\+escape, only \+: attr, esc\+\_\+mode implicit 
 
 \subsubsection*{A\+U\+T\+H\+OR}
 
-John S. Urban, 2020 \subsubsection*{L\+I\+C\+E\+N\+SE}
+John S. Urban, 2020
+
+\subsubsection*{L\+I\+C\+E\+N\+SE}
 
 Public Domain 
 
@@ -384,7 +396,7 @@ Sample program
 
 program demo\+\_\+color use M\+\_\+escape, only \+: color, color\+\_\+mode, \& ! F\+O\+R\+E\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& fg\+\_\+red, fg\+\_\+cyan, fg\+\_\+magenta, fg\+\_\+blue, \& \& fg\+\_\+green, fg\+\_\+yellow, fg\+\_\+white, fg\+\_\+ebony, \& \& fg\+\_\+default, \& ! B\+A\+C\+K\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& bg\+\_\+red, bg\+\_\+cyan, bg\+\_\+magenta, bg\+\_\+blue, \& \& bg\+\_\+green, bg\+\_\+yellow, bg\+\_\+white, bg\+\_\+ebony, \& \& bg\+\_\+default, \& ! A\+T\+T\+R\+I\+B\+U\+T\+ES \& bold, italic, inverse, underline, \& \& unbold, unitalic, uninverse, ununderline, \& \& reset, \& ! D\+I\+S\+P\+L\+AY \& clear implicit none write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{})fg\+\_\+red,bg\+\_\+green,bold,\textquotesingle{} Hello! \textquotesingle{},reset
 
-write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},fg=fg\+\_\+white,bg=bg\+\_\+red,style=italic//bold) call color\+\_\+mode(.false.) write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},fg=fg\+\_\+red,bg=bg\+\_\+red,style=italic//bold) end program demo\+\_\+color
+write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},\& \& fg=fg\+\_\+white,bg=bg\+\_\+red,style=italic//bold) call color\+\_\+mode(.false.) write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},\& \& fg=fg\+\_\+red,bg=bg\+\_\+red,style=italic//bold) end program demo\+\_\+color
 
 \subsubsection*{A\+U\+T\+H\+OR}
 
@@ -424,7 +436,7 @@ Sample program
 
 program demo\+\_\+color\+\_\+mode use M\+\_\+escape, only \+: color, color\+\_\+mode, \& ! F\+O\+R\+E\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& fg\+\_\+red, fg\+\_\+cyan, fg\+\_\+magenta, fg\+\_\+blue, \& \& fg\+\_\+green, fg\+\_\+yellow, fg\+\_\+white, fg\+\_\+ebony, \& \& fg\+\_\+default, \& ! B\+A\+C\+K\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& bg\+\_\+red, bg\+\_\+cyan, bg\+\_\+magenta, bg\+\_\+blue, \& \& bg\+\_\+green, bg\+\_\+yellow, bg\+\_\+white, bg\+\_\+ebony, \& \& bg\+\_\+default, \& ! A\+T\+T\+R\+I\+B\+U\+T\+ES \& bold, italic, inverse, underline, \& \& unbold, unitalic, uninverse, ununderline, \& \& reset, \& ! D\+I\+S\+P\+L\+AY \& clear implicit none write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{})fg\+\_\+red,bg\+\_\+green,bold,\textquotesingle{} Hello! \textquotesingle{},reset
 
-write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},fg=fg\+\_\+white,bg=bg\+\_\+red,style=italic//bold) call color\+\_\+mode(.false.) write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},fg=fg\+\_\+red,bg=bg\+\_\+red,style=italic//bold) end program demo\+\_\+color\+\_\+mode
+write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},\& \& fg=fg\+\_\+white,bg=bg\+\_\+red,style=italic//bold) call color\+\_\+mode(.false.) write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},\& \& fg=fg\+\_\+red,bg=bg\+\_\+red,style=italic//bold) end program demo\+\_\+color\+\_\+mode
 
 \subsubsection*{A\+U\+T\+H\+OR}
 
@@ -510,10 +522,10 @@ write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}Addi
 write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}Adding 
 \begin{DoxyItemize}
 \item 
-\end{DoxyItemize}\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$bo$>$
+\end{DoxyItemize}\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\& \&\textquotesingle{}$<$bo$>$
 \begin{DoxyItemize}
 \item 
-\end{DoxyItemize}$<$r$>$R\+ED$<$/r$>$,$<$g$>$G\+R\+E\+EN$<$/g$>$,{\bfseries B\+L\+UE}$<$/bo$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$bo$>$
+\end{DoxyItemize}$<$r$>$R\+ED$<$/r$>$,$<$g$>$G\+R\+E\+EN$<$/g$>$,{\bfseries B\+L\+UE}$<$/bo$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\& \&\textquotesingle{}$<$bo$>$
 \begin{DoxyItemize}
 \item 
 \end{DoxyItemize}{\ttfamily C\+Y\+AN},$<$m$>$M\+A\+G\+E\+N\+TA$<$/g$>$,$<$y$>$Y\+E\+L\+L\+OW$<$/y$>$$<$/bo$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$bo$>$
@@ -524,10 +536,10 @@ write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}Addi
 write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}Adding 
 \begin{DoxyItemize}
 \item 
-\end{DoxyItemize}\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$bo$>$
+\end{DoxyItemize}\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\& \&\textquotesingle{}$<$bo$>$
 \begin{DoxyItemize}
 \item 
-\end{DoxyItemize}$<$it$>$$<$r$>$R\+ED$<$/r$>$,$<$g$>$G\+R\+E\+EN$<$/g$>$,{\bfseries B\+L\+UE}$<$/it$>$$<$/bo$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$bo$>$
+\end{DoxyItemize}$<$it$>$$<$r$>$R\+ED$<$/r$>$,$<$g$>$G\+R\+E\+EN$<$/g$>$,{\bfseries B\+L\+UE}$<$/it$>$$<$/bo$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\& \&\textquotesingle{}$<$bo$>$
 \begin{DoxyItemize}
 \item 
 \end{DoxyItemize}$<$it$>${\ttfamily C\+Y\+AN},$<$m$>$M\+A\+G\+E\+N\+TA$<$/g$>$,$<$y$>$Y\+E\+L\+L\+OW$<$/it$>$$<$/y$>$$<$/bo$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$bo$>$
@@ -535,13 +547,13 @@ write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}Addi
 \item 
 \end{DoxyItemize}$<$it$>$$<$w$>$W\+H\+I\+TE$<$/w$>$ and $<$e$>$E\+B\+O\+NY$<$/e$>$$<$/bo$>$\textquotesingle{})
 
-write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}Adding $<$in$>$inverse$<$/in$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$in$>$$<$bo$>$
+write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}Adding $<$in$>$inverse$<$/in$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\& \&\textquotesingle{}$<$in$>$$<$bo$>$
 \begin{DoxyItemize}
 \item 
-\end{DoxyItemize}$<$it$>$$<$r$>$R\+ED$<$/r$>$,$<$g$>$G\+R\+E\+EN$<$/g$>$,{\bfseries B\+L\+UE}$<$/it$>$$<$/bo$>$$<$/in$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$in$>$$<$bo$>$
+\end{DoxyItemize}$<$it$>$$<$r$>$R\+ED$<$/r$>$,$<$g$>$G\+R\+E\+EN$<$/g$>$,\& \&{\bfseries B\+L\+UE}$<$/it$>$$<$/bo$>$$<$/in$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\& \&\textquotesingle{}$<$in$>$$<$bo$>$
 \begin{DoxyItemize}
 \item 
-\end{DoxyItemize}$<$it$>${\ttfamily C\+Y\+AN},$<$m$>$M\+A\+G\+E\+N\+TA$<$/g$>$,$<$y$>$Y\+E\+L\+L\+OW$<$/it$>$$<$/y$>$$<$/bo$>$$<$/in$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$in$>$$<$bo$>$
+\end{DoxyItemize}$<$it$>${\ttfamily C\+Y\+AN},$<$m$>$M\+A\+G\+E\+N\+TA$<$/g$>$,\& \&$<$y$>$Y\+E\+L\+L\+OW$<$/it$>$$<$/y$>$$<$/bo$>$$<$/in$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\& \&\textquotesingle{}$<$in$>$$<$bo$>$
 \begin{DoxyItemize}
 \item 
 \end{DoxyItemize}$<$it$>$$<$w$>$W\+H\+I\+TE$<$/w$>$ and $<$e$>$E\+B\+O\+NY$<$/e$>$$<$/bo$>$$<$/in$>$\textquotesingle{}) end subroutine printstuff
@@ -574,11 +586,17 @@ Here is the caller graph for this function\+:\nopagebreak
 
 \subsubsection*{N\+A\+ME}
 
-esc\+\_\+mode(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} select processing mode for output from esc(3f) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}
+esc\+\_\+mode(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} select processing mode for output from esc(3f) 
 
-subroutine esc\+\_\+mode(manner)
+\subsubsection*{S\+Y\+N\+O\+P\+S\+IS}
 
-character(len=$\ast$),intent(in) \+:\+: manner \subsubsection*{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}
+\begin{DoxyVerb}subroutine esc_mode(manner)
+
+   character(len=*),intent(in) :: manner
+\end{DoxyVerb}
+
+
+\subsubsection*{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}
 
 Turn off the generation of strings associated with the X\+ML keywords in the string generated by the esc(3f) function, or display the text in raw mode as it was passed to esc(3f) or return to A\+N\+SI escape control sequence generation.
 
@@ -642,13 +660,21 @@ Here is the caller graph for this function\+:\nopagebreak
 
 \subsubsection*{N\+A\+ME}
 
-print\+\_\+dictionary(3f) -\/ \mbox{[}A\+R\+G\+U\+M\+E\+N\+TS\+:M\+\_\+\+C\+L\+I2\mbox{]} print internal dictionary created by calls to update(3f) (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}
+print\+\_\+dictionary(3f) -\/ \mbox{[}A\+R\+G\+U\+M\+E\+N\+TS\+:M\+\_\+\+C\+L\+I2\mbox{]} print internal dictionary created by calls to update(3f) (L\+I\+C\+E\+N\+SE\+:PD) 
 
-subroutine print\+\_\+dictionary(header)
+\subsubsection*{S\+Y\+N\+O\+P\+S\+IS}
 
-character(len=$\ast$),intent(in),optional \+:\+: header \subsubsection*{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}
+\begin{DoxyVerb}subroutine print_dictionary(header)
 
-Print the internal dictionary created by calls to update(3f). This routine is intended to print the state of the argument list if an error occurs in using the update(3f) procedure. \subsubsection*{O\+P\+T\+I\+O\+NS}
+ character(len=*),intent(in),optional :: header
+\end{DoxyVerb}
+
+
+\subsubsection*{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}
+
+Print the internal dictionary created by calls to update(3f). This routine is intended to print the state of the argument list if an error occurs in using the update(3f) procedure.
+
+\subsubsection*{O\+P\+T\+I\+O\+NS}
 
 H\+E\+A\+D\+ER label to print before printing the state of the command argument list. \subsubsection*{E\+X\+A\+M\+P\+LE}
 
@@ -662,7 +688,9 @@ demo\+\_\+print\+\_\+dictionary $\vert$cat -\/v -\/e -\/t
 
 \subsubsection*{A\+U\+T\+H\+OR}
 
-John S. Urban, 2020 \subsubsection*{L\+I\+C\+E\+N\+SE}
+John S. Urban, 2020
+
+\subsubsection*{L\+I\+C\+E\+N\+SE}
 
 Public Domain 
 
@@ -691,13 +719,19 @@ Here is the caller graph for this function\+:\nopagebreak
 
 \subsubsection*{N\+A\+ME}
 
-update(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} update internal dictionary given keyword and value (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}
+update(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} update internal dictionary given keyword and value (L\+I\+C\+E\+N\+SE\+:PD) 
+
+\subsubsection*{S\+Y\+N\+O\+P\+S\+IS}
 
 subroutine update(key,val)
 
-character(len=$\ast$),intent(in) \+:\+: key character(len=$\ast$),intent(in),optional \+:\+: val \subsubsection*{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}
+character(len=$\ast$),intent(in) \+:\+: key character(len=$\ast$),intent(in),optional \+:\+: val
 
-Update internal dictionary in M\+\_\+escape(3fm) module. \subsubsection*{O\+P\+T\+I\+O\+NS}
+\subsubsection*{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}
+
+Update internal dictionary in M\+\_\+escape(3fm) module.
+
+\subsubsection*{O\+P\+T\+I\+O\+NS}
 
 key name of keyword to add, replace, or delete from dictionary val if present add or replace value associated with keyword. If not present remove keyword entry from dictionary. \subsubsection*{E\+X\+A\+M\+P\+LE}
 
@@ -715,7 +749,9 @@ end program demo\+\_\+update
 
 \subsubsection*{A\+U\+T\+H\+OR}
 
-John S. Urban, 2020 \subsubsection*{L\+I\+C\+E\+N\+SE}
+John S. Urban, 2020
+
+\subsubsection*{L\+I\+C\+E\+N\+SE}
 
 Public Domain 
 

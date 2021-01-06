@@ -1,6 +1,7 @@
 !>
 !!##NAME
-!!    M_escape(3f) - [M_escape] substitute escape sequences for XML-like syntax in strings
+!!    M_escape(3f) - [M_escape] substitute escape sequences for XML-like
+!!                   syntax in strings
 !!
 !!##SYNOPSIS
 !!
@@ -9,8 +10,8 @@
 !!     use M_escape, only : color, color_mode
 !!
 !!##DESCRIPTION
-!!    M_escape is a Fortran module for using XML-like syntax to add attributes
-!!    to terminal output such as color.
+!!    M_escape is a Fortran module for using XML-like syntax to add
+!!    attributes to terminal output such as color.
 !!
 !!    ANSI escape sequences are not universally supported by all terminal
 !!    emulators; and normally should be suppressed when not going to a tty
@@ -18,8 +19,8 @@
 !!    behaviors. or to perhaps in the future generate a CSS style sheet
 !!    and HTML instead of text to the terminal, ...
 !!
-!!    Alternatively, direct use of the escape sequences is supported, as
-!!    well as a functional interface, and an object-oriented approach.
+!!    Alternatively, direct use of the escape sequences is supported,
+!!    as well as a functional interface, and an object-oriented approach.
 !!
 !!    The original concept was to allow formatting by using an existing
 !!    XML library to allow the user to write HTML and to format it on a
@@ -32,7 +33,8 @@
 !!    to "plain" instead of "color" when the output file is not a terminal.
 !!
 !!##MAJOR FEATURES
-!!    o Add ANSI terminal escape sequences with an XML-like syntax with ESC(3f).
+!!    o Add ANSI terminal escape sequences with an XML-like syntax with
+!!      ESC(3f).
 !!    o suppress the escape sequence output with ESC_MODE(3f).
 !!    o add, delete, and replace what strings are produced using UPDATE(3f).
 !!
@@ -88,14 +90,20 @@
 !!    implicit none
 !!    character(len=1024) :: line
 !!    real :: value
-!!       write(*,'(a)') esc('<r><W>ERROR:</W>This should appear as red text</y>')
-!!       write(*,'(a)') esc('<y><B>WARNING:</B></y> This should appear as default text')
+!!       write(*,'(a)')&
+!!       &esc('<r><W>ERROR:</W>This should appear as red text</y>')
+!!       write(*,'(a)')&
+!!       &esc('<y><B>WARNING:</B></y> This should appear as default text')
 !!
 !!       value=3.4567
 !!       if( (value>0.0) .and. (value<100.0))then
-!!          write(line,fmt='("<w><G>GREAT</G></w>:The new value <Y><b>",f8.4,"</b></Y> is in range")')value
+!!          write(line,fmt=&
+!!          &'("<w><G>GREAT</G></w>:&
+!!          &The new value <Y><b>",f8.4,"</b></Y> is in range")')value
 !!       else
-!!          write(line,fmt='("<R><e>ERROR</e></R>:The new value <Y><b>",g0,"</b></Y> is out of range")')value
+!!          write(line,fmt=&
+!!          &'("<R><e>ERROR</e></R>:&
+!!          &The new value <Y><b>",g0,"</b></Y> is out of range")')value
 !!       endif
 !!
 !!       write(*,'(a)')esc(trim(line))
@@ -262,7 +270,8 @@ contains
 !===================================================================================================================================
 !>
 !!##NAME
-!!    esc(3f) - [M_escape] substitute escape sequences for XML-like syntax in strings
+!!    esc(3f) - [M_escape] substitute escape sequences for XML-like syntax
+!!              in strings
 !!
 !!##SYNOPSIS
 !!
@@ -329,9 +338,9 @@ contains
 !!        you use Windows 10+ and/or the Linux mode; although it has worked
 !!        with all CygWin and MinGW and Putty windows and mintty.
 !!      o you should use "<gt>" and "<lt>" instead of ">" and "<" in a string
-!!        processed by esc(3f) instead of in any plain text output so that the
-!!        raw mode will create correct input for the esc(3f) function if read
-!!        back in.
+!!        processed by esc(3f) instead of in any plain text output so that
+!!        the raw mode will create correct input for the esc(3f) function
+!!        if read back in.
 !!
 !!##EXAMPLE
 !!
@@ -362,29 +371,38 @@ contains
 !!    contains
 !!    subroutine printstuff()
 !!
-!!       write(*,'(a)') esc('<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>')
-!!       write(*,'(a)') esc('<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>')
-!!       write(*,'(a)') esc('<w>WHITE</w> and <e>EBONY</e>')
+!!      write(*,'(a)') esc('<r>RED</r>,<g>GREEN</g>,<b>BLUE</b>')
+!!      write(*,'(a)') esc('<c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y>')
+!!      write(*,'(a)') esc('<w>WHITE</w> and <e>EBONY</e>')
 !!
-!!       write(*,'(a)') esc('Adding <bo>bold</bo>')
-!!       write(*,'(a)') esc('<bo><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></bo>')
-!!       write(*,'(a)') esc('<bo><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></bo>')
-!!       write(*,'(a)') esc('<bo><w>WHITE</w> and <e>EBONY</e></bo>')
+!!      write(*,'(a)') esc('Adding <bo>bold</bo>')
+!!      write(*,'(a)') esc('<bo><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></bo>')
+!!      write(*,'(a)') esc('<bo><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></bo>')
+!!      write(*,'(a)') esc('<bo><w>WHITE</w> and <e>EBONY</e></bo>')
 !!
-!!       write(*,'(a)') esc('Adding <ul>underline</ul>')
-!!       write(*,'(a)') esc('<bo><ul><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></ul></bo>')
-!!       write(*,'(a)') esc('<bo><ul><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></ul></bo>')
-!!       write(*,'(a)') esc('<bo><ul><w>WHITE</w> and <e>EBONY</e></ul></bo>')
+!!      write(*,'(a)') esc('Adding <ul>underline</ul>')
+!!      write(*,'(a)') esc(&
+!!       &'<bo><ul><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></ul></bo>')
+!!      write(*,'(a)') esc(&
+!!       &'<bo><ul><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</y></ul></bo>')
+!!      write(*,'(a)') esc('<bo><ul><w>WHITE</w> and <e>EBONY</e></ul></bo>')
 !!
-!!       write(*,'(a)') esc('Adding <ul>italic</ul>')
-!!       write(*,'(a)') esc('<bo><ul><it><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></it></ul></bo>')
-!!       write(*,'(a)') esc('<bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</it></y></ul></bo>')
-!!       write(*,'(a)') esc('<bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo>')
+!!      write(*,'(a)') esc('Adding <ul>italic</ul>')
+!!      write(*,'(a)') esc(&
+!!       &'<bo><ul><it><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></it></ul></bo>')
+!!      write(*,'(a)') esc(&
+!!       &'<bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</it></y></ul></bo>')
+!!      write(*,'(a)') esc('<bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo>')
 !!
-!!       write(*,'(a)') esc('Adding <in>inverse</in>')
-!!       write(*,'(a)') esc('<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,<b>BLUE</b></it></ul></bo></in>')
-!!       write(*,'(a)') esc('<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,<y>YELLOW</it></y></ul></bo></in>')
-!!       write(*,'(a)') esc('<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
+!!      write(*,'(a)') esc('Adding <in>inverse</in>')
+!!      write(*,'(a)') esc(&
+!!       &'<in><bo><ul><it><r>RED</r>,<g>GREEN</g>,&
+!!       &<b>BLUE</b></it></ul></bo></in>')
+!!      write(*,'(a)') esc(&
+!!       &'<in><bo><ul><it><c>CYAN</c>,<m>MAGENTA</g>,&
+!!       &<y>YELLOW</it></y></ul></bo></in>')
+!!      write(*,'(a)') esc(&
+!!       &'<in><bo><ul><it><w>WHITE</w> and <e>EBONY</e></ul></bo></in>')
 !!    end subroutine printstuff
 !!
 !!    end program demo_esc
@@ -527,9 +545,11 @@ end function esc
 !!       implicit none
 !!         write(*,'(*(g0))')fg_red,bg_green,bold,' Hello! ',reset
 !!
-!!         write(*,'(a)')color(' Hello! ',fg=fg_white,bg=bg_red,style=italic//bold)
+!!         write(*,'(a)')color(' Hello! ',&
+!!          & fg=fg_white,bg=bg_red,style=italic//bold)
 !!         call color_mode(.false.)
-!!         write(*,'(a)')color(' Hello! ',fg=fg_red,bg=bg_red,style=italic//bold)
+!!         write(*,'(a)')color(' Hello! ',&
+!!          & fg=fg_red,bg=bg_red,style=italic//bold)
 !!    end program demo_color
 !!
 !!##AUTHOR
@@ -602,9 +622,11 @@ end function color
 !!       implicit none
 !!         write(*,'(*(g0))')fg_red,bg_green,bold,' Hello! ',reset
 !!
-!!         write(*,'(a)')color(' Hello! ',fg=fg_white,bg=bg_red,style=italic//bold)
+!!         write(*,'(a)')color(' Hello! ',&
+!!          & fg=fg_white,bg=bg_red,style=italic//bold)
 !!         call color_mode(.false.)
-!!         write(*,'(a)')color(' Hello! ',fg=fg_red,bg=bg_red,style=italic//bold)
+!!         write(*,'(a)')color(' Hello! ',&
+!!          & fg=fg_red,bg=bg_red,style=italic//bold)
 !!    end program demo_color_mode
 !!
 !!##AUTHOR
@@ -659,26 +681,80 @@ subroutine vt102()
    call update('lt','<')
 
    ! foreground colors
-   call update('r',fg_red);     call update('/r',fg_default); call update('red',fg_red);         call update('/red',fg_default)
-   call update('c',fg_cyan);    call update('/c',fg_default); call update('cyan',fg_cyan);       call update('/cyan',fg_default)
-   call update('m',fg_magenta); call update('/m',fg_default); call update('magenta',fg_magenta); call update('/magenta',fg_default)
-   call update('b',fg_blue);    call update('/b',fg_default); call update('blue',fg_blue);       call update('/blue',fg_default)
-   call update('g',fg_green);   call update('/g',fg_default); call update('green',fg_green);     call update('/green',fg_default)
-   call update('y',fg_yellow);  call update('/y',fg_default); call update('yellow',fg_yellow);   call update('/yellow',fg_default)
-   call update('w',fg_white);   call update('/w',fg_default); call update('white',fg_white);     call update('/white',fg_default)
-   call update('e',fg_ebony);   call update('/e',fg_default); call update('ebony',fg_ebony);     call update('/ebony',fg_default)
-   call update('x',fg_ebony);   call update('/x',fg_default); call update('black',fg_ebony);     call update('/black',fg_default)
+   call update('r',fg_red)
+       call update('/r',fg_default)
+       call update('red',fg_red)
+       call update('/red',fg_default)
+   call update('c',fg_cyan)
+       call update('/c',fg_default)
+       call update('cyan',fg_cyan)
+       call update('/cyan',fg_default)
+   call update('m',fg_magenta)
+       call update('/m',fg_default)
+       call update('magenta',fg_magenta)
+       call update('/magenta',fg_default)
+   call update('b',fg_blue)
+       call update('/b',fg_default)
+       call update('blue',fg_blue)
+       call update('/blue',fg_default)
+   call update('g',fg_green)
+       call update('/g',fg_default)
+       call update('green',fg_green)
+       call update('/green',fg_default)
+   call update('y',fg_yellow)
+       call update('/y',fg_default)
+       call update('yellow',fg_yellow)
+       call update('/yellow',fg_default)
+   call update('w',fg_white)
+       call update('/w',fg_default)
+       call update('white',fg_white)
+       call update('/white',fg_default)
+   call update('e',fg_ebony)
+       call update('/e',fg_default)
+       call update('ebony',fg_ebony)
+       call update('/ebony',fg_default)
+   call update('x',fg_ebony)
+       call update('/x',fg_default)
+       call update('black',fg_ebony)
+       call update('/black',fg_default)
 
    ! background colors
-   call update('R',bg_red);     call update('/R',bg_default); call update('RED',bg_red);         call update('/RED',bg_default)
-   call update('C',bg_cyan);    call update('/C',bg_default); call update('CYAN',bg_cyan);       call update('/CYAN',bg_default)
-   call update('M',bg_magenta); call update('/M',bg_default); call update('MAGENTA',bg_magenta); call update('/MAGENTA',bg_default)
-   call update('B',bg_blue);    call update('/B',bg_default); call update('BLUE',bg_blue);       call update('/BLUE',bg_default)
-   call update('G',bg_green);   call update('/G',bg_default); call update('GREEN',bg_green);     call update('/GREEN',bg_default)
-   call update('Y',bg_yellow);  call update('/Y',bg_default); call update('YELLOW',bg_yellow);   call update('/YELLOW',bg_default)
-   call update('W',bg_white);   call update('/W',bg_default); call update('WHITE',bg_white);     call update('/WHITE',bg_default)
-   call update('E',bg_ebony);   call update('/E',bg_default); call update('EBONY',bg_ebony);     call update('/EBONY',bg_default)
-   call update('X',bg_ebony);   call update('/X',bg_default); call update('BLACK',bg_ebony);     call update('/BLACK',bg_default)
+   call update('R',bg_red)
+       call update('/R',bg_default)
+       call update('RED',bg_red)
+       call update('/RED',bg_default)
+   call update('C',bg_cyan)
+       call update('/C',bg_default)
+       call update('CYAN',bg_cyan)
+       call update('/CYAN',bg_default)
+   call update('M',bg_magenta)
+       call update('/M',bg_default)
+       call update('MAGENTA',bg_magenta)
+       call update('/MAGENTA',bg_default)
+   call update('B',bg_blue)
+       call update('/B',bg_default)
+       call update('BLUE',bg_blue)
+       call update('/BLUE',bg_default)
+   call update('G',bg_green)
+       call update('/G',bg_default)
+       call update('GREEN',bg_green)
+       call update('/GREEN',bg_default)
+   call update('Y',bg_yellow)
+       call update('/Y',bg_default)
+       call update('YELLOW',bg_yellow)
+       call update('/YELLOW',bg_default)
+   call update('W',bg_white)
+       call update('/W',bg_default)
+       call update('WHITE',bg_white)
+       call update('/WHITE',bg_default)
+   call update('E',bg_ebony)
+       call update('/E',bg_default)
+       call update('EBONY',bg_ebony)
+       call update('/EBONY',bg_default)
+   call update('X',bg_ebony)
+       call update('/X',bg_default)
+       call update('BLACK',bg_ebony)
+       call update('/BLACK',bg_default)
 
 end subroutine vt102
 !===================================================================================================================================
@@ -687,11 +763,13 @@ end subroutine vt102
 !>
 !!##NAME
 !!    esc_mode(3f) - [M_escape] select processing mode for output from esc(3f)
+!!
 !!##SYNOPSIS
 !!
 !!    subroutine esc_mode(manner)
 !!
 !!       character(len=*),intent(in) :: manner
+!!
 !!##DESCRIPTION
 !!       Turn off the generation of strings associated with the XML keywords
 !!       in the string generated by the esc(3f) function, or display the
@@ -780,14 +858,17 @@ end subroutine wipe_dictionary
 !!##NAME
 !!    update(3f) - [M_escape] update internal dictionary given keyword and value
 !!    (LICENSE:PD)
+!!
 !!##SYNOPSIS
 !!
 !!   subroutine update(key,val)
 !!
 !!    character(len=*),intent(in)           :: key
 !!    character(len=*),intent(in),optional  :: val
+!!
 !!##DESCRIPTION
 !!    Update internal dictionary in M_escape(3fm) module.
+!!
 !!##OPTIONS
 !!    key  name of keyword to add, replace, or delete from dictionary
 !!    val  if present add or replace value associated with keyword. If not
@@ -823,6 +904,7 @@ end subroutine wipe_dictionary
 !!
 !!##AUTHOR
 !!    John S. Urban, 2020
+!!
 !!##LICENSE
 !!    Public Domain
 subroutine update(key,valin)
@@ -874,18 +956,22 @@ end function get
 !===================================================================================================================================
 !>
 !!##NAME
-!!    print_dictionary(3f) - [ARGUMENTS:M_CLI2] print internal dictionary created by calls to update(3f)
+!!    print_dictionary(3f) - [ARGUMENTS:M_CLI2] print internal dictionary
+!!                           created by calls to update(3f)
 !!    (LICENSE:PD)
+!!
 !!##SYNOPSIS
 !!
 !!
 !!    subroutine print_dictionary(header)
 !!
 !!     character(len=*),intent(in),optional :: header
+!!
 !!##DESCRIPTION
 !!    Print the internal dictionary created by calls to update(3f).
 !!    This routine is intended to print the state of the argument list
 !!    if an error occurs in using the update(3f) procedure.
+!!
 !!##OPTIONS
 !!     HEADER  label to print before printing the state of the command
 !!             argument list.
@@ -911,6 +997,7 @@ end function get
 !!
 !!##AUTHOR
 !!      John S. Urban, 2020
+!!
 !!##LICENSE
 !!      Public Domain
 !===================================================================================================================================
@@ -1042,23 +1129,29 @@ integer                       :: imax                   ! length of longest toke
 !!##NAME
 !!    attr(3f) - [M_escape] colorize text using a simple function-based approach
 !!    (LICENSE:PD)
+!!
 !!##SYNOPSIS
 !!
 !!   function attr(attribute) result (out)
 !!
 !!    character(len=*),intent(in)  :: attribute
 !!    character(len=:),allocatable :: out
+!!
 !!##DESCRIPTION
-!!    attr(3f) uses the same keywords as esc(3f) to send ANSI escape sequences
-!!    to the display screen, except instead of using a pseudo-XML string to select
-!!    the codes it uses a simple colon-delimited list of the keywords.
+!!    attr(3f) uses the same keywords as esc(3f) to send ANSI escape
+!!    sequences to the display screen, except instead of using a pseudo-XML
+!!    string to select the codes it uses a simple colon-delimited list of
+!!    the keywords.
+!!
 !!##OPTIONS
 !!    attribute  colon, space, or comma-delimited list of attribute keywords
 !!               as defined in the esc(3f) procedure.
 !!    text       if supplied it is printed and then an attribute reset is added
+!!
 !!##RETURNS
-!!    out        the output is the strings (by default ANSI video
-!!               display escape sequences, see update(3f) ) assigned by the keywords.
+!!    out        output the strings assigned by the keywords (by default
+!!    ANSI video
+!!               display escape sequences, see update(3f) )
 !!##EXAMPLE
 !!
 !!   Sample program
@@ -1084,6 +1177,7 @@ integer                       :: imax                   ! length of longest toke
 !!
 !!##AUTHOR
 !!    John S. Urban, 2020
+!!
 !!##LICENSE
 !!    Public Domain
 function attr(attribute,text) result(out)

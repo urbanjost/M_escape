@@ -1,5 +1,5 @@
 <map id="m_escape::vt102" name="m_escape::vt102">
 <area shape="rect" id="node2" href="$namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb" title="NAMEesc(3f) &#45; [M_escape] substitute escape sequences for XML&#45;like syntax in strings ..." alt="" coords="209,5,327,32"/>
-<area shape="rect" id="node3" href="$namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) SYNOPSIS..." alt="" coords="397,31,516,57"/>
-<area shape="rect" id="node4" href="$namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b" title="NAMEesc_mode(3f) &#45; [M_escape] select processing mode for output from esc(3f) SYNOPSIS" alt="" coords="187,107,349,133"/>
+<area shape="rect" id="node3" href="$namespacem__escape.html#a916b16ce9be553d669f54cb9575a91be" title="NAMEattr(3f) &#45; [M_escape] colorize text using a simple function&#45;based approach (LICENSE:PD) ..." alt="" coords="397,31,516,57"/>
+<area shape="rect" id="node4" href="$namespacem__escape.html#a4210456d81d9a1bf328093a9635e640b" title="NAMEesc_mode(3f) &#45; [M_escape] select processing mode for output from esc(3f) " alt="" coords="187,107,349,133"/>
 </map>

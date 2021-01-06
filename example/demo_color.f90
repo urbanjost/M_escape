@@ -17,7 +17,9 @@
              implicit none
                write(*,'(*(g0))')fg_red,bg_green,bold,' Hello! ',reset
 
-               write(*,'(a)')color(' Hello! ',fg=fg_white,bg=bg_red,style=italic//bold)
+               write(*,'(a)')color(' Hello! ',&
+                & fg=fg_white,bg=bg_red,style=italic//bold)
                call color_mode(.false.)
-               write(*,'(a)')color(' Hello! ',fg=fg_red,bg=bg_red,style=italic//bold)
+               write(*,'(a)')color(' Hello! ',&
+                & fg=fg_red,bg=bg_red,style=italic//bold)
           end program demo_color
