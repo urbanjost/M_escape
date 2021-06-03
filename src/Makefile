@@ -27,8 +27,8 @@ PROGFILES = \
 ../test/color_mode.f90 \
 $(NULL)
 PROG = ${PROGFILES:.f90=}
-SRCS =  M_escape.f90 M_list.f90
-OBJS =  M_escape.o M_list.o
+SRCS =  M_escape.f90 M_list2.f90
+OBJS =  M_escape.o M_list2.o
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # platform-specific values you will probably change
 # 
@@ -102,4 +102,4 @@ man:
 	: SPELLING
 	@env MANPATH=../man MANWIDTH=80  man --regex '.*'|col -b|spell|xargs -n 5|column -t
 #=================================================================================
-M_escape.o: M_list.o 
+M_escape.o: M_list2.o 

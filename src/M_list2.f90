@@ -1,16 +1,16 @@
 !>
 !!##NAME
-!!    M_list(3f) - [M_list] maintain simple lists
+!!    M_list2(3f) - [M_list2] maintain simple lists
 !!    (LICENSE:PD)
 !!
 !!##SYNOPSIS
 !!
-!!    use M_list, only : insert, replace, remove
-!!    use M_list, only : dictionary
+!!    use M_list2, only : insert, replace, remove
+!!    use M_list2, only : dictionary
 !!
 !!##DESCRIPTION
 !!
-!!    The M_list(3fm) module allows for maintaining an array as a sorted
+!!    The M_list2(3fm) module allows for maintaining an array as a sorted
 !!    list. An example is given that creates a keyword-value dictionary
 !!    using the lists.
 !!
@@ -57,11 +57,11 @@
 !!   Sample program
 !!
 !!    program demo_M_list
-!!    use M_list, only : insert, locate, replace, remove
+!!    use M_list2, only : insert, locate, replace, remove
 !!    ! create a dictionary with character keywords, values, and value lengths
 !!    ! using the routines for maintaining a list
 !!
-!!     use M_list, only : locate, insert, replace
+!!     use M_list2, only : locate, insert, replace
 !!     implicit none
 !!     character(len=:),allocatable   :: keywords(:)
 !!     character(len=:),allocatable   :: values(:)
@@ -150,29 +150,29 @@
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
 !===================================================================================================================================
-module M_list
+module M_list2
 use, intrinsic :: iso_fortran_env, only : stderr=>ERROR_UNIT,stdout=>OUTPUT_UNIT    ! access computing environment
 implicit none
 private
 
-public locate        ! [M_list] find PLACE in sorted character array where value can be found or should be placed
+public locate        ! [M_list2] find PLACE in sorted character array where value can be found or should be placed
    private locate_c
    private locate_d
    private locate_r
    private locate_i
-public insert        ! [M_list] insert entry into a sorted allocatable array at specified position
+public insert        ! [M_list2] insert entry into a sorted allocatable array at specified position
    private insert_c
    private insert_d
    private insert_r
    private insert_i
    private insert_l
-public replace       ! [M_list] replace entry by index from a sorted allocatable array if it is present
+public replace       ! [M_list2] replace entry by index from a sorted allocatable array if it is present
    private replace_c
    private replace_d
    private replace_r
    private replace_i
    private replace_l
-public remove        ! [M_list] delete entry by index from a sorted allocatable array if it is present
+public remove        ! [M_list2] delete entry by index from a sorted allocatable array if it is present
    private remove_c
    private remove_d
    private remove_r
@@ -180,25 +180,25 @@ public remove        ! [M_list] delete entry by index from a sorted allocatable 
    private remove_l
 
 !character(len=*),parameter::ident_1="&
-!&@(#)M_list::locate(3f): Generic subroutine locates where element is or should be in sorted allocatable array"
+!&@(#)M_list2::locate(3f): Generic subroutine locates where element is or should be in sorted allocatable array"
 interface locate
    module procedure locate_c, locate_d, locate_r, locate_i
 end interface
 
 !character(len=*),parameter::ident_2="&
-!&@(#)M_list::insert(3f): Generic subroutine inserts element into allocatable array at specified position"
+!&@(#)M_list2::insert(3f): Generic subroutine inserts element into allocatable array at specified position"
 interface insert
    module procedure insert_c, insert_d, insert_r, insert_i, insert_l
 end interface
 
 !character(len=*),parameter::ident_3="&
-!&@(#)M_list::replace(3f): Generic subroutine replaces element from allocatable array at specified position"
+!&@(#)M_list2::replace(3f): Generic subroutine replaces element from allocatable array at specified position"
 interface replace
    module procedure replace_c, replace_d, replace_r, replace_i, replace_l
 end interface
 
 !character(len=*),parameter::ident_4="&
-!&@(#)M_list::remove(3f): Generic subroutine deletes element from allocatable array at specified position"
+!&@(#)M_list2::remove(3f): Generic subroutine deletes element from allocatable array at specified position"
 interface remove
    module procedure remove_c, remove_d, remove_r, remove_i, remove_l
 end interface
@@ -225,7 +225,7 @@ contains
 !===================================================================================================================================
 !>
 !!##NAME
-!!    locate(3f) - [M_list] finds the index where a string is found or should be in a sorted array
+!!    locate(3f) - [M_list2] finds the index where a string is found or should be in a sorted array
 !!    (LICENSE:PD)
 !!
 !!##SYNOPSIS
@@ -277,7 +277,7 @@ contains
 !!
 !!     program demo_locate
 !!     use M_sort, only : sort_shell
-!!     use M_list, only : locate
+!!     use M_list2, only : locate
 !!     implicit none
 !!     character(len=:),allocatable  :: arr(:)
 !!     integer                       :: i
@@ -346,7 +346,7 @@ contains
 subroutine locate_c(list,value,place,ier,errmsg)
 
 !character(len=*),parameter::ident_5="&
-!&@(#)M_list::locate_c(3f): find PLACE in sorted character array where VALUE can be found or should be placed"
+!&@(#)M_list2::locate_c(3f): find PLACE in sorted character array where VALUE can be found or should be placed"
 
 character(len=*),intent(in)             :: value
 integer,intent(out)                     :: place
@@ -421,7 +421,7 @@ end subroutine locate_c
 subroutine locate_d(list,value,place,ier,errmsg)
 
 !character(len=*),parameter::ident_6="&
-!&@(#)M_list::locate_d(3f): find PLACE in sorted doubleprecision array where VALUE can be found or should be placed"
+!&@(#)M_list2::locate_d(3f): find PLACE in sorted doubleprecision array where VALUE can be found or should be placed"
 
 ! Assuming an array sorted in descending order
 !
@@ -502,7 +502,7 @@ end subroutine locate_d
 subroutine locate_r(list,value,place,ier,errmsg)
 
 !character(len=*),parameter::ident_7="&
-!&@(#)M_list::locate_r(3f): find PLACE in sorted real array where VALUE can be found or should be placed"
+!&@(#)M_list2::locate_r(3f): find PLACE in sorted real array where VALUE can be found or should be placed"
 
 ! Assuming an array sorted in descending order
 !
@@ -583,7 +583,7 @@ end subroutine locate_r
 subroutine locate_i(list,value,place,ier,errmsg)
 
 !character(len=*),parameter::ident_8="&
-!&@(#)M_list::locate_i(3f): find PLACE in sorted integer array where VALUE can be found or should be placed"
+!&@(#)M_list2::locate_i(3f): find PLACE in sorted integer array where VALUE can be found or should be placed"
 
 ! Assuming an array sorted in descending order
 !
@@ -666,7 +666,7 @@ end subroutine locate_i
 !===================================================================================================================================
 !>
 !!##NAME
-!!    remove(3f) - [M_list] remove entry from an allocatable array at specified position
+!!    remove(3f) - [M_list2] remove entry from an allocatable array at specified position
 !!    (LICENSE:PD)
 !!
 !!##SYNOPSIS
@@ -694,7 +694,7 @@ end subroutine locate_i
 !!
 !!     program demo_remove
 !!     use M_sort, only : sort_shell
-!!     use M_list, only : locate, remove
+!!     use M_list2, only : locate, remove
 !!     implicit none
 !!     character(len=:),allocatable :: arr(:)
 !!     integer                       :: i
@@ -729,7 +729,7 @@ end subroutine locate_i
 !!    Public Domain
 subroutine remove_c(list,place)
 
-!character(len=*),parameter::ident_9="@(#)M_list::remove_c(3fp): remove string from allocatable string array at specified position"
+!character(len=*),parameter::ident_9="@(#)M_list2::remove_c(3fp): remove string from allocatable string array at specified position"
 
 character(len=:),allocatable :: list(:)
 integer,intent(in)           :: place
@@ -751,7 +751,7 @@ end subroutine remove_c
 subroutine remove_d(list,place)
 
 !character(len=*),parameter::ident_10="&
-!&@(#)M_list::remove_d(3fp): remove doubleprecision value from allocatable array at specified position"
+!&@(#)M_list2::remove_d(3fp): remove doubleprecision value from allocatable array at specified position"
 
 doubleprecision,allocatable  :: list(:)
 integer,intent(in)           :: place
@@ -772,7 +772,7 @@ integer                      :: end
 end subroutine remove_d
 subroutine remove_r(list,place)
 
-!character(len=*),parameter::ident_11="@(#)M_list::remove_r(3fp): remove value from allocatable array at specified position"
+!character(len=*),parameter::ident_11="@(#)M_list2::remove_r(3fp): remove value from allocatable array at specified position"
 
 real,allocatable    :: list(:)
 integer,intent(in)  :: place
@@ -793,7 +793,7 @@ integer             :: end
 end subroutine remove_r
 subroutine remove_l(list,place)
 
-!character(len=*),parameter::ident_12="@(#)M_list::remove_l(3fp): remove value from allocatable array at specified position"
+!character(len=*),parameter::ident_12="@(#)M_list2::remove_l(3fp): remove value from allocatable array at specified position"
 
 logical,allocatable    :: list(:)
 integer,intent(in)     :: place
@@ -815,7 +815,7 @@ integer                :: end
 end subroutine remove_l
 subroutine remove_i(list,place)
 
-!character(len=*),parameter::ident_13="@(#)M_list::remove_i(3fp): remove value from allocatable array at specified position"
+!character(len=*),parameter::ident_13="@(#)M_list2::remove_i(3fp): remove value from allocatable array at specified position"
 integer,allocatable    :: list(:)
 integer,intent(in)     :: place
 integer                :: end
@@ -839,7 +839,7 @@ end subroutine remove_i
 !===================================================================================================================================
 !>
 !!##NAME
-!!    replace(3f) - [M_list] replace entry in a string array at specified position
+!!    replace(3f) - [M_list2] replace entry in a string array at specified position
 !!    (LICENSE:PD)
 !!
 !!##SYNOPSIS
@@ -873,7 +873,7 @@ end subroutine remove_i
 !!   Replace key-value pairs in a dictionary
 !!
 !!     program demo_replace
-!!     use M_list, only  : insert, locate, replace
+!!     use M_list2, only  : insert, locate, replace
 !!     ! Find if a key is in a list and insert it
 !!     ! into the key list and value list if it is not present
 !!     ! or replace the associated value if the key existed
@@ -932,7 +932,7 @@ end subroutine remove_i
 !!    Public Domain
 subroutine replace_c(list,value,place)
 
-!character(len=*),parameter::ident_14="@(#)M_list::replace_c(3fp): replace string in allocatable string array at specified position"
+!character(len=*),parameter::ident_14="@(#)M_list2::replace_c(3fp): replace string in allocatable string array at specified position"
 
 character(len=*),intent(in)  :: value
 character(len=:),allocatable :: list(:)
@@ -962,7 +962,7 @@ end subroutine replace_c
 subroutine replace_d(list,value,place)
 
 !character(len=*),parameter::ident_15="&
-!&@(#)M_list::replace_d(3fp): place doubleprecision value into allocatable array at specified position"
+!&@(#)M_list2::replace_d(3fp): place doubleprecision value into allocatable array at specified position"
 
 doubleprecision,intent(in)   :: value
 doubleprecision,allocatable  :: list(:)
@@ -984,7 +984,7 @@ integer                      :: end
 end subroutine replace_d
 subroutine replace_r(list,value,place)
 
-!character(len=*),parameter::ident_16="@(#)M_list::replace_r(3fp): place value into allocatable array at specified position"
+!character(len=*),parameter::ident_16="@(#)M_list2::replace_r(3fp): place value into allocatable array at specified position"
 
 real,intent(in)       :: value
 real,allocatable      :: list(:)
@@ -1006,7 +1006,7 @@ integer               :: end
 end subroutine replace_r
 subroutine replace_l(list,value,place)
 
-!character(len=*),parameter::ident_17="@(#)M_list::replace_l(3fp): place value into allocatable array at specified position"
+!character(len=*),parameter::ident_17="@(#)M_list2::replace_l(3fp): place value into allocatable array at specified position"
 
 logical,allocatable   :: list(:)
 logical,intent(in)    :: value
@@ -1028,7 +1028,7 @@ integer               :: end
 end subroutine replace_l
 subroutine replace_i(list,value,place)
 
-!character(len=*),parameter::ident_18="@(#)M_list::replace_i(3fp): place value into allocatable array at specified position"
+!character(len=*),parameter::ident_18="@(#)M_list2::replace_i(3fp): place value into allocatable array at specified position"
 
 integer,intent(in)    :: value
 integer,allocatable   :: list(:)
@@ -1053,7 +1053,7 @@ end subroutine replace_i
 !===================================================================================================================================
 !>
 !!##NAME
-!!    insert(3f) - [M_list] insert entry into a string array at specified position
+!!    insert(3f) - [M_list2] insert entry into a string array at specified position
 !!    (LICENSE:PD)
 !!
 !!##SYNOPSIS
@@ -1084,7 +1084,7 @@ end subroutine replace_i
 !!
 !!     program demo_insert
 !!     use M_sort, only : sort_shell
-!!     use M_list, only : locate, insert
+!!     use M_list2, only : locate, insert
 !!     implicit none
 !!     character(len=:),allocatable :: arr(:)
 !!     integer                       :: i
@@ -1137,7 +1137,7 @@ end subroutine replace_i
 !!    Public Domain
 subroutine insert_c(list,value,place)
 
-!character(len=*),parameter::ident_19="@(#)M_list::insert_c(3fp): place string into allocatable string array at specified position"
+!character(len=*),parameter::ident_19="@(#)M_list2::insert_c(3fp): place string into allocatable string array at specified position"
 
 character(len=*),intent(in)  :: value
 character(len=:),allocatable :: list(:)
@@ -1173,7 +1173,7 @@ integer                      :: end
 end subroutine insert_c
 subroutine insert_r(list,value,place)
 
-!character(len=*),parameter::ident_20="@(#)M_list::insert_r(3fp): place real value into allocatable array at specified position"
+!character(len=*),parameter::ident_20="@(#)M_list2::insert_r(3fp): place real value into allocatable array at specified position"
 
 real,intent(in)       :: value
 real,allocatable      :: list(:)
@@ -1203,7 +1203,7 @@ end subroutine insert_r
 subroutine insert_d(list,value,place)
 
 !character(len=*),parameter::ident_21="&
-!&@(#)M_list::insert_d(3fp): place doubleprecision value into allocatable array at specified position"
+!&@(#)M_list2::insert_d(3fp): place doubleprecision value into allocatable array at specified position"
 
 doubleprecision,intent(in)       :: value
 doubleprecision,allocatable      :: list(:)
@@ -1229,7 +1229,7 @@ integer                          :: end
 end subroutine insert_d
 subroutine insert_l(list,value,place)
 
-!character(len=*),parameter::ident_22="@(#)M_list::insert_l(3fp): place value into allocatable array at specified position"
+!character(len=*),parameter::ident_22="@(#)M_list2::insert_l(3fp): place value into allocatable array at specified position"
 
 logical,allocatable   :: list(:)
 logical,intent(in)    :: value
@@ -1256,7 +1256,7 @@ integer               :: end
 end subroutine insert_l
 subroutine insert_i(list,value,place)
 
-!character(len=*),parameter::ident_23="@(#)M_list::insert_i(3fp): place value into allocatable array at specified position"
+!character(len=*),parameter::ident_23="@(#)M_list2::insert_i(3fp): place value into allocatable array at specified position"
 
 integer,allocatable   :: list(:)
 integer,intent(in)    :: value
@@ -1286,7 +1286,7 @@ end subroutine insert_i
 !===================================================================================================================================
 !>
 !!##NAME
-!!    dict_delete(3f) - [M_list] delete entry by name from an allocatable sorted string array if it is present
+!!    dict_delete(3f) - [M_list2] delete entry by name from an allocatable sorted string array if it is present
 !!    (LICENSE:PD)
 !!
 !!##SYNOPSIS
@@ -1312,7 +1312,7 @@ end subroutine insert_i
 !!    delete a key from a dictionary by name.
 !!
 !!     program demo_dict_delete
-!!     use M_list, only : dictionary
+!!     use M_list2, only : dictionary
 !!     implicit none
 !!     type(dictionary) :: caps
 !!     integer                       :: i
@@ -1346,7 +1346,7 @@ end subroutine insert_i
 !!    Public Domain
 subroutine dict_delete(self,key)
 
-!character(len=*),parameter::ident_24="@(#)M_list::dict_delete(3f): remove string from sorted allocatable string array if present"
+!character(len=*),parameter::ident_24="@(#)M_list2::dict_delete(3f): remove string from sorted allocatable string array if present"
 
 class(dictionary),intent(inout) :: self
 character(len=*),intent(in)     :: key
@@ -1365,7 +1365,7 @@ end subroutine dict_delete
 !===================================================================================================================================
 !>
 !!##NAME
-!!    dict_get(3f) - [M_list] get value of key-value pair in a dictionary given key
+!!    dict_get(3f) - [M_list2] get value of key-value pair in a dictionary given key
 !!    (LICENSE:PD)
 !!
 !!##SYNOPSIS
@@ -1392,7 +1392,7 @@ end subroutine dict_delete
 !!
 !!
 !!     program demo_locate
-!!     use M_list, only : dictionary
+!!     use M_list2, only : dictionary
 !!     implicit none
 !!     type(dictionary)             :: table
 !!     character(len=:),allocatable :: val
@@ -1423,7 +1423,7 @@ end subroutine dict_delete
 !!    Public Domain
 function dict_get(self,key) result(value)
 
-!character(len=*),parameter::ident_25="@(#)M_list::dict_get(3f): get value of key-value pair in dictionary, given key"
+!character(len=*),parameter::ident_25="@(#)M_list2::dict_get(3f): get value of key-value pair in dictionary, given key"
 
 !!class(dictionary),intent(inout) :: self
 class(dictionary)               :: self
@@ -1442,7 +1442,7 @@ end function dict_get
 !===================================================================================================================================
 !>
 !!##NAME
-!!    dict_add(3f) - [M_list] add or replace a key-value pair in a dictionary
+!!    dict_add(3f) - [M_list2] add or replace a key-value pair in a dictionary
 !!    (LICENSE:PD)
 !!
 !!##SYNOPSIS
@@ -1466,7 +1466,7 @@ end function dict_get
 !!    If string is not found in a sorted array, insert the string
 !!
 !!     program demo_add
-!!     use M_list, only : dictionary
+!!     use M_list2, only : dictionary
 !!     implicit none
 !!     type(dictionary) :: dict
 !!     integer          :: i
@@ -1490,7 +1490,7 @@ end function dict_get
 !!    Public Domain
 subroutine dict_add(self,key,value)
 
-!character(len=*),parameter::ident_26="@(#)M_list::dict_add(3f): place key-value pair into dictionary, adding the key if required"
+!character(len=*),parameter::ident_26="@(#)M_list2::dict_add(3f): place key-value pair into dictionary, adding the key if required"
 
 class(dictionary),intent(inout) :: self
 character(len=*),intent(in)     :: key
@@ -1511,7 +1511,7 @@ end subroutine dict_add
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
 !===================================================================================================================================
-end module M_list
+end module M_list2
 !===================================================================================================================================
 !()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()()=
 !===================================================================================================================================

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['remove',['remove',['../interfacem__list_1_1remove.html',1,'m_list']]],
-  ['replace',['replace',['../interfacem__list_1_1replace.html',1,'m_list']]]
+  ['remove_138',['remove',['../interfacem__list2_1_1remove.html',1,'m_list2']]],
+  ['replace_139',['replace',['../interfacem__list2_1_1replace.html',1,'m_list2']]]
 ];

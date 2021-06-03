@@ -6,6 +6,9 @@ author = "John S. Urban"
 maintainer = "urbanjost@comcast.net"
 copyright = "2020 John S. Urban"
 description= "ANSI control escape sequences using an XML-like syntax for attributes like color on video displays and emulators"
+categories = ["ANSI escape sequences"]
+keywords = ["fortran", "terminal control sequences", "escape sequences", "in-line terminal control" ]
+homepage = "https://github.com/urbanjost/M_escape.git"
 
 # demo programs
 test = [

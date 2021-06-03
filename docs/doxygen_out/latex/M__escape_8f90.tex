@@ -1,52 +1,36 @@
-\hypertarget{M__escape_8f90}{}\section{/home/urbanjs/venus/\+V600/github/\+M\+\_\+escape/src/\+M\+\_\+escape.f90 File Reference}
-\label{M__escape_8f90}\index{/home/urbanjs/venus/\+V600/github/\+M\+\_\+escape/src/\+M\+\_\+escape.\+f90@{/home/urbanjs/venus/\+V600/github/\+M\+\_\+escape/src/\+M\+\_\+escape.\+f90}}
-\subsection*{Modules}
+\hypertarget{M__escape_8f90}{}\doxysection{/home/urbanjs/venus/\+V600/github/\+M\+\_\+escape/src/\+M\+\_\+escape.f90 File Reference}
+\label{M__escape_8f90}\index{/home/urbanjs/venus/V600/github/M\_escape/src/M\_escape.f90@{/home/urbanjs/venus/V600/github/M\_escape/src/M\_escape.f90}}
+\doxysubsection*{Modules}
 \begin{DoxyCompactItemize}
 \item 
 module \mbox{\hyperlink{namespacem__escape}{m\+\_\+escape}}
-\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
-
-M\+\_\+escape(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax in strings \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Functions/\+Subroutines}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
 character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__escape_a36f016baad6b23f86189e6f3ee6db0cb}{m\+\_\+escape\+::esc}} (string, clear\+\_\+at\+\_\+end)
-\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
-
-esc(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax in strings \end{DoxyCompactList}\item 
+\item 
 character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__escape_af7d28a73e65efb58beeb684d7bdeefec}{m\+\_\+escape\+::color}} (string, fg, bg, style)
-\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
-
-color(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\item 
+\item 
 subroutine, public \mbox{\hyperlink{namespacem__escape_a24566737cb6aa1672180eaa21c8d4f66}{m\+\_\+escape\+::color\+\_\+mode}} (switch)
-\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
-
-color\+\_\+mode(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} toggle style effects of color(3f) on and off (L\+I\+C\+E\+N\+SE\+:PD) \subsubsection*{S\+Y\+N\+O\+P\+S\+IS}\end{DoxyCompactList}\item 
+\item 
 subroutine \mbox{\hyperlink{namespacem__escape_ae9d40717b2e75e90e2505d5fed6435c5}{m\+\_\+escape\+::vt102}} ()
 \item 
 subroutine, public \mbox{\hyperlink{namespacem__escape_a4210456d81d9a1bf328093a9635e640b}{m\+\_\+escape\+::esc\+\_\+mode}} (manner)
-\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
-
-esc\+\_\+mode(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} select processing mode for output from esc(3f) \end{DoxyCompactList}\item 
+\item 
 subroutine \mbox{\hyperlink{namespacem__escape_a1bc574bc97157fe67d868d2bd180c91e}{m\+\_\+escape\+::wipe\+\_\+dictionary}} ()
 \item 
 subroutine, public \mbox{\hyperlink{namespacem__escape_a5efd612f60d281003917329484a7960c}{m\+\_\+escape\+::update}} (key, valin)
-\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
-
-update(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} update internal dictionary given keyword and value (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\item 
+\item 
 character(len=\+:) function, allocatable \mbox{\hyperlink{namespacem__escape_af555c90c278ff964d8bce93ee0368a42}{m\+\_\+escape\+::get}} (key)
 \item 
 subroutine, public \mbox{\hyperlink{namespacem__escape_a6add907828fd34e94b87f643a5cabc64}{m\+\_\+escape\+::print\+\_\+dictionary}} (header)
-\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
-
-print\+\_\+dictionary(3f) -\/ \mbox{[}A\+R\+G\+U\+M\+E\+N\+TS\+:M\+\_\+\+C\+L\+I2\mbox{]} print internal dictionary created by calls to update(3f) (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\item 
+\item 
 subroutine \mbox{\hyperlink{namespacem__escape_af23bd97702864e0f32258e6ec0d51506}{m\+\_\+escape\+::split}} (input\+\_\+line, array, delimiters)
 \item 
 character(len=\+:) function, allocatable, public \mbox{\hyperlink{namespacem__escape_a916b16ce9be553d669f54cb9575a91be}{m\+\_\+escape\+::attr}} (attribute, text)
-\begin{DoxyCompactList}\small\item\em \subsubsection*{N\+A\+ME}
-
-attr(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Variables}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 logical, save \mbox{\hyperlink{namespacem__escape_a67ff4e5b90da8436f0da5882c4a5720c}{m\+\_\+escape\+::g\+\_\+color}} =.true.
@@ -63,7 +47,7 @@ character(len=\+:), allocatable, save \mbox{\hyperlink{namespacem__escape_ab4e7f
 \item 
 character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_aa17be0f87e5ec9012a38c04bfbb5e588}{m\+\_\+escape\+::nl}} =new\+\_\+line(\textquotesingle{}a\textquotesingle{})
 \item 
-character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_a9931f535eb0f6f24df5a121331faa5ef}{m\+\_\+escape\+::escape}} =achar(27) \textbackslash{}\char`\"{}
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_a9931f535eb0f6f24df5a121331faa5ef}{m\+\_\+escape\+::escape}} =achar(27)
 \item 
 character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_a6d5af6b1571cba22511523c53c71fa6f}{m\+\_\+escape\+::code\+\_\+start}} =E\+S\+C\+A\+PE//\textquotesingle{}\mbox{[}\textquotesingle{}
 \item 
@@ -71,7 +55,7 @@ character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_af913c3263
 \item 
 character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_aaaf7224f2104dcd571cdaa69b61b9d01}{m\+\_\+escape\+::code\+\_\+reset}} =C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//\textquotesingle{}0\textquotesingle{}//C\+O\+D\+E\+\_\+\+E\+ND
 \item 
-character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_a9d45e30ea5891b89dc9a61ba1b5dbc03}{m\+\_\+escape\+::clear\+\_\+display}} =C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//\textquotesingle{}2\+J\textquotesingle{}
+character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_a9d45e30ea5891b89dc9a61ba1b5dbc03}{m\+\_\+escape\+::clear\+\_\+display}} =C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//\textquotesingle{}2J\textquotesingle{}
 \item 
 character(len= $\ast$), parameter \mbox{\hyperlink{namespacem__escape_ae4634ac062742627f215df29998fc677}{m\+\_\+escape\+::home\+\_\+display}} =C\+O\+D\+E\+\_\+\+S\+T\+A\+RT//\textquotesingle{}H\textquotesingle{}
 \item 

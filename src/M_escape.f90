@@ -16,7 +16,7 @@
 !!    ANSI escape sequences are not universally supported by all terminal
 !!    emulators; and normally should be suppressed when not going to a tty
 !!    device. This routine provides the basic structure to support such
-!!    behaviors. or to perhaps in the future generate a CSS style sheet
+!!    behaviors, or to perhaps in the future generate a CSS style sheet
 !!    and HTML instead of text to the terminal, ...
 !!
 !!    Alternatively, direct use of the escape sequences is supported,
@@ -29,7 +29,8 @@
 !!    a similar syntax to directly generate text attributes; but it is a
 !!    much simpler approach programmatically.
 !!
-!!    Typically, you should use M_system::system_istty(3f) to set the default
+!!    Typically, you should use M_system::system_istty(3f) or the common
+!!    Fortran extension ISATTY() to set the default
 !!    to "plain" instead of "color" when the output file is not a terminal.
 !!
 !!##MAJOR FEATURES
@@ -42,7 +43,7 @@
 !!      o colors are not nestable, keywords are case-sensitive,
 !!      o not all terminals obey the sequences. On Windows, it is best if
 !!        you use Windows 10+ and/or the Linux mode; although it has worked
-!!        with all CygWin and MinGW and Putty windows and mintty.
+!!        with all CygWin and MinGW and Putty windows and mintty(1).
 !!
 !!##FUTURE
 !!     Full support for alternate output formats like HTML and popular markdown
@@ -77,9 +78,9 @@
 !!
 !!    It is a shame xterm(1) does not support pixel-oriented abilities to define
 !!    a "graphics" area or support canvas(3c)-like in-band graphics, somewhat
-!!    like Tektronix terminals.
+!!    like Tektronix terminals, although it does have a Tektronix 4010 mode.
 !!
-!!    overload + to replace //
+!!    Perhaps overload + to replace //
 !!
 !!##EXAMPLE
 !!
@@ -165,7 +166,7 @@
 !!
 !!##ALTERNATE OBJECT ORIENTED
 module M_escape
-use M_list, only : insert, locate, replace, remove
+use M_list2, only : insert, locate, replace, remove
 use, intrinsic :: iso_fortran_env, only : stderr=>ERROR_UNIT,stdin=>INPUT_UNIT    ! access computing environment
 implicit none
 private
