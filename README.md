@@ -131,10 +131,10 @@ or emulator of such:
    program demo_M_escape
    use M_escape, only : esc, esc_mode
 
-      write(*,'(/,a,/)')esc('<GREEN><bold><white> FIRST PASS IN COLOR <reset>')
+      write(*,'(/,a,/)')esc('<GREEN><bold><white> COLOR <reset>')
       call printme()
 
-      write(*,'(/,a,/)')esc('<G><bo><w> SECOND PASS AS PLAIN TEXT <reset>')
+      write(*,'(/,a,/)')esc('<G><bo><w> DO THE SAME THING IN "PLAIN" MODE<reset>')
       call esc_mode(manner='plain')
       call printme()
 
@@ -327,6 +327,10 @@ change all the keywords to output HTML.
    was to further and summarize the discussion concerning adding
    ANSI color escape sequences to the [**Fortran Standard Library
    project**](https://github.com/fortran-lang/stdlib/issues/229).
+
+---
+[CHANGELOG](CHANGELOG.md)
+---
 
 ### REFERENCES
 * [**Fortran Wiki example**](http://fortranwiki.org/fortran/show/ansi_colors) for an example that covers the basics
