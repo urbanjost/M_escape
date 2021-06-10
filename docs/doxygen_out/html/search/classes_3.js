@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['remove_138',['remove',['../interfacem__list2_1_1remove.html',1,'m_list2']]],
-  ['replace_139',['replace',['../interfacem__list2_1_1replace.html',1,'m_list2']]]
+  ['m_5fescape_5finitialize_140',['M_escape_initialize',['../interfacem__escape_1_1M__escape__initialize.html',1,'m_escape']]]
 ];

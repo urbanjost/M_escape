@@ -163,8 +163,6 @@
 !!       write(*,'(*(g0))',advance='yes')' Back to normal writes.'
 !!    end subroutine printme
 !!    end program functional
-!!
-!!##ALTERNATE OBJECT ORIENTED
 module M_escape
 use M_list2, only : insert, locate, replace, remove
 use, intrinsic :: iso_fortran_env, only : stderr=>ERROR_UNIT,stdin=>INPUT_UNIT    ! access computing environment
@@ -272,6 +270,7 @@ interface
         integer(kind=c_int) :: r
     end function
 end interface
+
 
 contains
 !===================================================================================================================================

@@ -63,6 +63,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Types</a> &#124;
 <a href="#func-members">Functions/Subroutines</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -70,6 +71,11 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Types</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">interface &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacem__escape_1_1M__escape__initialize.html">M_escape_initialize</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a36f016baad6b23f86189e6f3ee6db0cb"><td class="memItemLeft" align="right" valign="top">character(len=:) function, allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacem__escape.html#a36f016baad6b23f86189e6f3ee6db0cb">esc</a> (string, clear_at_end)</td></tr>
@@ -322,9 +328,7 @@ ALTERNATE DIRECT USE</h2>
 <h2><a class="anchor" id="autotoc_md8"></a>
 ALTERNATE FUNCTIONAL INTERFACE</h2>
 <p>If you prefer a functional interface, use the attr(3f) function with the same keywords as with the esc(3f) function. Note that esc_mode(3f) will work with this function.</p>
-<p>program functional use M_escape, only : attr, esc_mode implicit none call printme('color') call printme('plain') call printme('raw') contains subroutine printme(mymode) character(len=*),intent(in) :: mymode call esc_mode(mymode) write(*,'(a)')mymode write(*,'(*(g0))',advance='no') &amp; &amp; attr('red:BLUE:bold','Hello!'), &amp; &amp; 'and everything is back to defaults or ', &amp; &amp; attr('RED:blue:bold'),'Hello Again!', &amp; &amp; attr('/BLUE'),' Well, the text color is still on.',attr('reset') write(*,'(*(g0))',advance='yes')' Back to normal writes.' end subroutine printme end program functional</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
-ALTERNATE OBJECT ORIENTED</h2>
+<p>program functional use M_escape, only : attr, esc_mode implicit none call printme('color') call printme('plain') call printme('raw') contains subroutine printme(mymode) character(len=*),intent(in) :: mymode call esc_mode(mymode) write(*,'(a)')mymode write(*,'(*(g0))',advance='no') &amp; &amp; attr('red:BLUE:bold','Hello!'), &amp; &amp; 'and everything is back to defaults or ', &amp; &amp; attr('RED:blue:bold'),'Hello Again!', &amp; &amp; attr('/BLUE'),' Well, the text color is still on.',attr('reset') write(*,'(*(g0))',advance='yes')' Back to normal writes.' end subroutine printme end program functional </p>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a916b16ce9be553d669f54cb9575a91be"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a916b16ce9be553d669f54cb9575a91be">&#9670;&nbsp;</a></span>attr()</h2>
@@ -351,30 +355,30 @@ ALTERNATE OBJECT ORIENTED</h2>
         </tr>
       </table>
 </div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md50"></a>
+<h2><a class="anchor" id="autotoc_md49"></a>
 NAME</h2>
 <p>attr(3f) - [M_escape] colorize text using a simple function-based approach (LICENSE:PD)</p>
-<h2><a class="anchor" id="autotoc_md51"></a>
+<h2><a class="anchor" id="autotoc_md50"></a>
 SYNOPSIS</h2>
 <p>function attr(attribute) result (out)</p>
 <p>character(len=*),intent(in) :: attribute character(len=:),allocatable :: out</p>
-<h2><a class="anchor" id="autotoc_md52"></a>
+<h2><a class="anchor" id="autotoc_md51"></a>
 DESCRIPTION</h2>
 <p>attr(3f) uses the same keywords as esc(3f) to send ANSI escape sequences to the display screen, except instead of using a pseudo-XML string to select the codes it uses a simple colon-delimited list of the keywords.</p>
-<h2><a class="anchor" id="autotoc_md53"></a>
+<h2><a class="anchor" id="autotoc_md52"></a>
 OPTIONS</h2>
 <p>attribute colon, space, or comma-delimited list of attribute keywords as defined in the esc(3f) procedure. text if supplied it is printed and then an attribute reset is added</p>
-<h2><a class="anchor" id="autotoc_md54"></a>
+<h2><a class="anchor" id="autotoc_md53"></a>
 RETURNS</h2>
 <p>out output the strings assigned by the keywords (by default ANSI video display escape sequences, see update(3f) ) </p>
-<h2><a class="anchor" id="autotoc_md55"></a>
+<h2><a class="anchor" id="autotoc_md54"></a>
 EXAMPLE</h2>
 <p>Sample program</p>
 <p>program demo_attr use M_escape, only : attr, esc_mode implicit none call printme('color') call printme('plain') call printme('raw') contains subroutine printme(mymode) character(len=*),intent(in) :: mymode call esc_mode(mymode) write(*,'(a)')mymode write(*,'(*(g0))',advance='no')attr('red:BLUE:bold','Hello!'), &amp; &amp; 'and everything is back to defaults or ', &amp; &amp; attr('RED:blue:bold'),'Hello Again!', &amp; &amp; attr('/RED'),' Well, the text color is still blue.',attr('reset') write(*,'(*(g0))',advance='yes')' Back to a normal write statement.' end subroutine printme end program demo_attr</p>
-<h2><a class="anchor" id="autotoc_md56"></a>
+<h2><a class="anchor" id="autotoc_md55"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2020</p>
-<h2><a class="anchor" id="autotoc_md57"></a>
+<h2><a class="anchor" id="autotoc_md56"></a>
 LICENSE</h2>
 <p>Public Domain </p>
 
@@ -433,10 +437,10 @@ Here is the call graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 NAME</h2>
 <p>color(3f) - [M_escape] colorize text using a simple function-based approach (LICENSE:PD) </p>
-<h2><a class="anchor" id="autotoc_md18"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 SYNOPSIS</h2>
 <pre class="fragment">use M_escape, only : color, color_mode, &amp;
 
@@ -461,21 +465,21 @@ SYNOPSIS</h2>
   character(len=*),intent(in),optional :: fg
   character(len=*),intent(in),optional :: bg
   character(len=*),intent(in),optional :: style
-</pre><h2><a class="anchor" id="autotoc_md19"></a>
+</pre><h2><a class="anchor" id="autotoc_md18"></a>
 DESCRIPTION</h2>
 <p>The color constant strings can be used directly but unconditionally in an output statement. To allow the attributes to be ignored they can be called with the color(3f) routine, which the color_mode(3f) procedure can be used to toggle on and off. Note that this routine does an implicit reset at the end of each use.</p>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md19"></a>
 OPTIONS</h2>
 <p>string string to assign attributes to fg foreground color constant bg background color constant style style keyword or concatenated style keywords</p>
-<h2><a class="anchor" id="autotoc_md21"></a>
+<h2><a class="anchor" id="autotoc_md20"></a>
 EXAMPLE</h2>
 <p>Sample program</p>
 <p>program demo_color use M_escape, only : color, color_mode, &amp; ! FOREGROUND COLORS &amp; fg_red, fg_cyan, fg_magenta, fg_blue, &amp; &amp; fg_green, fg_yellow, fg_white, fg_ebony, &amp; &amp; fg_default, &amp; ! BACKGROUND COLORS &amp; bg_red, bg_cyan, bg_magenta, bg_blue, &amp; &amp; bg_green, bg_yellow, bg_white, bg_ebony, &amp; &amp; bg_default, &amp; ! ATTRIBUTES &amp; bold, italic, inverse, underline, &amp; &amp; unbold, unitalic, uninverse, ununderline, &amp; &amp; reset, &amp; ! DISPLAY &amp; clear implicit none write(*,'(*(g0))')fg_red,bg_green,bold,' Hello! ',reset</p>
 <p>write(*,'(a)')color(' Hello! ',&amp; &amp; fg=fg_white,bg=bg_red,style=italic//bold) call color_mode(.false.) write(*,'(a)')color(' Hello! ',&amp; &amp; fg=fg_red,bg=bg_red,style=italic//bold) end program demo_color</p>
-<h2><a class="anchor" id="autotoc_md22"></a>
+<h2><a class="anchor" id="autotoc_md21"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2020 </p>
-<h2><a class="anchor" id="autotoc_md23"></a>
+<h2><a class="anchor" id="autotoc_md22"></a>
 LICENSE</h2>
 <p>Public Domain </p>
 
@@ -498,29 +502,29 @@ LICENSE</h2>
         </tr>
       </table>
 </div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md24"></a>
+<h2><a class="anchor" id="autotoc_md23"></a>
 NAME</h2>
 <p>color_mode(3f) - [M_escape] toggle style effects of color(3f) on and off (LICENSE:PD) </p>
-<h2><a class="anchor" id="autotoc_md25"></a>
+<h2><a class="anchor" id="autotoc_md24"></a>
 SYNOPSIS</h2>
 <pre class="fragment"> subroutine color_mode(switch)
 
   logical,intent(in) :: switch
-</pre><h2><a class="anchor" id="autotoc_md26"></a>
+</pre><h2><a class="anchor" id="autotoc_md25"></a>
 DESCRIPTION</h2>
 <p>The color constant strings can be used directly but unconditionally in an output statement. To allow the attributes to be ignored they can be called with the color(3f) routine, which the color_mode(3f) procedure can be used to toggle on and off. Note that this routine does an implicit reset at the end of each use.</p>
-<h2><a class="anchor" id="autotoc_md27"></a>
+<h2><a class="anchor" id="autotoc_md26"></a>
 OPTIONS</h2>
 <p>switch turn attributes set by color(3f) on and off</p>
-<h2><a class="anchor" id="autotoc_md28"></a>
+<h2><a class="anchor" id="autotoc_md27"></a>
 EXAMPLE</h2>
 <p>Sample program</p>
 <p>program demo_color_mode use M_escape, only : color, color_mode, &amp; ! FOREGROUND COLORS &amp; fg_red, fg_cyan, fg_magenta, fg_blue, &amp; &amp; fg_green, fg_yellow, fg_white, fg_ebony, &amp; &amp; fg_default, &amp; ! BACKGROUND COLORS &amp; bg_red, bg_cyan, bg_magenta, bg_blue, &amp; &amp; bg_green, bg_yellow, bg_white, bg_ebony, &amp; &amp; bg_default, &amp; ! ATTRIBUTES &amp; bold, italic, inverse, underline, &amp; &amp; unbold, unitalic, uninverse, ununderline, &amp; &amp; reset, &amp; ! DISPLAY &amp; clear implicit none write(*,'(*(g0))')fg_red,bg_green,bold,' Hello! ',reset</p>
 <p>write(*,'(a)')color(' Hello! ',&amp; &amp; fg=fg_white,bg=bg_red,style=italic//bold) call color_mode(.false.) write(*,'(a)')color(' Hello! ',&amp; &amp; fg=fg_red,bg=bg_red,style=italic//bold) end program demo_color_mode</p>
-<h2><a class="anchor" id="autotoc_md29"></a>
+<h2><a class="anchor" id="autotoc_md28"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2020 </p>
-<h2><a class="anchor" id="autotoc_md30"></a>
+<h2><a class="anchor" id="autotoc_md29"></a>
 LICENSE</h2>
 <p>Public Domain </p>
 
@@ -553,38 +557,38 @@ LICENSE</h2>
         </tr>
       </table>
 </div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 NAME</h2>
 <p>esc(3f) - [M_escape] substitute escape sequences for XML-like syntax in strings</p>
-<h2><a class="anchor" id="autotoc_md11"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 SYNOPSIS</h2>
 <pre class="fragment"> function esc(string,clear_at_end) result (expanded)
 
    character(len=*),intent(in) :: string
    logical,intent(in),optional :: clear_at_end
    character(len=:),allocatable :: expanded
-</pre><h2><a class="anchor" id="autotoc_md12"></a>
+</pre><h2><a class="anchor" id="autotoc_md11"></a>
 DESCRIPTION</h2>
 <p>Use XML-like syntax to add attributes to terminal output such as color.</p>
 <p>ANSI escape sequences are not universally supported by all terminal emulators; and normally should be suppressed when not going to a tty device. This routine provides the basic structure to support such behaviors.</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 OPTIONS</h2>
 <p>string input string of form </p><pre class="fragment">            "&lt;attribute_name&gt;string&lt;/attribute_name&gt; ...".
 
            where the current attributes are color names,
            bold, italic, underline, ...
 </pre><p>clear_at_end By default, a sequence to clear all text attributes is sent at the end of the returned text if an escape character appears in the output string. This can be turned off by setting this value to false. </p>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 KEYWORDS</h2>
 <p>current keywords</p>
 <p>colors: r, red, R, RED g, green, G, GREEN b, blue, B, BLUE m, magenta, M, MAGENTA c, cyan, C, CYAN y, yellow, Y, YELLOW e, ebony, E, EBONY w, white, W, WHITE attributes: it, italic bo, bold un, underline other: clear esc, escape default gt lt</p>
 <p>By default, if the color mnemonics (ie. the keywords) are uppercase they change the background color. If lowercase, the foreground color.</p>
 <p>The "default" keyword is typically used explicitly when clear_at_end=.false.</p>
 <p>Add, delete, and replace what strings are produced using UPDATE(3f).</p>
-<h2><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md14"></a>
 LIMITATIONS</h2>
 <p>o colors are not nestable, keywords are case-sensitive, o not all terminals obey the sequences. On Windows, it is best if you use Windows 10+ and/or the Linux mode; although it has worked with all CygWin and MinGW and Putty windows and mintty. o you should use "&lt;gt&gt;" and "&lt;lt&gt;" instead of "&gt;" and "&lt;" in a string processed by esc(3f) instead of in any plain text output so that the raw mode will create correct input for the esc(3f) function if read back in.</p>
-<h2><a class="anchor" id="autotoc_md16"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 EXAMPLE</h2>
 <p>Sample program</p>
 <p>program demo_esc use M_escape, only : esc, esc_mode, update write(*,'(a)') esc('&lt;clear&gt;TEST DEFAULTS:') call printstuff()</p>
@@ -684,22 +688,22 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md31"></a>
+<h2><a class="anchor" id="autotoc_md30"></a>
 NAME</h2>
 <p>esc_mode(3f) - [M_escape] select processing mode for output from esc(3f)</p>
-<h2><a class="anchor" id="autotoc_md32"></a>
+<h2><a class="anchor" id="autotoc_md31"></a>
 SYNOPSIS</h2>
 <pre class="fragment">subroutine esc_mode(manner)
 
    character(len=*),intent(in) :: manner
-</pre><h2><a class="anchor" id="autotoc_md33"></a>
+</pre><h2><a class="anchor" id="autotoc_md32"></a>
 DESCRIPTION</h2>
 <p>Turn off the generation of strings associated with the XML keywords in the string generated by the esc(3f) function, or display the text in raw mode as it was passed to esc(3f) or return to ANSI escape control sequence generation.</p>
-<h2><a class="anchor" id="autotoc_md34"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 OPTIONS</h2>
 <p>MANNER The current manners or modes supported via the ESC_MODE(3f) procedure are</p>
 <p>plain suppress the output associated with keywords color(default) commonly supported escape sequences raw echo the input to ESC(3f) as its output reload restore original keyword meanings deleted or replaced by calls to update(3f).</p>
-<h2><a class="anchor" id="autotoc_md35"></a>
+<h2><a class="anchor" id="autotoc_md34"></a>
 EXAMPLE</h2>
 <p>Sample program</p>
 <p>program demo_esc_mode use M_escape, only : esc, esc_mode implicit none character(len=1024) :: line real :: value</p>
@@ -780,30 +784,30 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md43"></a>
+<h2><a class="anchor" id="autotoc_md42"></a>
 NAME</h2>
 <p>print_dictionary(3f) - [ARGUMENTS:M_CLI2] print internal dictionary created by calls to update(3f) (LICENSE:PD)</p>
-<h2><a class="anchor" id="autotoc_md44"></a>
+<h2><a class="anchor" id="autotoc_md43"></a>
 SYNOPSIS</h2>
 <pre class="fragment">subroutine print_dictionary(header)
 
  character(len=*),intent(in),optional :: header
-</pre><h2><a class="anchor" id="autotoc_md45"></a>
+</pre><h2><a class="anchor" id="autotoc_md44"></a>
 DESCRIPTION</h2>
 <p>Print the internal dictionary created by calls to update(3f). This routine is intended to print the state of the argument list if an error occurs in using the update(3f) procedure.</p>
-<h2><a class="anchor" id="autotoc_md46"></a>
+<h2><a class="anchor" id="autotoc_md45"></a>
 OPTIONS</h2>
 <p>HEADER label to print before printing the state of the command argument list. </p>
-<h2><a class="anchor" id="autotoc_md47"></a>
+<h2><a class="anchor" id="autotoc_md46"></a>
 EXAMPLE</h2>
 <p>Typical usage:</p>
 <p>program demo_print_dictionary use M_escape, only : esc, update, print_dictionary implicit none write(*,'(a)') esc('&lt;clear&gt;TEST CUSTOMIZED:') ! add custom keywords call update('blink',char(27)//'[5m') call update('/blink',char(27)//'[38m') call print_dictionary('DICTIONARY') write(*,'(a)') esc('&lt;blink&gt;Items for Friday&lt;/blink&gt;') end program demo_print_dictionary</p>
 <p>Sample output</p>
 <p>demo_print_dictionary |cat -v -e -t</p>
-<h2><a class="anchor" id="autotoc_md48"></a>
+<h2><a class="anchor" id="autotoc_md47"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2020</p>
-<h2><a class="anchor" id="autotoc_md49"></a>
+<h2><a class="anchor" id="autotoc_md48"></a>
 LICENSE</h2>
 <p>Public Domain </p>
 
@@ -887,20 +891,20 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
-<h2><a class="anchor" id="autotoc_md36"></a>
+<h2><a class="anchor" id="autotoc_md35"></a>
 NAME</h2>
 <p>update(3f) - [M_escape] update internal dictionary given keyword and value (LICENSE:PD)</p>
-<h2><a class="anchor" id="autotoc_md37"></a>
+<h2><a class="anchor" id="autotoc_md36"></a>
 SYNOPSIS</h2>
 <p>subroutine update(key,val)</p>
 <p>character(len=*),intent(in) :: key character(len=*),intent(in),optional :: val</p>
-<h2><a class="anchor" id="autotoc_md38"></a>
+<h2><a class="anchor" id="autotoc_md37"></a>
 DESCRIPTION</h2>
 <p>Update internal dictionary in M_escape(3fm) module.</p>
-<h2><a class="anchor" id="autotoc_md39"></a>
+<h2><a class="anchor" id="autotoc_md38"></a>
 OPTIONS</h2>
 <p>key name of keyword to add, replace, or delete from dictionary val if present add or replace value associated with keyword. If not present remove keyword entry from dictionary. </p>
-<h2><a class="anchor" id="autotoc_md40"></a>
+<h2><a class="anchor" id="autotoc_md39"></a>
 EXAMPLE</h2>
 <p>Sample program</p>
 <p>program demo_update use M_escape, only : esc, update write(*,'(a)') esc('&lt;clear&gt;TEST CUSTOMIZED:') ! add custom keywords call update('blink',char(27)//'[5m') call update('/blink',char(27)//'[38m')</p>
@@ -908,10 +912,10 @@ EXAMPLE</h2>
 <p>write(*,'(a)',advance='no') esc('&lt;r&gt;RED&lt;/r&gt;,') write(*,'(a)',advance='no') esc('<b>BLUE</b>,') write(*,'(a)',advance='yes') esc('&lt;g&gt;GREEN&lt;/g&gt;')</p>
 <p>! delete call update('r') call update('/r') ! replace call update('b','&lt;&lt;&lt;&lt;') call update('/b','&gt;&gt;&gt;&gt;') write(*,'(a)',advance='no') esc('&lt;r&gt;RED&lt;/r&gt;,') write(*,'(a)',advance='no') esc('<b>BLUE</b>,') write(*,'(a)',advance='yes') esc('&lt;g&gt;GREEN&lt;/g&gt;')</p>
 <p>end program demo_update</p>
-<h2><a class="anchor" id="autotoc_md41"></a>
+<h2><a class="anchor" id="autotoc_md40"></a>
 AUTHOR</h2>
 <p>John S. Urban, 2020</p>
-<h2><a class="anchor" id="autotoc_md42"></a>
+<h2><a class="anchor" id="autotoc_md41"></a>
 LICENSE</h2>
 <p>Public Domain </p>
 

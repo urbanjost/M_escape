@@ -1,5 +1,10 @@
 \hypertarget{namespacem__escape}{}\doxysection{m\+\_\+escape Module Reference}
 \label{namespacem__escape}\index{m\_escape@{m\_escape}}
+\doxysubsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+interface \mbox{\hyperlink{interfacem__escape_1_1M__escape__initialize}{M\+\_\+escape\+\_\+initialize}}
+\end{DoxyCompactItemize}
 \doxysubsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
@@ -260,8 +265,7 @@ Alternatively, you may use the escape sequences directly
 program direct use M\+\_\+escape, only \+: \& ! F\+O\+R\+E\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& fg\+\_\+red, fg\+\_\+cyan, fg\+\_\+magenta, fg\+\_\+blue, \& \& fg\+\_\+green, fg\+\_\+yellow, fg\+\_\+white, fg\+\_\+ebony, \& \& fg\+\_\+default, \& ! B\+A\+C\+K\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& bg\+\_\+red, bg\+\_\+cyan, bg\+\_\+magenta, bg\+\_\+blue, \& \& bg\+\_\+green, bg\+\_\+yellow, bg\+\_\+white, bg\+\_\+ebony, \& \& bg\+\_\+default, \& ! A\+T\+T\+R\+I\+B\+U\+T\+ES \& bold, italic, inverse, underline, \& \& unbold, unitalic, uninverse, ununderline, \& \& reset, \& ! D\+I\+S\+P\+L\+AY \& clear implicit none write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{})fg\+\_\+red,bg\+\_\+green,bold,\textquotesingle{}Hello!\textquotesingle{},reset end program direct\hypertarget{namespacem__escape_autotoc_md8}{}\doxysubsubsection{A\+L\+T\+E\+R\+N\+A\+T\+E F\+U\+N\+C\+T\+I\+O\+N\+A\+L I\+N\+T\+E\+R\+F\+A\+CE}\label{namespacem__escape_autotoc_md8}
 If you prefer a functional interface, use the attr(3f) function with the same keywords as with the esc(3f) function. Note that esc\+\_\+mode(3f) will work with this function.
 
-program functional use M\+\_\+escape, only \+: attr, esc\+\_\+mode implicit none call printme(\textquotesingle{}color\textquotesingle{}) call printme(\textquotesingle{}plain\textquotesingle{}) call printme(\textquotesingle{}raw\textquotesingle{}) contains subroutine printme(mymode) character(len=$\ast$),intent(in) \+:: mymode call esc\+\_\+mode(mymode) write($\ast$,\textquotesingle{}(a)\textquotesingle{})mymode write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}no\textquotesingle{}) \& \& attr(\textquotesingle{}red\+:\+B\+L\+UE\+:bold\textquotesingle{},\textquotesingle{}Hello!\textquotesingle{}), \& \& \textquotesingle{}and everything is back to defaults or \textquotesingle{}, \& \& attr(\textquotesingle{}R\+E\+D\+:blue\+:bold\textquotesingle{}),\textquotesingle{}Hello Again!\textquotesingle{}, \& \& attr(\textquotesingle{}/\+B\+L\+UE\textquotesingle{}),\textquotesingle{} Well, the text color is still on.\textquotesingle{},attr(\textquotesingle{}reset\textquotesingle{}) write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}yes\textquotesingle{})\textquotesingle{} Back to normal writes.\textquotesingle{} end subroutine printme end program functional\hypertarget{namespacem__escape_autotoc_md9}{}\doxysubsubsection{A\+L\+T\+E\+R\+N\+A\+T\+E O\+B\+J\+E\+C\+T O\+R\+I\+E\+N\+T\+ED}\label{namespacem__escape_autotoc_md9}
-
+program functional use M\+\_\+escape, only \+: attr, esc\+\_\+mode implicit none call printme(\textquotesingle{}color\textquotesingle{}) call printme(\textquotesingle{}plain\textquotesingle{}) call printme(\textquotesingle{}raw\textquotesingle{}) contains subroutine printme(mymode) character(len=$\ast$),intent(in) \+:: mymode call esc\+\_\+mode(mymode) write($\ast$,\textquotesingle{}(a)\textquotesingle{})mymode write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}no\textquotesingle{}) \& \& attr(\textquotesingle{}red\+:\+B\+L\+UE\+:bold\textquotesingle{},\textquotesingle{}Hello!\textquotesingle{}), \& \& \textquotesingle{}and everything is back to defaults or \textquotesingle{}, \& \& attr(\textquotesingle{}R\+E\+D\+:blue\+:bold\textquotesingle{}),\textquotesingle{}Hello Again!\textquotesingle{}, \& \& attr(\textquotesingle{}/\+B\+L\+UE\textquotesingle{}),\textquotesingle{} Well, the text color is still on.\textquotesingle{},attr(\textquotesingle{}reset\textquotesingle{}) write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}yes\textquotesingle{})\textquotesingle{} Back to normal writes.\textquotesingle{} end subroutine printme end program functional 
 
 \doxysubsection{Function/\+Subroutine Documentation}
 \mbox{\Hypertarget{namespacem__escape_a916b16ce9be553d669f54cb9575a91be}\label{namespacem__escape_a916b16ce9be553d669f54cb9575a91be}} 
@@ -270,18 +274,18 @@ program functional use M\+\_\+escape, only \+: attr, esc\+\_\+mode implicit none
 \doxysubsubsection{\texorpdfstring{attr()}{attr()}}
 {\footnotesize\ttfamily character(len=\+:) function, allocatable, public m\+\_\+escape\+::attr (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in)}]{attribute,  }\item[{character(len=$\ast$), intent(in), optional}]{text }\end{DoxyParamCaption})}
 
-\hypertarget{namespacem__escape_autotoc_md50}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md50}
-attr(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD)\hypertarget{namespacem__escape_autotoc_md51}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md51}
+\hypertarget{namespacem__escape_autotoc_md49}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md49}
+attr(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD)\hypertarget{namespacem__escape_autotoc_md50}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md50}
 function attr(attribute) result (out)
 
-character(len=$\ast$),intent(in) \+:: attribute character(len=\+:),allocatable \+:: out\hypertarget{namespacem__escape_autotoc_md52}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md52}
-attr(3f) uses the same keywords as esc(3f) to send A\+N\+SI escape sequences to the display screen, except instead of using a pseudo-\/\+X\+ML string to select the codes it uses a simple colon-\/delimited list of the keywords.\hypertarget{namespacem__escape_autotoc_md53}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md53}
-attribute colon, space, or comma-\/delimited list of attribute keywords as defined in the esc(3f) procedure. text if supplied it is printed and then an attribute reset is added\hypertarget{namespacem__escape_autotoc_md54}{}\doxysubsubsection{R\+E\+T\+U\+R\+NS}\label{namespacem__escape_autotoc_md54}
-out output the strings assigned by the keywords (by default A\+N\+SI video display escape sequences, see update(3f) ) \hypertarget{namespacem__escape_autotoc_md55}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md55}
+character(len=$\ast$),intent(in) \+:: attribute character(len=\+:),allocatable \+:: out\hypertarget{namespacem__escape_autotoc_md51}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md51}
+attr(3f) uses the same keywords as esc(3f) to send A\+N\+SI escape sequences to the display screen, except instead of using a pseudo-\/\+X\+ML string to select the codes it uses a simple colon-\/delimited list of the keywords.\hypertarget{namespacem__escape_autotoc_md52}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md52}
+attribute colon, space, or comma-\/delimited list of attribute keywords as defined in the esc(3f) procedure. text if supplied it is printed and then an attribute reset is added\hypertarget{namespacem__escape_autotoc_md53}{}\doxysubsubsection{R\+E\+T\+U\+R\+NS}\label{namespacem__escape_autotoc_md53}
+out output the strings assigned by the keywords (by default A\+N\+SI video display escape sequences, see update(3f) ) \hypertarget{namespacem__escape_autotoc_md54}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md54}
 Sample program
 
-program demo\+\_\+attr use M\+\_\+escape, only \+: attr, esc\+\_\+mode implicit none call printme(\textquotesingle{}color\textquotesingle{}) call printme(\textquotesingle{}plain\textquotesingle{}) call printme(\textquotesingle{}raw\textquotesingle{}) contains subroutine printme(mymode) character(len=$\ast$),intent(in) \+:: mymode call esc\+\_\+mode(mymode) write($\ast$,\textquotesingle{}(a)\textquotesingle{})mymode write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}no\textquotesingle{})attr(\textquotesingle{}red\+:\+B\+L\+UE\+:bold\textquotesingle{},\textquotesingle{}Hello!\textquotesingle{}), \& \& \textquotesingle{}and everything is back to defaults or \textquotesingle{}, \& \& attr(\textquotesingle{}R\+E\+D\+:blue\+:bold\textquotesingle{}),\textquotesingle{}Hello Again!\textquotesingle{}, \& \& attr(\textquotesingle{}/\+R\+ED\textquotesingle{}),\textquotesingle{} Well, the text color is still blue.\textquotesingle{},attr(\textquotesingle{}reset\textquotesingle{}) write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}yes\textquotesingle{})\textquotesingle{} Back to a normal write statement.\textquotesingle{} end subroutine printme end program demo\+\_\+attr\hypertarget{namespacem__escape_autotoc_md56}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__escape_autotoc_md56}
-John S. Urban, 2020\hypertarget{namespacem__escape_autotoc_md57}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__escape_autotoc_md57}
+program demo\+\_\+attr use M\+\_\+escape, only \+: attr, esc\+\_\+mode implicit none call printme(\textquotesingle{}color\textquotesingle{}) call printme(\textquotesingle{}plain\textquotesingle{}) call printme(\textquotesingle{}raw\textquotesingle{}) contains subroutine printme(mymode) character(len=$\ast$),intent(in) \+:: mymode call esc\+\_\+mode(mymode) write($\ast$,\textquotesingle{}(a)\textquotesingle{})mymode write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}no\textquotesingle{})attr(\textquotesingle{}red\+:\+B\+L\+UE\+:bold\textquotesingle{},\textquotesingle{}Hello!\textquotesingle{}), \& \& \textquotesingle{}and everything is back to defaults or \textquotesingle{}, \& \& attr(\textquotesingle{}R\+E\+D\+:blue\+:bold\textquotesingle{}),\textquotesingle{}Hello Again!\textquotesingle{}, \& \& attr(\textquotesingle{}/\+R\+ED\textquotesingle{}),\textquotesingle{} Well, the text color is still blue.\textquotesingle{},attr(\textquotesingle{}reset\textquotesingle{}) write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{},advance=\textquotesingle{}yes\textquotesingle{})\textquotesingle{} Back to a normal write statement.\textquotesingle{} end subroutine printme end program demo\+\_\+attr\hypertarget{namespacem__escape_autotoc_md55}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__escape_autotoc_md55}
+John S. Urban, 2020\hypertarget{namespacem__escape_autotoc_md56}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__escape_autotoc_md56}
 Public Domain 
 
 References esc(), get(), mode, split(), and vt102().
@@ -299,8 +303,8 @@ Here is the call graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{color()}{color()}}
 {\footnotesize\ttfamily character(len=\+:) function, allocatable, public m\+\_\+escape\+::color (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in)}]{string,  }\item[{character(len=$\ast$), intent(in), optional}]{fg,  }\item[{character(len=$\ast$), intent(in), optional}]{bg,  }\item[{character(len=$\ast$), intent(in), optional}]{style }\end{DoxyParamCaption})}
 
-\hypertarget{namespacem__escape_autotoc_md17}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md17}
-color(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \hypertarget{namespacem__escape_autotoc_md18}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md18}
+\hypertarget{namespacem__escape_autotoc_md16}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md16}
+color(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple function-\/based approach (L\+I\+C\+E\+N\+SE\+:PD) \hypertarget{namespacem__escape_autotoc_md17}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md17}
 \begin{DoxyVerb}use M_escape, only : color, color_mode, &
 
  ! FOREGROUND COLORS
@@ -325,15 +329,15 @@ color(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} colorize text using a simple functio
   character(len=*),intent(in),optional :: bg
   character(len=*),intent(in),optional :: style
 \end{DoxyVerb}
-\hypertarget{namespacem__escape_autotoc_md19}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md19}
-The color constant strings can be used directly but unconditionally in an output statement. To allow the attributes to be ignored they can be called with the color(3f) routine, which the color\+\_\+mode(3f) procedure can be used to toggle on and off. Note that this routine does an implicit reset at the end of each use.\hypertarget{namespacem__escape_autotoc_md20}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md20}
-string string to assign attributes to fg foreground color constant bg background color constant style style keyword or concatenated style keywords\hypertarget{namespacem__escape_autotoc_md21}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md21}
+\hypertarget{namespacem__escape_autotoc_md18}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md18}
+The color constant strings can be used directly but unconditionally in an output statement. To allow the attributes to be ignored they can be called with the color(3f) routine, which the color\+\_\+mode(3f) procedure can be used to toggle on and off. Note that this routine does an implicit reset at the end of each use.\hypertarget{namespacem__escape_autotoc_md19}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md19}
+string string to assign attributes to fg foreground color constant bg background color constant style style keyword or concatenated style keywords\hypertarget{namespacem__escape_autotoc_md20}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md20}
 Sample program
 
 program demo\+\_\+color use M\+\_\+escape, only \+: color, color\+\_\+mode, \& ! F\+O\+R\+E\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& fg\+\_\+red, fg\+\_\+cyan, fg\+\_\+magenta, fg\+\_\+blue, \& \& fg\+\_\+green, fg\+\_\+yellow, fg\+\_\+white, fg\+\_\+ebony, \& \& fg\+\_\+default, \& ! B\+A\+C\+K\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& bg\+\_\+red, bg\+\_\+cyan, bg\+\_\+magenta, bg\+\_\+blue, \& \& bg\+\_\+green, bg\+\_\+yellow, bg\+\_\+white, bg\+\_\+ebony, \& \& bg\+\_\+default, \& ! A\+T\+T\+R\+I\+B\+U\+T\+ES \& bold, italic, inverse, underline, \& \& unbold, unitalic, uninverse, ununderline, \& \& reset, \& ! D\+I\+S\+P\+L\+AY \& clear implicit none write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{})fg\+\_\+red,bg\+\_\+green,bold,\textquotesingle{} Hello! \textquotesingle{},reset
 
-write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},\& \& fg=fg\+\_\+white,bg=bg\+\_\+red,style=italic//bold) call color\+\_\+mode(.false.) write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},\& \& fg=fg\+\_\+red,bg=bg\+\_\+red,style=italic//bold) end program demo\+\_\+color\hypertarget{namespacem__escape_autotoc_md22}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__escape_autotoc_md22}
-John S. Urban, 2020 \hypertarget{namespacem__escape_autotoc_md23}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__escape_autotoc_md23}
+write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},\& \& fg=fg\+\_\+white,bg=bg\+\_\+red,style=italic//bold) call color\+\_\+mode(.false.) write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},\& \& fg=fg\+\_\+red,bg=bg\+\_\+red,style=italic//bold) end program demo\+\_\+color\hypertarget{namespacem__escape_autotoc_md21}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__escape_autotoc_md21}
+John S. Urban, 2020 \hypertarget{namespacem__escape_autotoc_md22}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__escape_autotoc_md22}
 Public Domain 
 
 References g\+\_\+color, and reset.
@@ -344,21 +348,21 @@ References g\+\_\+color, and reset.
 \doxysubsubsection{\texorpdfstring{color\_mode()}{color\_mode()}}
 {\footnotesize\ttfamily subroutine, public m\+\_\+escape\+::color\+\_\+mode (\begin{DoxyParamCaption}\item[{logical, intent(in)}]{switch }\end{DoxyParamCaption})}
 
-\hypertarget{namespacem__escape_autotoc_md24}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md24}
-color\+\_\+mode(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} toggle style effects of color(3f) on and off (L\+I\+C\+E\+N\+SE\+:PD) \hypertarget{namespacem__escape_autotoc_md25}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md25}
+\hypertarget{namespacem__escape_autotoc_md23}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md23}
+color\+\_\+mode(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} toggle style effects of color(3f) on and off (L\+I\+C\+E\+N\+SE\+:PD) \hypertarget{namespacem__escape_autotoc_md24}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md24}
 \begin{DoxyVerb} subroutine color_mode(switch)
 
   logical,intent(in) :: switch
 \end{DoxyVerb}
-\hypertarget{namespacem__escape_autotoc_md26}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md26}
-The color constant strings can be used directly but unconditionally in an output statement. To allow the attributes to be ignored they can be called with the color(3f) routine, which the color\+\_\+mode(3f) procedure can be used to toggle on and off. Note that this routine does an implicit reset at the end of each use.\hypertarget{namespacem__escape_autotoc_md27}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md27}
-switch turn attributes set by color(3f) on and off\hypertarget{namespacem__escape_autotoc_md28}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md28}
+\hypertarget{namespacem__escape_autotoc_md25}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md25}
+The color constant strings can be used directly but unconditionally in an output statement. To allow the attributes to be ignored they can be called with the color(3f) routine, which the color\+\_\+mode(3f) procedure can be used to toggle on and off. Note that this routine does an implicit reset at the end of each use.\hypertarget{namespacem__escape_autotoc_md26}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md26}
+switch turn attributes set by color(3f) on and off\hypertarget{namespacem__escape_autotoc_md27}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md27}
 Sample program
 
 program demo\+\_\+color\+\_\+mode use M\+\_\+escape, only \+: color, color\+\_\+mode, \& ! F\+O\+R\+E\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& fg\+\_\+red, fg\+\_\+cyan, fg\+\_\+magenta, fg\+\_\+blue, \& \& fg\+\_\+green, fg\+\_\+yellow, fg\+\_\+white, fg\+\_\+ebony, \& \& fg\+\_\+default, \& ! B\+A\+C\+K\+G\+R\+O\+U\+ND C\+O\+L\+O\+RS \& bg\+\_\+red, bg\+\_\+cyan, bg\+\_\+magenta, bg\+\_\+blue, \& \& bg\+\_\+green, bg\+\_\+yellow, bg\+\_\+white, bg\+\_\+ebony, \& \& bg\+\_\+default, \& ! A\+T\+T\+R\+I\+B\+U\+T\+ES \& bold, italic, inverse, underline, \& \& unbold, unitalic, uninverse, ununderline, \& \& reset, \& ! D\+I\+S\+P\+L\+AY \& clear implicit none write($\ast$,\textquotesingle{}($\ast$(g0))\textquotesingle{})fg\+\_\+red,bg\+\_\+green,bold,\textquotesingle{} Hello! \textquotesingle{},reset
 
-write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},\& \& fg=fg\+\_\+white,bg=bg\+\_\+red,style=italic//bold) call color\+\_\+mode(.false.) write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},\& \& fg=fg\+\_\+red,bg=bg\+\_\+red,style=italic//bold) end program demo\+\_\+color\+\_\+mode\hypertarget{namespacem__escape_autotoc_md29}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__escape_autotoc_md29}
-John S. Urban, 2020 \hypertarget{namespacem__escape_autotoc_md30}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__escape_autotoc_md30}
+write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},\& \& fg=fg\+\_\+white,bg=bg\+\_\+red,style=italic//bold) call color\+\_\+mode(.false.) write($\ast$,\textquotesingle{}(a)\textquotesingle{})color(\textquotesingle{} Hello! \textquotesingle{},\& \& fg=fg\+\_\+red,bg=bg\+\_\+red,style=italic//bold) end program demo\+\_\+color\+\_\+mode\hypertarget{namespacem__escape_autotoc_md28}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__escape_autotoc_md28}
+John S. Urban, 2020 \hypertarget{namespacem__escape_autotoc_md29}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__escape_autotoc_md29}
 Public Domain 
 
 References g\+\_\+color.
@@ -369,18 +373,18 @@ References g\+\_\+color.
 \doxysubsubsection{\texorpdfstring{esc()}{esc()}}
 {\footnotesize\ttfamily character(len=\+:) function, allocatable, public m\+\_\+escape\+::esc (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in)}]{string,  }\item[{logical, intent(in), optional}]{clear\+\_\+at\+\_\+end }\end{DoxyParamCaption})}
 
-\hypertarget{namespacem__escape_autotoc_md10}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md10}
-esc(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax in strings\hypertarget{namespacem__escape_autotoc_md11}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md11}
+\hypertarget{namespacem__escape_autotoc_md9}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md9}
+esc(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} substitute escape sequences for X\+M\+L-\/like syntax in strings\hypertarget{namespacem__escape_autotoc_md10}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md10}
 \begin{DoxyVerb} function esc(string,clear_at_end) result (expanded)
 
    character(len=*),intent(in) :: string
    logical,intent(in),optional :: clear_at_end
    character(len=:),allocatable :: expanded
 \end{DoxyVerb}
-\hypertarget{namespacem__escape_autotoc_md12}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md12}
+\hypertarget{namespacem__escape_autotoc_md11}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md11}
 Use X\+M\+L-\/like syntax to add attributes to terminal output such as color.
 
-A\+N\+SI escape sequences are not universally supported by all terminal emulators; and normally should be suppressed when not going to a tty device. This routine provides the basic structure to support such behaviors.\hypertarget{namespacem__escape_autotoc_md13}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md13}
+A\+N\+SI escape sequences are not universally supported by all terminal emulators; and normally should be suppressed when not going to a tty device. This routine provides the basic structure to support such behaviors.\hypertarget{namespacem__escape_autotoc_md12}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md12}
 string input string of form \begin{DoxyVerb}            "<attribute_name>string</attribute_name> ...".
 
            where the current attributes are color names,
@@ -388,7 +392,7 @@ string input string of form \begin{DoxyVerb}            "<attribute_name>string<
 \end{DoxyVerb}
 
 
-clear\+\_\+at\+\_\+end By default, a sequence to clear all text attributes is sent at the end of the returned text if an escape character appears in the output string. This can be turned off by setting this value to false. \hypertarget{namespacem__escape_autotoc_md14}{}\doxysubsubsection{K\+E\+Y\+W\+O\+R\+DS}\label{namespacem__escape_autotoc_md14}
+clear\+\_\+at\+\_\+end By default, a sequence to clear all text attributes is sent at the end of the returned text if an escape character appears in the output string. This can be turned off by setting this value to false. \hypertarget{namespacem__escape_autotoc_md13}{}\doxysubsubsection{K\+E\+Y\+W\+O\+R\+DS}\label{namespacem__escape_autotoc_md13}
 current keywords
 
 colors\+: r, red, R, R\+ED g, green, G, G\+R\+E\+EN b, blue, B, B\+L\+UE m, magenta, M, M\+A\+G\+E\+N\+TA c, cyan, C, C\+Y\+AN y, yellow, Y, Y\+E\+L\+L\+OW e, ebony, E, E\+B\+O\+NY w, white, W, W\+H\+I\+TE attributes\+: it, italic bo, bold un, underline other\+: clear esc, escape default gt lt
@@ -397,8 +401,8 @@ By default, if the color mnemonics (ie. the keywords) are uppercase they change 
 
 The \char`\"{}default\char`\"{} keyword is typically used explicitly when clear\+\_\+at\+\_\+end=.false.
 
-Add, delete, and replace what strings are produced using U\+P\+D\+A\+T\+E(3f).\hypertarget{namespacem__escape_autotoc_md15}{}\doxysubsubsection{L\+I\+M\+I\+T\+A\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md15}
-o colors are not nestable, keywords are case-\/sensitive, o not all terminals obey the sequences. On Windows, it is best if you use Windows 10+ and/or the Linux mode; although it has worked with all Cyg\+Win and Min\+GW and Putty windows and mintty. o you should use \char`\"{}$<$gt$>$\char`\"{} and \char`\"{}$<$lt$>$\char`\"{} instead of \char`\"{}$>$\char`\"{} and \char`\"{}$<$\char`\"{} in a string processed by esc(3f) instead of in any plain text output so that the raw mode will create correct input for the esc(3f) function if read back in.\hypertarget{namespacem__escape_autotoc_md16}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md16}
+Add, delete, and replace what strings are produced using U\+P\+D\+A\+T\+E(3f).\hypertarget{namespacem__escape_autotoc_md14}{}\doxysubsubsection{L\+I\+M\+I\+T\+A\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md14}
+o colors are not nestable, keywords are case-\/sensitive, o not all terminals obey the sequences. On Windows, it is best if you use Windows 10+ and/or the Linux mode; although it has worked with all Cyg\+Win and Min\+GW and Putty windows and mintty. o you should use \char`\"{}$<$gt$>$\char`\"{} and \char`\"{}$<$lt$>$\char`\"{} instead of \char`\"{}$>$\char`\"{} and \char`\"{}$<$\char`\"{} in a string processed by esc(3f) instead of in any plain text output so that the raw mode will create correct input for the esc(3f) function if read back in.\hypertarget{namespacem__escape_autotoc_md15}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md15}
 Sample program
 
 program demo\+\_\+esc use M\+\_\+escape, only \+: esc, esc\+\_\+mode, update write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$clear$>$T\+E\+ST D\+E\+F\+A\+U\+L\+TS\+:\textquotesingle{}) call printstuff()
@@ -480,17 +484,17 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{esc\_mode()}{esc\_mode()}}
 {\footnotesize\ttfamily subroutine, public m\+\_\+escape\+::esc\+\_\+mode (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in)}]{manner }\end{DoxyParamCaption})}
 
-\hypertarget{namespacem__escape_autotoc_md31}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md31}
-esc\+\_\+mode(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} select processing mode for output from esc(3f)\hypertarget{namespacem__escape_autotoc_md32}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md32}
+\hypertarget{namespacem__escape_autotoc_md30}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md30}
+esc\+\_\+mode(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} select processing mode for output from esc(3f)\hypertarget{namespacem__escape_autotoc_md31}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md31}
 \begin{DoxyVerb}subroutine esc_mode(manner)
 
    character(len=*),intent(in) :: manner
 \end{DoxyVerb}
-\hypertarget{namespacem__escape_autotoc_md33}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md33}
-Turn off the generation of strings associated with the X\+ML keywords in the string generated by the esc(3f) function, or display the text in raw mode as it was passed to esc(3f) or return to A\+N\+SI escape control sequence generation.\hypertarget{namespacem__escape_autotoc_md34}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md34}
+\hypertarget{namespacem__escape_autotoc_md32}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md32}
+Turn off the generation of strings associated with the X\+ML keywords in the string generated by the esc(3f) function, or display the text in raw mode as it was passed to esc(3f) or return to A\+N\+SI escape control sequence generation.\hypertarget{namespacem__escape_autotoc_md33}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md33}
 M\+A\+N\+N\+ER The current manners or modes supported via the E\+S\+C\+\_\+\+M\+O\+D\+E(3f) procedure are
 
-plain suppress the output associated with keywords color(default) commonly supported escape sequences raw echo the input to E\+S\+C(3f) as its output reload restore original keyword meanings deleted or replaced by calls to update(3f).\hypertarget{namespacem__escape_autotoc_md35}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md35}
+plain suppress the output associated with keywords color(default) commonly supported escape sequences raw echo the input to E\+S\+C(3f) as its output reload restore original keyword meanings deleted or replaced by calls to update(3f).\hypertarget{namespacem__escape_autotoc_md34}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md34}
 Sample program
 
 program demo\+\_\+esc\+\_\+mode use M\+\_\+escape, only \+: esc, esc\+\_\+mode implicit none character(len=1024) \+:: line real \+:: value
@@ -539,23 +543,23 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{print\_dictionary()}{print\_dictionary()}}
 {\footnotesize\ttfamily subroutine, public m\+\_\+escape\+::print\+\_\+dictionary (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in), optional}]{header }\end{DoxyParamCaption})}
 
-\hypertarget{namespacem__escape_autotoc_md43}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md43}
-print\+\_\+dictionary(3f) -\/ \mbox{[}A\+R\+G\+U\+M\+E\+N\+TS\+:M\+\_\+\+C\+L\+I2\mbox{]} print internal dictionary created by calls to update(3f) (L\+I\+C\+E\+N\+SE\+:PD)\hypertarget{namespacem__escape_autotoc_md44}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md44}
+\hypertarget{namespacem__escape_autotoc_md42}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md42}
+print\+\_\+dictionary(3f) -\/ \mbox{[}A\+R\+G\+U\+M\+E\+N\+TS\+:M\+\_\+\+C\+L\+I2\mbox{]} print internal dictionary created by calls to update(3f) (L\+I\+C\+E\+N\+SE\+:PD)\hypertarget{namespacem__escape_autotoc_md43}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md43}
 \begin{DoxyVerb}subroutine print_dictionary(header)
 
  character(len=*),intent(in),optional :: header
 \end{DoxyVerb}
-\hypertarget{namespacem__escape_autotoc_md45}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md45}
-Print the internal dictionary created by calls to update(3f). This routine is intended to print the state of the argument list if an error occurs in using the update(3f) procedure.\hypertarget{namespacem__escape_autotoc_md46}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md46}
-H\+E\+A\+D\+ER label to print before printing the state of the command argument list. \hypertarget{namespacem__escape_autotoc_md47}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md47}
+\hypertarget{namespacem__escape_autotoc_md44}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md44}
+Print the internal dictionary created by calls to update(3f). This routine is intended to print the state of the argument list if an error occurs in using the update(3f) procedure.\hypertarget{namespacem__escape_autotoc_md45}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md45}
+H\+E\+A\+D\+ER label to print before printing the state of the command argument list. \hypertarget{namespacem__escape_autotoc_md46}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md46}
 Typical usage\+:
 
 program demo\+\_\+print\+\_\+dictionary use M\+\_\+escape, only \+: esc, update, print\+\_\+dictionary implicit none write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$clear$>$T\+E\+ST C\+U\+S\+T\+O\+M\+I\+Z\+ED\+:\textquotesingle{}) ! add custom keywords call update(\textquotesingle{}blink\textquotesingle{},char(27)//\textquotesingle{}\mbox{[}5m\textquotesingle{}) call update(\textquotesingle{}/blink\textquotesingle{},char(27)//\textquotesingle{}\mbox{[}38m\textquotesingle{}) call print\+\_\+dictionary(\textquotesingle{}D\+I\+C\+T\+I\+O\+N\+A\+RY\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$blink$>$Items for Friday$<$/blink$>$\textquotesingle{}) end program demo\+\_\+print\+\_\+dictionary
 
 Sample output
 
-demo\+\_\+print\+\_\+dictionary $\vert$cat -\/v -\/e -\/t\hypertarget{namespacem__escape_autotoc_md48}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__escape_autotoc_md48}
-John S. Urban, 2020\hypertarget{namespacem__escape_autotoc_md49}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__escape_autotoc_md49}
+demo\+\_\+print\+\_\+dictionary $\vert$cat -\/v -\/e -\/t\hypertarget{namespacem__escape_autotoc_md47}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__escape_autotoc_md47}
+John S. Urban, 2020\hypertarget{namespacem__escape_autotoc_md48}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__escape_autotoc_md48}
 Public Domain 
 
 References counts, keywords, and values.
@@ -579,13 +583,13 @@ Here is the caller graph for this function\+:\nopagebreak
 \doxysubsubsection{\texorpdfstring{update()}{update()}}
 {\footnotesize\ttfamily subroutine, public m\+\_\+escape\+::update (\begin{DoxyParamCaption}\item[{character(len=$\ast$), intent(in)}]{key,  }\item[{character(len=$\ast$), intent(in), optional}]{valin }\end{DoxyParamCaption})}
 
-\hypertarget{namespacem__escape_autotoc_md36}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md36}
-update(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} update internal dictionary given keyword and value (L\+I\+C\+E\+N\+SE\+:PD)\hypertarget{namespacem__escape_autotoc_md37}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md37}
+\hypertarget{namespacem__escape_autotoc_md35}{}\doxysubsubsection{N\+A\+ME}\label{namespacem__escape_autotoc_md35}
+update(3f) -\/ \mbox{[}M\+\_\+escape\mbox{]} update internal dictionary given keyword and value (L\+I\+C\+E\+N\+SE\+:PD)\hypertarget{namespacem__escape_autotoc_md36}{}\doxysubsubsection{S\+Y\+N\+O\+P\+S\+IS}\label{namespacem__escape_autotoc_md36}
 subroutine update(key,val)
 
-character(len=$\ast$),intent(in) \+:: key character(len=$\ast$),intent(in),optional \+:: val\hypertarget{namespacem__escape_autotoc_md38}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md38}
-Update internal dictionary in M\+\_\+escape(3fm) module.\hypertarget{namespacem__escape_autotoc_md39}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md39}
-key name of keyword to add, replace, or delete from dictionary val if present add or replace value associated with keyword. If not present remove keyword entry from dictionary. \hypertarget{namespacem__escape_autotoc_md40}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md40}
+character(len=$\ast$),intent(in) \+:: key character(len=$\ast$),intent(in),optional \+:: val\hypertarget{namespacem__escape_autotoc_md37}{}\doxysubsubsection{D\+E\+S\+C\+R\+I\+P\+T\+I\+ON}\label{namespacem__escape_autotoc_md37}
+Update internal dictionary in M\+\_\+escape(3fm) module.\hypertarget{namespacem__escape_autotoc_md38}{}\doxysubsubsection{O\+P\+T\+I\+O\+NS}\label{namespacem__escape_autotoc_md38}
+key name of keyword to add, replace, or delete from dictionary val if present add or replace value associated with keyword. If not present remove keyword entry from dictionary. \hypertarget{namespacem__escape_autotoc_md39}{}\doxysubsubsection{E\+X\+A\+M\+P\+LE}\label{namespacem__escape_autotoc_md39}
 Sample program
 
 program demo\+\_\+update use M\+\_\+escape, only \+: esc, update write($\ast$,\textquotesingle{}(a)\textquotesingle{}) esc(\textquotesingle{}$<$clear$>$T\+E\+ST C\+U\+S\+T\+O\+M\+I\+Z\+ED\+:\textquotesingle{}) ! add custom keywords call update(\textquotesingle{}blink\textquotesingle{},char(27)//\textquotesingle{}\mbox{[}5m\textquotesingle{}) call update(\textquotesingle{}/blink\textquotesingle{},char(27)//\textquotesingle{}\mbox{[}38m\textquotesingle{})
@@ -596,8 +600,8 @@ write($\ast$,\textquotesingle{}(a)\textquotesingle{},advance=\textquotesingle{}n
 
 ! delete call update(\textquotesingle{}r\textquotesingle{}) call update(\textquotesingle{}/r\textquotesingle{}) ! replace call update(\textquotesingle{}b\textquotesingle{},\textquotesingle{}$<$$<$$<$$<$\textquotesingle{}) call update(\textquotesingle{}/b\textquotesingle{},\textquotesingle{}$>$$>$$>$$>$\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{},advance=\textquotesingle{}no\textquotesingle{}) esc(\textquotesingle{}$<$r$>$R\+ED$<$/r$>$,\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{},advance=\textquotesingle{}no\textquotesingle{}) esc(\textquotesingle{}{\bfseries{B\+L\+UE}},\textquotesingle{}) write($\ast$,\textquotesingle{}(a)\textquotesingle{},advance=\textquotesingle{}yes\textquotesingle{}) esc(\textquotesingle{}$<$g$>$G\+R\+E\+EN$<$/g$>$\textquotesingle{})
 
-end program demo\+\_\+update\hypertarget{namespacem__escape_autotoc_md41}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__escape_autotoc_md41}
-John S. Urban, 2020\hypertarget{namespacem__escape_autotoc_md42}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__escape_autotoc_md42}
+end program demo\+\_\+update\hypertarget{namespacem__escape_autotoc_md40}{}\doxysubsubsection{A\+U\+T\+H\+OR}\label{namespacem__escape_autotoc_md40}
+John S. Urban, 2020\hypertarget{namespacem__escape_autotoc_md41}{}\doxysubsubsection{L\+I\+C\+E\+N\+SE}\label{namespacem__escape_autotoc_md41}
 Public Domain 
 
 References counts, keywords, and values.
