@@ -6,12 +6,12 @@ list of notable changes including`records of change such as bug fixes,
 new features, changes, and relevant notifications.
 
 ---
-**2021-06-09**  Carlos Une <https://github.com/SomajitDey;brocolis@eml.cc>
+**2021-06-09**  Carlos Une <https://github.com/SomajitDey>
 
 ### :green_circle: ADD:
     Added `M_escape_initialize` interface so you can activate recognition of
     ANSI escape sequences on MSWindows platforms that do not always recognize
-    them by default.
+    them by default <brocolis@eml.cc>.
 ---
 
 <!--
