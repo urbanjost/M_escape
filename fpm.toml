@@ -12,16 +12,16 @@ homepage = "https://github.com/urbanjost/M_escape.git"
 
 # demo programs
 test = [
-   { name="demo1", source-dir="test", main="default.f90" },
-   { name="demo2", source-dir="test", main="plain.f90" },
-   { name="demo3", source-dir="test", main="raw.f90" },
-   { name="demo4", source-dir="test", main="vt102.f90" },
-   { name="demo5", source-dir="test", main="custom.f90" },
-   { name="demo6", source-dir="test", main="dump.f90" },
-   { name="demo7", source-dir="test", main="functional.f90" },
-   { name="demo8", source-dir="test", main="direct.f90" },
-   { name="demo9", source-dir="test", main="mixed.f90" },
-   { name="demo10", source-dir="test", main="color_mode.f90" }
+   { name="demo1_default", source-dir="test", main="default.f90" },
+   { name="demo2_plain", source-dir="test", main="plain.f90" },
+   { name="demo3_raw", source-dir="test", main="raw.f90" },
+   { name="demo4_vt102", source-dir="test", main="vt102.f90" },
+   { name="demo5_custom", source-dir="test", main="custom.f90" },
+   { name="demo6_dump", source-dir="test", main="dump.f90" },
+   { name="demo7_functional", source-dir="test", main="functional.f90" },
+   { name="demo8_direct", source-dir="test", main="direct.f90" },
+   { name="demo9_mixed", source-dir="test", main="mixed.f90" },
+   { name="demo10_color_mode", source-dir="test", main="color_mode.f90" }
 ]
 executable = [
    { name="plain", source-dir="app", main="plain.f90" },
