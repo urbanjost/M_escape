@@ -1,4 +1,9 @@
-#if defined(_WIN32)
+/*
+ * Change _WIN32XX to _WIN32 to build this. Causes
+ * problems in WSL and so is being changed to an option
+ * till a correct combination of conditions can be determined
+ */
+#if defined(_WIN32) 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
