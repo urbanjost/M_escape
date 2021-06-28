@@ -3,7 +3,7 @@
  * problems in WSL and so is being changed to an option
  * till a correct combination of conditions can be determined
  */
-#if defined(_WIN32) 
+#if defined(_WIN32XX) 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
